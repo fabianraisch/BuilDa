@@ -1,6 +1,6 @@
 # Setup
 
-## License
+## Important License Note
 
 Currently, the FMU is missing in the repository due to open licencing questions. Thus, the programm is not properly executable right now. The repository will be updated with the FMU as soon as the licencing questions are answered. We hope that we can provide the full functionality of BuilDa as soon as possible. 
 
