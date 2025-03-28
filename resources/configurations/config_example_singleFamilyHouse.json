@@ -1,0 +1,153 @@
+////comments are filtered before parsing
+//links to other parameters can be set by writing a string of the parameter name instead of the value (there's only one iteration of link resolving)
+//sometimes null can be used as parameter values, to let BuilDa deduce the parameters from other sources
+
+//Configuration of tabula buildig DE.N.SFH.08.Gen
+{
+    "variations": {
+        // zone geometry
+            "zone_length":[9.4125], // length of zone from (east to west)
+            "zone_width":[8],       // width of zone from (north to south)
+            "floor_height":[3.04],  // heigth of one floor level
+            "n_floors":[2],         // number or floor levels
+        // windows
+            "fAWin_south":[0.14056], // window to wall fraction on that geographical direction
+            "fAWin_west":[0.14056],  // window to wall fraction on that geographical direction
+            "fAWin_north":[0.14056], // window to wall fraction on that geographical direction
+            "fAWin_east":[0.14056],  // window to wall fraction on that geographical direction
+        // relational factors
+            "fATransToAWindow":[0.9],            // factor of transparent window area / overall window area
+            "fARoofToAFloor":[1.63612217795485], // factor of roof area / floor area (if inclined roof, this factor is > 1)
+            "fAInt":[1.238235294117647],         // factor of interior wall surfaces (both sides) / exterior wall surfaces (cannot be zero) 
+                                                 // e.g. 1.238235294117647. This value is taken from a research apartment of the University of Applied Sciences of Rosenheim 
+                                                 // it is calculated by fAInt = ((2.5+7+7)*7/10*2 + (7.7+2.5+3.1)*10/14*2) /34
+
+
+        // thermal properties
+        "heatCapacity_furniture_per_m2":[2230], // the value is calculated by: wood equivalence of capacity m/m² (ida ice assumption) * density of spruce [kg/m³]* heat capacity of spruce [J(kg*K)]
+            // building components
+                // external walls
+                "UExt":[0.665],               // U-value of the external walls in W/m²K
+                "heatCapacity_wall":[192000], // heat capacity of the external walls [J/m²K]
+                // floor
+                "UFloor":[0.514],              // U-value of the floor in W/m²K
+                "heatCapacity_floor":[483840], // heat capacity of the floor in J/m²K
+                // internal walls
+                "UInt":[1],                            // U-value of the internal walls in W/m²K
+                "heatCapacity_internalWall":[145154],  // heat capacity of the internal walls [J/m²K]
+                // roof
+                "URoof":[0.402],             // U-value of the roof in W/m²K
+                "heatCapacity_roof":[81240], // heat capacity of the roof in J/m²K
+                // windows
+                "UWin":[3.2],               // U-value of the windows
+                "thermalZone.gWin":[0.7],   // solar heat gain coefficient of windows
+            
+        //ventilation
+        "heatRecoveryRate":[0],     //heat recovery rate of ventilation system
+        "airChangeRate":[0.3],      //air change rate in zone (through mechanical or natural ventilation)
+
+        // external files (wildcard patterns can be used to specify more than one file)
+            // path(s) to weather file(s) 
+            "weaDat.fileName":["resources/weatherFiles/Munich.mos"],
+            // path(s) to internal gain profile file(s) 
+            "internalGain.fileName":["resources/internalGainProfiles/NoActivity.txt"],
+            // path(s) to window opening profile file(s) 
+            "hygienicalWindowOpening.fileName":["resources/hygienicalWindowOpeningProfiles/no_opening.txt"],
+
+
+        // model internal controller
+        "roomTempLowerSetpoint":[18],  //different temperature setpoints (upper setpoint) - usefull e.g. for nocturnal decrease or histeresis
+        "roomTempUpperSetpoint":[22],  //different temperature setpoints (lower setpoint) - usefull e.g. for nocturnal decrease or histeresis
+        "UseInternalController": [1],  // switches between model internal P-Controller for heating and external controller (configured below). 1: internal controller is used, 0: external controller input
+        
+        // RC-Element's distribution parameters
+        // predefined distribution profiles can be used like 'monolythic', 'heavy', 'leightweight' (heavy and leightweigth origin form ASHRAE 140-2004 test cases TC600 and TC900)
+            "extWall_C_distribution":["monolythic"], 
+            "floor_C_distribution":[[478800, 5040,	0.001]], 
+            "roof_C_distribution":[[22440,   58800,	0.001]], 
+
+            "extWall_R_distribution":["monolythic"],  
+            "floor_R_distribution":[[0.0525, 0.0525, 0.1579, 0.0001]],
+            "roof_R_distribution":[[1.1085,  1.1085, 0.1,    0.0001]],
+
+            "intWall_R_distribution":["monolythic"],
+            "intWall_C_distribution":["monolythic"],
+
+        // detailled thermal properties
+            // radiation fractions of heat sources
+                "internalGainsConvectiveFraction":[0.4],
+                "heatingConvectiveFraction":[1],
+            // heat transfer coefficients (must match to parameters configured statically in the model)
+                "Rsi_extWall":[0.13333333333333333], //=1/(hConv+hRad)=1/(5+2.5) //horizontal heat flow
+                "Rsi_intWall":[0.13333333333333333], //=1/(hConv+hRad)=1/(5+2.5) //horizontal heat flow
+                "Rsi_floor":[0.17543859649122806],   //=1/(hConv+hRad)=1/(5+0.7) //downward heat flow
+                "Rsi_roof":[0.1],                    //=1/(hConv+hRad)=1/(5+5)  //upward heat flow
+                "Rse_extWall":[0.04],
+                "Rse_roof":[0.04],
+                "Rsi_window":[0.13333333333333333],  //=1/(hConv+hRad)=1/(5+2.5) //horizontal heat flow!
+                "Rse_window":[0.05],
+    
+
+        // parameters for caluclation of nominal heat load (set to null for automatic calculation of parameter)
+        "ta_min":[null], 
+        "ti_set":[null]
+    },
+	"variation_type": "cartesian_product",  // available: zip, cartesian_product
+    "converter_functions": [
+        "Link_resolver",                    // enables resolving of linked parameters (value of first parameter links to another parameter, whose value is used as the actual value for the first parmaeter)
+        "Miscellaneous_handler",
+        "Zone_dimensions_calculator",
+        "RC_Distribution_Configurator",     // resolves to predefined distribution profiles for R and C, if configured so
+        "Component_properties_calculator",
+        "Nominal_heating_power_calculator"
+    ],
+    "controller_name": ["TwoPointController_heating"], //list of controllers, options: 
+                                                                            // PController_heating, 
+                                                                            // PIController_cooling, 
+                                                                            // PIController_heating, 
+                                                                            // RandomSchedulePController, 
+                                                                            // TwoPointController_cooling, 
+                                                                            // TwoPointController_heating, 
+                                                                            // TwoPointController_windowOpening 
+                                                                            // if more than one controller generates output for the same model interface, the output of the last controller in list is applied
+                                                                            // for development of own controllers, edit add a new controller class file to src/controllers/custom_controllers and add it in util_functions.py () 
+    //time parameters - can be set as integer in seconds or as a string like 5s, 5min, 5d, 5w, 5y, representing 5 seconds, 5 minutes, 5 days, 5 weeks or 5 yrears in each case                                                                            
+    "controller_step_size": 90, 
+    "start_time": 0,
+    "stop_time": 31536000,
+    "writer_step_size": 900,
+    //list the name of fmu parameter to be exported 
+    "columns_included": ["thermalZone.TAir", "totalHeatingPower.y","weaBus.TDryBul","weaBus.HDirNor","weaBus.HDifHor","weaDat.weaBus.HGloHor"]
+}
+    // other possible columns to export:
+    // "roomTempUpperSetpoint","thermalZone.TAir", "totalHeatingPower.y",
+    // "totalHeatingPowerWithGain.y","weaBus.TDryBul","weaBus.TBlaSky","weaBus.winSpe",
+    // "weaBus.HDirNor","weaBus.HDifHor","weaDat.weaBus.HGloHor", "HeatFlowFromPersons.port.Q_flow", 
+    // "HeatFlowFromPersons.Q_flow", "perCon.port.Q_flow", "perCon.Q_flow", "perRad.port.Q_flow", 
+    // "perRad.Q_flow", "preTem.port.Q_flow", "preTem1.port.Q_flow", "preTem2.port.Q_flow", 
+    // "preTemRoof.port.Q_flow", "theConRoof.fluid.Q_flow", "theConRoof.Q_flow", 
+    // "theConRoof.solid.Q_flow", "theConWall.fluid.Q_flow", "theConWall.Q_flow", 
+    // "theConWall.solid.Q_flow", "theConWin.fluid.Q_flow", "theConWin.Q_flow", "theConWin.solid.Q_flow", 
+    // "thermalZone.convHeatSol.port.Q_flow", "thermalZone.convHeatSol.Q_flow", "thermalZone.extWall.Q_flow", 
+    // "thermalZone.extWallRC.port_a.Q_flow", "thermalZone.extWallRC.port_b.Q_flow", 
+    // "thermalZone.extWallRC.thermCapExt[1].port.Q_flow", "thermalZone.extWallRC.thermCapExt[2].port.Q_flow", 
+    // "thermalZone.extWallRC.thermCapExt[3].port.Q_flow", "thermalZone.floor.Q_flow", "thermalZone.floorRC.port_a.Q_flow", 
+    // "thermalZone.floorRC.port_b.Q_flow", "thermalZone.floorRC.thermCapExt[1].port.Q_flow", "thermalZone.floorRC.thermCapExt[2].port.Q_flow", 
+    // "thermalZone.floorRC.thermCapExt[3].port.Q_flow", "thermalZone.intGainsConv.Q_flow", "thermalZone.intGainsRad.Q_flow", 
+    // "thermalZone.intWallRC.port_a.Q_flow", "thermalZone.intWallRC.thermCapInt[1].port.Q_flow", 
+    // "thermalZone.intWallRC.thermCapInt[2].port.Q_flow", "thermalZone.intWallRC.thermCapInt[3].port.Q_flow", 
+    // "thermalZone.radHeatSol[1].port.Q_flow", "thermalZone.radHeatSol[1].Q_flow", "thermalZone.radHeatSol[2].port.Q_flow", 
+    // "thermalZone.radHeatSol[2].Q_flow", "thermalZone.radHeatSol[3].port.Q_flow", "thermalZone.radHeatSol[3].Q_flow", 
+    // "thermalZone.radHeatSol[4].port.Q_flow", "thermalZone.radHeatSol[4].Q_flow", "thermalZone.resWin.port_a.Q_flow", 
+    // "thermalZone.resWin.port_b.Q_flow", "thermalZone.resWin.Q_flow", "thermalZone.roof.Q_flow", "thermalZone.roofRC.port_a.Q_flow", 
+    // "thermalZone.roofRC.port_b.Q_flow", "thermalZone.roofRC.thermCapExt[1].port.Q_flow", "thermalZone.roofRC.thermCapExt[2].port.Q_flow", 
+    // "thermalZone.roofRC.thermCapExt[3].port.Q_flow", "thermalZone.thermSplitterIntGains.portIn[1].Q_flow", 
+    // "thermalZone.thermSplitterIntGains.portOut[1].Q_flow", "thermalZone.thermSplitterIntGains.portOut[2].Q_flow", 
+    // "thermalZone.thermSplitterIntGains.portOut[3].Q_flow", "thermalZone.thermSplitterIntGains.portOut[4].Q_flow", 
+    // "thermalZone.thermSplitterIntGains.portOut[5].Q_flow", "thermalZone.thermSplitterSolRad.portIn[1].Q_flow", 
+    // "thermalZone.thermSplitterSolRad.portIn[2].Q_flow", "thermalZone.thermSplitterSolRad.portIn[3].Q_flow", 
+    // "thermalZone.thermSplitterSolRad.portIn[4].Q_flow", "thermalZone.thermSplitterSolRad.portOut[1].Q_flow", 
+    // "thermalZone.thermSplitterSolRad.portOut[2].Q_flow", "thermalZone.thermSplitterSolRad.portOut[3].Q_flow", 
+    // "thermalZone.thermSplitterSolRad.portOut[4].Q_flow", "thermalZone.thermSplitterSolRad.portOut[5].Q_flow", 
+    // "thermalZone.volAir.heatPort.Q_flow", "thermalZone.window.Q_flow", "ventilationHeatLosses.port.Q_flow", 
+    // "ventilationHeatLosses.Q_flow","Q_heating_MWh.y"
