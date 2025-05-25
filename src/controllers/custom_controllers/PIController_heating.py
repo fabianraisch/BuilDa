@@ -21,6 +21,7 @@ class PIController_heating(Controller):
                 parameters_etc=[],
                 P=.5, 
                 w={0-1:18+273.15,6*3600-1:22+273.15,22*3600-1:18+273.15},   #setpoints for nocturnal decrease from 22 to 6 
+                #w={0-1:23+273.15,6*3600-1:22+273.15,22*3600-1:18+273.15},   #setpoints for nocturnal decrease from 22 to 6 
                 #w=20+273.15, #setpoint if no nocturnal decrease
                 I=.001,  
                 anti_windup=True,
@@ -41,8 +42,8 @@ class PIController_heating(Controller):
         self.I=I
         #initialization
         self.integrativePart=0
-        self.b_clamping_on=False #actual state of clamping (anti_windup technique)
         self.curr_time_last=0
+        self.u_last=0
 
     #called before every step of simulation
     def control(self,fmu_state_dict,curr_time):
@@ -57,16 +58,21 @@ class PIController_heating(Controller):
         e=(w-y) *(1 if not(self.b_reversed_action_control) else -1)
 
         u=e*self.P
-        if self.I!=0 and not(self.b_clamping_on):
+        if self.I!=0:
             dt=curr_time-self.curr_time_last
-            i=dt*e
-            self.integrativePart+=i
+
+            #clamping: Clamping, or conditional integration, prevents the integral 
+            # output from accumulating in the appropriate direction when 
+            # the controller output is saturated.
+            if (self.u_last>self.u_max and dt*e>0) or (self.u_last<self.u_min and dt*e<0):
+                self.integrativePart+=0 #clamping takes effect
+            else:
+                self.integrativePart+=dt*e #no clamping
+
             u+=self.integrativePart*self.I
         u_limited=min(max(self.u_min,u),self.u_max)
-        if u!=u_limited: self.b_clamping_on=True
-        else: self.b_clamping_on=False
-        u=u_limited
+        fmu_state_dict[self.parameters_u[0]]=float(u_limited)
 
-        fmu_state_dict[self.parameters_u[0]]=float(u)
+        self.curr_time_last=curr_time
+        self.u_last=u
         return(fmu_state_dict)
-

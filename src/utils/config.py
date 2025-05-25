@@ -1,8 +1,9 @@
 import os
 import re
+import numpy as np
 import random
 from typing import List
-from src.utils.util_functions import load_json
+from src.utils.util_functions import load_json,load_hygienicalWindowOpening_data,load_internalGain_data,load_weather_data
 
 class Config:
     def __init__(self, 
@@ -53,7 +54,7 @@ class Config:
             return self.config[key]
         else:
             raise KeyError(f"Given key '{key}' does not exist in the configuration.")
-        
+    
 
     def parse_config(self, config):
 
@@ -79,7 +80,8 @@ class Config:
             "start_time": self.START_TIME_DEFAULT,
             "stop_time": self.STOP_TIME_DEFAULT,        # Equals one day default
             "writer_step_size": self.WRITER_STEP_SIZE_DEFAULT,        # Equals 15 minutes default
-            "columns_included": []                      # Default: include all columns
+            "columns_included": [],                      # Default: include all columns
+            "time_columns_included": ["second_of_day","day_of_year"]
         }
 
         # Parse variations
@@ -135,6 +137,13 @@ class Config:
         if isinstance(columns_included, list):
             parsed["columns_included"] = columns_included
 
+        # Parse time_columns_included from the config file
+        time_columns_included = config.get("time_columns_included")
+        if isinstance(time_columns_included, list):
+            parsed["time_columns_included"] = time_columns_included
+
+
+
         return parsed
     
 
@@ -186,7 +195,33 @@ class Config:
     
 
         
+    def get_max_permitted_time_step(self):
+        '''
+        max_permitted_time_step (int): This parameter defines the maximum allowable 
+        time step, expressed in seconds, that is consistent with the resolution 
+        of the external input files. It ensures that the time intervals between 
+        solver steps do not exceed this threshold, thereby ensuring, that all 
+        events defined by the external input files are seen by the model. 
+        In contrast to writer_step_size, it doesn't affect the the ability for events
+        to be seen by the user in the results.
+
+        Function calculates this max_permitted_time_step, considered are files with changes in data (at least two different values in data), that are supposed to affect the dynamics in the model
         
+        '''
+
+        df_hygienicalWindowOpening=load_hygienicalWindowOpening_data(self.config["variations"])
+        df_internalGain=load_internalGain_data(self.config["variations"])
+        df_weather=load_weather_data(self.config["variations"])
+        
+        #get time step of external profiles who have different values in its data
+        time_steps_to_consider=[df.index.diff().min().total_seconds() for df in  
+                [df_hygienicalWindowOpening, df_internalGain, df_weather] if df.nunique().max().item()>1]
+
+        time_steps_to_consider.append(np.inf)  #set dummy value, if time_steps_to_consider is empty (will do nothing)
+        max_permitted_time_step=int(min(time_steps_to_consider))
+        return(max_permitted_time_step)
+            
+
 
 
 

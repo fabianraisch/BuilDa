@@ -17,13 +17,19 @@ class ControllerWrapper:
                  controller_names: List[str],
                  controller_step_size: int,
                  fmu_wrapper: FMUWrapper):
-        self.controllers=[]
-        self.controllers = get_controller_by_string(controller_names)
 
-        # if model internal heating controller should be used, delete all heating controllers from list. 
-        # criterion: output is 'ctrSignalHeating' (heating controller interface of fmu)
-        if list(fmu_wrapper.get_fmu_state_dict(["UseInternalController.k"]).values())[0]: 
-            self.controllers=[c for c in self.controllers if "ctrSignalHeating" in c.parameters_u]
+
+        #%%instantiation of controllers
+        self.controllers=list()
+        b_internal_heating_controller_active=bool(list(fmu_wrapper.get_fmu_state_dict(["UseInternalController.k"]).values())[0])
+        for controller_name in controller_names:
+            controller=get_controller_by_string(controller_name)
+            # if model internal heating controller should be used, don't add external heating controllers to list. 
+            # criterion to be an external heating controller: output is 'ctrSignalHeating' (heating controller interface of fmu)
+            if not(b_internal_heating_controller_active and "ctrSignalHeating" in controller.parameters_u):
+                self.controllers.append(controller)
+        
+        #%%
         self.controller_step_size = controller_step_size
 
         self.fmu_wrapper = fmu_wrapper
@@ -41,14 +47,18 @@ class ControllerWrapper:
         for controller in self.controllers:
                 controller.configure(self.fmu_wrapper.get_fmu_state_dict(controller.get_control_variables()))
 
-    def perform_control_check(self, curr_time):
+    def perform_control_check(self, curr_time_relative):
         '''
-        Determine if a control action should be performed at the current time step.
+        Determines if control action should be performed at the current simulation time.
+        Returns a boolean indicating whether the the control action should be performed based on the elapsed simulation time and the `controller_step_size` parameter from the configuration.
 
-        This method returns a boolean indicating whether control actions are 
-        triggered based on the current time and the specified controller step size.
-        '''        
-        if any(self.controllers) and curr_time % self.controller_step_size == 0:
+        Parameters:
+            curr_time_relative (float): The simulation time, elapsed since simulation start time
+
+        Returns:
+            bool: True if control action should be performed, False otherwise.
+        ''' 
+        if any(self.controllers) and curr_time_relative % self.controller_step_size == 0:
             return True
         else:
             return False
@@ -73,5 +83,9 @@ class ControllerWrapper:
         '''
         for controller in self.controllers: 
             fmu_state_dict_modified = controller.control(fmu_state_dict=fmu_state_dict, curr_time=curr_time)
-            controller_output={key:fmu_state_dict_modified[key] for key in controller.parameters_u}  #multiple output controller
+            #limit the controller outputs to the intersection of configured controller output variables and 
+            # actually returned variables by the controller
+            controller_output_keys=set(fmu_state_dict_modified) & set(controller.parameters_u) 
+            #multiple output controller
+            controller_output={key:fmu_state_dict_modified[key] for key in controller_output_keys}  
             self.fmu_wrapper.alter_in_fmu(controller_output)

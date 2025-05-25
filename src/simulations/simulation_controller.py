@@ -19,23 +19,24 @@ class SimulationController:
         self.fmu_wrapper = FMUWrapper(fmu_path=config.fmu_path, 
                                        start_time=config.get("start_time"))
         
-        self.converter = Converter(self.fmu_wrapper.fmu_default_dict, 
-                                   self.fmu_wrapper.fmu_variable_names, 
-                                   config.get("converter_functions"))
-        
+
         self.step_size_arr = get_step_size_arr(config.get("start_time"),
                                                 config.get("stop_time"),
                                                 config.get("writer_step_size"),
-                                                config.get("controller_step_size"))
+                                                config.get("controller_step_size"),
+                                                max_permitted_time_step=config.get_max_permitted_time_step())
 
         
         self.out_cols = ["timestamp"] + \
             list(set(self.fmu_wrapper.vrs.keys()).intersection(config.get("columns_included")))
         
+        #%%initialization of FMU
+        self.fmu_wrapper.fmu.enterInitializationMode()        
+        self.converter = Converter(self.fmu_wrapper.fmu_default_dict, 
+                            config.get("converter_functions"))
         self.converted_variation = self.converter.convert(variation)
-
-        self.fmu_wrapper.do_initialization_routine(param_dict=dict(self.converted_variation))
-
+        self.fmu_wrapper.alter_in_fmu(param_dict=dict(self.converted_variation))
+        self.fmu_wrapper.fmu.exitInitializationMode()
         self.fmu_wrapper.test_fmu_parameterizing(parameters=dict(self.converted_variation),
                                                  b_verbose_mode=False)
         
@@ -46,19 +47,18 @@ class SimulationController:
         self.controller_wrapper.configure_controllers()
 
 
-    def generate_output_check(self, curr_time):
+    def generate_output_check(self, curr_time_relative):
         '''
         Determines if output should be generated at the current simulation time.
-
-        Returns a boolean indicating whether the output should be generated based on the current time and the `writer_step_size` parameter from the configuration.
+        Returns a boolean indicating whether output should be generated based on the elapsed simulation time and the `controller_step_size` parameter from the configuration.
 
         Parameters:
-            curr_time (float): The current simulation time.
+            curr_time_relative (float): The simulation time, elapsed since simulation start time
 
         Returns:
             bool: True if output should be generated, False otherwise.
         '''
-        if curr_time % self.config.get("writer_step_size") == 0:
+        if curr_time_relative % self.config.get("writer_step_size") == 0:
             return True 
         else:
             return False
@@ -99,10 +99,12 @@ class SimulationController:
 
         for step_size in self.step_size_arr:
             
-            b_perform_control = self.controller_wrapper.perform_control_check(curr_time=
-                                                                                    self.fmu_wrapper.time)
+            #calculate simulation time since simulation start time
+            curr_time_relative=self.fmu_wrapper.time-self.config.get("start_time")
+            b_perform_control = self.controller_wrapper.perform_control_check(curr_time_relative=
+                                                                            curr_time_relative)
             
-            b_generate_output = self.generate_output_check(curr_time=self.fmu_wrapper.time)
+            b_generate_output = self.generate_output_check(curr_time_relative=curr_time_relative)
 
             variables_to_read = []
             if b_perform_control:
@@ -117,8 +119,7 @@ class SimulationController:
                 self.controller_wrapper.handle_control_action(curr_time=self.fmu_wrapper.time, 
                                                               fmu_state_dict=fmu_state_dict)
 
-            #(temporary) fix: read out again variables from fmu to get recent values influenced by controller (e.g. totalHeatingPower.y influenced by controller output ctrSignalHeating) (apparently no doStep is necessary here) 
-            # ToDo_Thomas: If problem ist fixed, remove above comment, if not, put it into issues. Or add comment like: #Here, no doStep is neccessary, ase values influenced by controller can simply be read out                                            
+            #read out again variables from fmu to get recent values influenced by controller (e.g. totalHeatingPower.y influenced by controller output ctrSignalHeating) (no doStep is necessary here) 
             fmu_state_dict = self.fmu_wrapper.get_fmu_state_dict(variables_to_read=variables_to_read)
 
             if b_generate_output:

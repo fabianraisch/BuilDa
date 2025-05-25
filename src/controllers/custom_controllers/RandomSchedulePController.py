@@ -4,7 +4,7 @@ import random
 
 class RandomSchedulePController(PController_heating):  
     '''
-    PController (Proportional Controller): Adjusts the output proportionally to the error, 
+    Adjusts the output proportionally to the error, 
     defined as the difference between the desired setpoint and the current process variable y.
 
     This controller is used for heating.

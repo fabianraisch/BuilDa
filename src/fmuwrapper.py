@@ -3,6 +3,8 @@ import shutil
 from fmpy import read_model_description, extract
 from fmpy.fmi2 import FMU2Slave
 import pandas as pd
+import json
+import platform
 
 class FMUWrapper:
     def __init__(self,
@@ -18,11 +20,32 @@ class FMUWrapper:
         for variable in self.model_description.modelVariables:
             self.vrs[variable.name]={"type":variable.type,"reference":variable.valueReference,"start":variable.start}
 
+        #get start values from model description
+        self.fmu_default_dict={k:
+            float(self.vrs[k]["start"]) if self.vrs[k]["type"]=="Real" 
+                and self.vrs[k]["start"]!=None else \
+            str(self.vrs[k]["start"]) if self.vrs[k]["type"]=="String" 
+                and self.vrs[k]["start"]!=None else \
+            int(self.vrs[k]["start"]) if self.vrs[k]["type"]=="Integer" 
+                and self.vrs[k]["start"]!=None  else \
+            bool(self.vrs[k]["start"]) if self.vrs[k]["type"]=="Boolean" 
+                and self.vrs[k]["start"]!=None  else \
+            self.vrs[k]["start"] \
+            for k in self.vrs.keys()}
+
+        ##store start values to a json file (only use, if all start values are available!)
+        #json.dump(self.fmu_default_dict, open("resources/FMUs/fmu_state_dict.json","w"), indent=4, sort_keys=True)
+
+        #fill missing start values with those from json
+        self.fmu_default_dict.update({k:v for k,v in \
+            json.load(open("resources/FMUs/fmu_state_dict.json","r")).items() \
+            if k in self.fmu_default_dict.keys() and self.fmu_default_dict[k]==None})
+        
+
         self.time = start_time
 
         self.init_FMU()
 
-        self.fmu_variable_names, self.fmu_default_dict = self.get_start_values() 
 
     def test_fmu_parameterizing(self, parameters:dict,b_verbose_mode=False) -> int:
         '''
@@ -70,36 +93,6 @@ class FMUWrapper:
                     if b_verbose_mode:
                         print("#SUCCESSFULLY SET PARAMETER: tried to set",k,"to",parameters[k],"value is now",fmu_state_dict[k],"parameter attributes(causality:variability):",causality+":"+variability)
         return n_errors
-
-    def get_start_values(self):
-        '''
-        Gets the start values for all model variables as specified in the ModelDescription.xml of the FMU.
-
-        This method creates a dictionary of start values for variables of type Boolean, String, Integer, or Real. It ignores enumeration types and provides a warning for unsupported data types. Returns a set of variable keys and the corresponding start values.
-
-        '''        
-        fmu_state_dict=dict()
-        for variable in self.vrs.keys():
-            value_str=self.vrs[variable]["start"]
-            dtype=self.vrs[variable]["type"]
-            if value_str:
-                if dtype=="Real":
-                    value=float(value_str)
-                elif dtype=="Integer":
-                    value=int(value_str)
-                elif dtype=="String":
-                    value=str(value_str)
-                elif dtype=="Boolean":
-                    value=bool(value_str)
-                elif dtype=="Enumeration":
-                    #ignore enumeration
-                    continue
-                else:
-                    print("##Warning on initial variable readout: no behaviour for data type",dtype,"defined")
-                    continue
-                fmu_state_dict[variable]=value
-
-        return set(self.vrs.keys()), fmu_state_dict
 
     def init_FMU(self):
         '''
@@ -155,7 +148,8 @@ class FMUWrapper:
         '''
         try:
             self.fmu.terminate()
-            self.fmu.freeInstance()
+            if platform.system().lower()=="linux": #currently deactivated on windows as it broke the execution in tests
+                self.fmu.freeInstance() 
             shutil.rmtree(self.fmu.unzipDirectory)
         except Exception as e:
             print("FMU could not be terminated properly. Maybe no simulation was done after init step.")
@@ -183,19 +177,6 @@ class FMUWrapper:
         self.state = self.fmu.deSerializeFMUstate(self.bstate)
         self.fmu.setFMUstate(self.state)
 
-
-    def do_initialization_routine(self, param_dict: dict):
-        '''
-        Function to handle the initialization routine of the FMU object. Must be done before each simulation.
-
-        Args: None
-        Returns: None
-        '''
-        self.fmu.enterInitializationMode()
-        self.alter_in_fmu(param_dict=param_dict)
-        self.fmu.exitInitializationMode()
-    
-
     def reset_fmu(self):
         '''
         Resets the FMU to its initial state.
@@ -213,8 +194,6 @@ class FMUWrapper:
         '''
 
         for variable, value in param_dict.items():
-            # Check if value can be converted into float, else it is probably no float so it treated as string
-            # ToDo: Makes this save and sound
             if self.vrs[variable]["type"]=="Real":
                 self.fmu.setReal([self.vrs[variable]["reference"]],[value])
             elif self.vrs[variable]["type"]=="String":
@@ -279,3 +258,4 @@ class FMUWrapper:
 
         pd.concat([df],axis=1).to_csv(file_name,sep=",")
         return file_name
+

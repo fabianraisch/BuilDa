@@ -73,13 +73,14 @@ class Controller(ABC):
         Returns:
         float: The current value of w.
         """            
-        w=self.w
-        if type(w) is dict: 
+        if type(self.w) is dict: 
             second_of_day=curr_time%86400
             w_dict=self.w
             w_dict_keys_list=list(w_dict.keys())
             w_dict_keys_list.sort()
             w=w_dict[w_dict_keys_list[bisect.bisect_left(w_dict_keys_list,second_of_day)-1]]
+        else:
+            w=self.w
         return w
 
     def resolve_link_to_fmu_variable(self,fmu_state_dict,variable):

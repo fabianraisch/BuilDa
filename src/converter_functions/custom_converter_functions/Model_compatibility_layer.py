@@ -13,7 +13,7 @@ class Model_compatibility_layer(ConverterFunction):
         super().__init__()
         
     @staticmethod
-    def ensure_GT_zero(n):
+    def ensure_GT_zero(n,replacement_value=1e-5):
         """
         Returns a value that is nearly zero if the input is zero; otherwise, returns the input value.
 
@@ -24,10 +24,10 @@ class Model_compatibility_layer(ConverterFunction):
         float: A small number if the input is zero, otherwise the input number.
         """
         replacement_value = 1e-5 
-        return replacement_value if n == 0 else n
+        return replacement_value if abs(n) < replacement_value else n
     
     def convert(self, variable_dict):
-        list_gt_0=["fAInt","_distribution"]
+        list_gt_0=["fAInt","_distribution","fAWin_"]
         for key in variable_dict.keys():
             if any([sstr for sstr in list_gt_0 if sstr in key]):
                 e=variable_dict[key]

@@ -61,7 +61,10 @@
         "UseInternalController": [1],  // switches between model internal P-Controller for heating and external controller (configured below). 1: internal controller is used, 0: external controller input
         
         // RC-Element's distribution parameters
-        // predefined distribution profiles can be used like 'monolythic', 'heavy', 'leightweight' (heavy and leightweigth origin form ASHRAE 140-2004 test cases TC600 and TC900)
+        // predefined distribution profiles can be used like 
+        // 'monolythic', 
+        // 'heavy', 'leightweight' (heavy and leightweigth origin form ASHRAE 140-2004 test cases TC600 and TC900)
+        // 'baloonFraming', 'perforatedBrick', 'gasConcrete' (origin from predefined wall constructions on https://www.ubakus.de/)
             "extWall_C_distribution":["monolythic"], 
             "floor_C_distribution":[[478800, 5040,	0.001]], 
             "roof_C_distribution":[[22440,   58800,	0.001]], 
@@ -96,10 +99,12 @@
     "converter_functions": [
         "Link_resolver",                    // enables resolving of linked parameters (value of first parameter links to another parameter, whose value is used as the actual value for the first parmaeter)
         "Miscellaneous_handler",
+        "Model_compatibility_layer",
         "Zone_dimensions_calculator",
         "RC_Distribution_Configurator",     // resolves to predefined distribution profiles for R and C, if configured so
         "Component_properties_calculator",
-        "Nominal_heating_power_calculator"
+        "Nominal_heating_power_calculator",
+        "Nominal_cooling_power_calculator"
     ],
     "controller_name": ["TwoPointController_heating"], //list of controllers, options: 
                                                                             // PController_heating, 
@@ -116,8 +121,18 @@
     "start_time": 0,
     "stop_time": 31536000,
     "writer_step_size": 900,
+    //time columns to be exported (optional, default is "second_of_day","day_of_year")
+                                                                //list of options
+                                                                // "second", "minute", "hour", "day", "year" (absolute values)
+                                                                // "second_of_day"
+                                                                // "day_of_year"
+                                                                //"minute_of_day"
+                                                                //"day_of_month"
+                                                                //"week_of_year"
+                                                                //"nanosecond_of_month"
+    "time_columns_included":["second_of_day","day_of_year"],
     //list the name of fmu parameter to be exported 
-    "columns_included": ["thermalZone.TAir", "totalHeatingPower.y","weaBus.TDryBul","weaBus.HDirNor","weaBus.HDifHor","weaDat.weaBus.HGloHor"]
+    "columns_included": ["thermalZone.TAir", "totalHeatingPower.y","weaBus.TDryBul","weaBus.HDirNor","weaBus.HDifHor","weaBus.HGloHor"]
 }
     // other possible columns to export:
     // "roomTempUpperSetpoint","thermalZone.TAir", "totalHeatingPower.y",

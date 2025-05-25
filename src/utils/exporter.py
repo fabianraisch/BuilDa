@@ -57,6 +57,7 @@ class Exporter():
 			self, 
 			rows, 
 			header,
+            header_time_columns,
             info,
 			param_input_list,
 			var_param
@@ -109,10 +110,13 @@ class Exporter():
         file_name=os.path.join(save_dir,os.path.basename(save_dir)+".csv")
 
 		# Save the csv file generated from the given array.
-        rows = self.__transform_timestamps(rows) 
-        header = ["seconds_of_day", "day_of_year"] + header[1:] # Replace the first column named "timestamp" with the new columns
+        rows = self.__transform_timestamps(rows,time_columns=header_time_columns) 
+        header = header_time_columns + header[1:] # Replace the first column named "timestamp" with the new columns
         df = pd.DataFrame(rows,columns=header)
-        df=df[["seconds_of_day", "day_of_year"]+sorted(df.columns[2:])] #sort the columns, except the first two columns called "seconds_of_day" and "day_of_year"
+
+         #sort the columns, except the time_columns specified in "header_time_columns", that are placed on the beginning
+        df=df[header_time_columns + sorted(set(df.columns)-set(header_time_columns)) ]
+
         df.to_csv(file_name)
 
 		# Add csv file containing all info of the vars set.
@@ -212,34 +216,47 @@ class Exporter():
         return ''.join(x.title() for x in components)
     
 
-    def __transform_timestamps(self,data):
+    def __transform_timestamps(self,data,time_columns):
         '''
-        Transform the first column of each sublist to two new columns:
-		seconds of the day and day of the year.
+        Transform the first column of each sublist to new columns as stated in parameter time_columns:
+		     e.g. "time:second_of_day": second of the day and "time:day_of_year": day of the year.
 
 		Args:
 			data (list of lists): Input data with each sublist containing a timestep in seconds.
+            time_columns (list of strings): Columns to be created based on the time stamp in seconds in the data (1st column).
 
 		Returns:
 			list of lists: Transformed data with new columns replacing the original timestep column.
 		'''
-        new_data = []
+        time_expressions_available_functions_dict = {
+            "second": lambda current_time: (current_time - start_time).total_seconds(),
+            "minute": lambda current_time: (current_time - start_time).total_seconds()//60,
+            "hour": lambda current_time: (current_time - start_time).total_seconds()//3600,
+            "day": lambda current_time: (current_time - start_time).total_seconds()//86400,
+            "year": lambda current_time: (current_time - start_time).total_seconds()//31536000,
+            "second_of_day": lambda current_time: current_time.hour * 3600 + current_time.minute * 60 + current_time.second,
+            "minute_of_day": lambda current_time: current_time.hour * 60 + current_time.minute,
+            "day_of_year": lambda current_time: current_time.timetuple().tm_yday,
+            "day_of_month": lambda current_time: current_time.day,
+            "week_of_year": lambda current_time: current_time.isocalendar()[1],
+            "nanosecond_of_month": lambda current_time: (current_time - current_time.replace(day=1)).total_seconds() * 1e9
+        }
+
 		# Assume the input time in seconds is elapsed time since the start of the first day
         start_time = datetime.datetime(2023, 1, 1)  # An arbitrary starting point (start of a non leap year) to make datetime calculations and exctract seconds of day and day of year afterwards (--> assuming here, it's January 1st, 2023 0 a.m.)
 
-        for sublist in data:
-			# First column is the timestep in seconds since the start
-            elapsed_seconds = sublist[0]
-            current_time = start_time + datetime.timedelta(seconds=elapsed_seconds)
+        for index_row,row in enumerate(data):
+            second = row[0]    #total time in seconds (elapsed simulation time)
+            current_time = start_time + datetime.timedelta(seconds=second)
 
-			# Get seconds of the day and day of the year
-            seconds_of_day = current_time.hour * 3600 + current_time.minute * 60 + current_time.second
-            day_of_year = current_time.timetuple().tm_yday
+            
+            time_expression_list=[time_expressions_available_functions_dict[v](current_time) for v in time_columns]
 
-			# Add these new columns and retain other columns
-            new_data.append([seconds_of_day, day_of_year] + sublist[1:])
+			# Add the new columns and retain column with original time stamp
+            data[index_row]=time_expression_list + row[1:]
 
-        return new_data
+
+        return data
 
 
     def copy_fmu_and_config(self):

@@ -16,8 +16,9 @@ from multiprocessing import cpu_count
 user_config={
     "config_name":"config_example_singleFamilyHouse.json",
     "output_path":"output",
-    "fmu_name_windows":"Model_0v1_0interiorWalls_0Floor_0Roof_0Pctrl_win64.fmu",
-    "fmu_name_linux":"Model_0v1_0interiorWalls_0Floor_0Roof_0Pctrl_linux.fmu"
+    "fmu_name_windows":"Model_v1_interiorWalls_Floor_Roof_Pctrl_windows_openmodelica.fmu",
+    "fmu_name_linux":"Model_v1_interiorWalls_Floor_Roof_Pctrl_linux_openmodelica.fmu",
+    "multiprocessing":True
 }
 #======================
 #end of user config section
@@ -57,9 +58,10 @@ if __name__ == "__main__":
     config_path, fmu_path, output_path = setup_paths(user_config)
 
     print("\n")
-    print(f"used FMU-File:\t\t'{fmu_path}' (last modified: {time.strftime('%Y-%m-%dT%H:%M:%S', time.localtime(os.path.getmtime(fmu_path)))})")
+    print(f"used FMU-File:\t\t'{fmu_path}' \n\t\t\t(last modified: {time.strftime('%Y-%m-%dT%H:%M:%S', time.localtime(os.path.getmtime(fmu_path)))})")
     print(f"used config-File:\t'{config_path}'")
     print(f"used output directory:\t'{output_path}'")
+    print(f"Multiprocessing:\t'{user_config["multiprocessing"]}'")
     print("\n")
 
     config = Config(config_path, fmu_path, output_path)
@@ -75,26 +77,32 @@ if __name__ == "__main__":
 
     n_workers = cpu_count()
     with ProcessPoolExecutor(max_workers=n_workers) as executor:
-        futures = [executor.submit(worker_start, i+1, config, variation) for i, variation in enumerate(variation_list)]
-
-        total_tasks = len(futures)
+        total_tasks = len(variation_list)
         completed_tasks = 0
         print(f"Total tasks: {total_tasks}. Computing...\n")
         
-        # Loop through the completed futures as they finish
-        for future in as_completed(futures):
-            completed_tasks += 1
-            
-            rows, header, converted_variation, original_variation = future.result()
-            
+        def export_and_printout(): 
+            global completed_tasks 
+            completed_tasks+= 1   
             exporter.export_csv(rows=rows, 
                                 header=header, 
+                                header_time_columns=config.config["time_columns_included"],
                                 info=converted_variation, 
                                 param_input_list=original_variation, 
                                 var_param=variated_config_parameters)
-
             sys.stdout.write(f"\rTasks completed: {completed_tasks}/{total_tasks}, total runtime: {round(time.time()-time_begin,2)} s\n")
             sys.stdout.flush()
+
+        # Loop through the completed futures as they finish
+        if user_config["multiprocessing"]: 
+            futures = [executor.submit(worker_start, i+1, config, variation) for i, variation in enumerate(variation_list)]
+            for future in as_completed(futures):
+                rows, header, converted_variation, original_variation = future.result()
+                export_and_printout()
+        else: 
+            for variation in variation_list:
+                rows, header, converted_variation, original_variation = worker_start(1,config,variation)
+                export_and_printout()
         
         print(f"\nAll tasks are done!\n\n")
         

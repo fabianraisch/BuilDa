@@ -12,10 +12,11 @@ class Link_resolver(ConverterFunction):
 
     def convert(self, variable_dict):
         to_return=dict()
-        #checks if there's an intersection of key and value sets (indicates linked parameters)
-        #and applies link resolution use parameter values of link targets
+        #Checks if there's an intersection of key and value sets (indicates linked parameters).
+        #If so, applies link resolution applying the values of the link targets parameters to the 
+        #parameters where the link was configured.
+        #e.g.: parameter1="parameter1"; parameter2=2 ---> parameter1=2
         #only str-type values are considered
-        # ToDo_Thomas: I don't get the second sentence. Maybe use a short example to explain it (In theory I undersood it, but anyways)
         for key in variable_dict.keys():
             value=variable_dict[key]
             if type(value) is str and value in variable_dict.keys():

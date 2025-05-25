@@ -2,7 +2,7 @@ from src.utils.util_functions import get_converter_function_by_string
 
 class Converter():
 
-    def __init__(self, deault_dict, variable_names, converter_function_names = []):
+    def __init__(self, deault_dict, converter_function_names = []):
         '''
         Init the Converter. Takes a list of converter function names to retrieve the converter function for later use.
 
@@ -28,7 +28,7 @@ class Converter():
 
         self.fmu_default_dict = deault_dict 
 
-        self.fmu_variable_names = variable_names
+        self.conversion_result_last_dict=self.fmu_default_dict
 
     def convert(self, variations):
         '''
@@ -61,9 +61,10 @@ class Converter():
         
         #%%filter: keep only...
         #...parameters that exist as fmu parameters
-        #...fmu parameters that have been changed
         ##debug print: difference-set of converter function output and fmu parameters to check, if there are naming errors:
         #print(variation_dict.keys() ^ self.fmu_default_dict.keys())
-        fmu_parameters_to_update_lists=[(k,v) for k,v in variation_dict.items() if k in self.fmu_default_dict.keys() and v!=self.fmu_default_dict[k]]
+        fmu_parameters_to_update_lists=[(k,v) for k,v in variation_dict.items() if k in self.fmu_default_dict.keys() and v!=self.conversion_result_last_dict[k]]
+        
+        self.conversion_result_last_dict=conversion_result_dict
         return fmu_parameters_to_update_lists
 

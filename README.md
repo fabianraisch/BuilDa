@@ -1,9 +1,5 @@
 # Setup
 
-## Important License Note
-
-Currently, the FMU is missing in the repository due to open licencing questions. Thus, the programm is not properly executable right now. The repository will be updated with the FMU as soon as the licencing questions are answered. We hope that we can provide the full functionality of BuilDa as soon as possible. 
-
 ## Load Repository
 To setup BuilDa clone the repo and go into the directory
 
@@ -99,6 +95,38 @@ The general simulation parameters include
         - Simulation output  
         - External control  
 
+## Weather and human behaviour profiles
+### Weather
+Outside weather, window-opening behaviour and human activity profiles are specified in the config.
+
+Using 
+```
+ python3 ./resources/mos_generator.py [startyear] [endyear] [latitude (optional)] [longitude (optional)] [output filename (optional)]
+```
+weather data for specific locations from Jan. 1st (startyear) to Dec. 31st (endyear) can be freshly pulled from [PVGIS](https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis_en) over different time periods which then is stored in `./resources/weatherData/[output filename]`. Start and end should lie in between 2005 and 2020. 
+
+### Behaviour profiles
+
+Window opening profiles and activity profiles with possible user changes over time can be generated using the script `./resources/profile_generator.py`.
+
+For each occupant, all relevant parameters (see below) are randomly chosen using a gaussian distribution around reference values specified at the top of the script. Calling `generate_profiles()` automatically creates n_occupants profiles for gaussian distributed amounts of days each and concatenates them to one profile, which is stored in `resources/hygienicalWindowOpeningProfiles` and `resources/internalGainProfiles/[filename]`.
+
+Instead, calling `generate_winOpeningProfile_spec_time(time)` or `generate_intGainProfile(time)` `(time from to: [[YYYY, MM, DD], [YYYY, MM, DD]])` generates a profile over the given time period using either the reference parameters from the top of the script or ones provided as arguments. It returns the profiles as `np.array` which then have to be manually saved.
+
+List of parameters used for the profiles:
+
+| Name              | Description               | Unit      |
+|-------------------|---------------------------|-----------|
+| `n_persons`       | the amount of persons the household exists of |    |
+| `sleeptime`         | `[from, to]` wallclock time, the (or all) user sleeps | h |
+| `rmr = 1.62*bodymass`| resting metabolic rate. The amount of heat a resting human radiates | W |
+| `met_profile`     | activity profile over one day in multitudes of rmr with shape `(hour of day, [holiday, workday, saturday, sunday])` |         |
+| `non-human-profile` |  activity profile of household appliances, shape same as `met_profile` | W  |
+| `open_after_min`  | The amount of minutes 1 person rests in the room after which they'd want fresh air | min |
+| `consciousness`   | weight parameter to alter the air quality at which the window is opened. 1 meaning the windows are opened after 1 person spends `open_after_min` resting, 0 meaning no windows are opened and 2 meaning the window is already openend after `open_after_min`/2  |     |
+
+The profiles can be used by changing the config entries `internalGain.fileName` and `hygienicalWindowOpening.fileName` to the generated files before simulating.
+
 # Simulation output
 There are plenty of simulation output parameters (configurable as output parameters in the config JSON), with the most important being:
 
@@ -165,6 +193,8 @@ The purpose of the control function is to modify the controller output variable 
 
 This project is licensed under the GNU GENERAL PUBLIC LICENSE
                        Version 3 - see the [LICENSE](./LICENSE) file for details.
+
+Due to licensing, the original FMU was replaced with a similar one from OpenModelica.
 
 
 ### Citation

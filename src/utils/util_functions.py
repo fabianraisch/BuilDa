@@ -5,29 +5,7 @@ import glob
 from typing import List
 import sys
 import os
-
-#%%controllers
-from src.controllers.controller import Controller
-#custom classes
-from src.controllers.custom_controllers.PController_heating import PController_heating
-from src.controllers.custom_controllers.PIController_heating import PIController_heating
-from src.controllers.custom_controllers.TwoPointController_cooling import TwoPointController_cooling
-from src.controllers.custom_controllers.TwoPointController_heating import TwoPointController_heating
-from src.controllers.custom_controllers.TwoPointController_windowOpening import TwoPointController_windowOpening
-from src.controllers.custom_controllers.RandomSchedulePController import RandomSchedulePController
-from src.controllers.custom_controllers.PIController_cooling import PIController_cooling
-
-#%%converter functions
-from src.converter_functions.converter_function import ConverterFunction
-#custom classes
-from src.converter_functions.custom_converter_functions.Component_properties_calculator import Component_properties_calculator
-from src.converter_functions.custom_converter_functions.Link_resolver import Link_resolver
-from src.converter_functions.custom_converter_functions.Miscellaneous_handler import Miscellaneous_handler
-from src.converter_functions.custom_converter_functions.Model_compatibility_layer import Model_compatibility_layer
-from src.converter_functions.custom_converter_functions.Nominal_heating_power_calculator import Nominal_heating_power_calculator
-from src.converter_functions.custom_converter_functions.RC_Distribution_Configurator import RC_Distribution_Configurator
-from src.converter_functions.custom_converter_functions.Zone_dimensions_calculator import Zone_dimensions_calculator
-
+import pandas as pd
 
 
 
@@ -87,43 +65,49 @@ def parse_duration(duration:str)->int:
         return product
 
 
-def get_controller_by_string(controller_strings: list[str]) -> List[Controller]:
+def get_controller_by_string(s: str):
     '''
-    Function to get a certain controller by providing a list of identifying strings.
+    Function to get a certain controller by providing an identifying string.
 
     Args: 
-        - controllers [list(str)]: List of strings that identify the controller(s) needed.
+        - s [str]: strings that identifies the controller needed.
 
-    Returns: The corresponding controller list given by the list of strings. If a controller wasn't found, raise error.
+    Returns: The corresponding controller given by the string. If a controller wasn't found, raise error.
     '''
-    
-    controllers=list()
-    for s in controller_strings:
-        if s == "TwoPointController_heating":
-            controllers.append(TwoPointController_heating())
-        elif s == "TwoPointController_windowOpening":
-            controllers.append(TwoPointController_windowOpening())
-        elif s == "TwoPointController_cooling":
-            controllers.append(TwoPointController_cooling())
-        elif s == "PIController_heating":
-            controllers.append(PIController_heating())
-        elif s == "PIController_cooling":
-            controllers.append(PIController_cooling())
-        elif s == "PController_heating":
-            controllers.append(PController_heating())
-        elif s == "RandomSchedulePController":
-            controllers.append(RandomSchedulePController())
+    #%%controllers
+    from src.controllers.controller import Controller
+    #custom classes
+    from src.controllers.custom_controllers.PController_heating import PController_heating
+    from src.controllers.custom_controllers.PIController_heating import PIController_heating
+    from src.controllers.custom_controllers.TwoPointController_cooling import TwoPointController_cooling
+    from src.controllers.custom_controllers.TwoPointController_heating import TwoPointController_heating
+    from src.controllers.custom_controllers.TwoPointController_windowOpening import TwoPointController_windowOpening
+    from src.controllers.custom_controllers.RandomSchedulePController import RandomSchedulePController
+    from src.controllers.custom_controllers.PIController_cooling import PIController_cooling
+    if s == "TwoPointController_heating":
+        return TwoPointController_heating()
+    elif s == "TwoPointController_windowOpening":
+        return TwoPointController_windowOpening()
+    elif s == "TwoPointController_cooling":
+        return TwoPointController_cooling()
+    elif s == "PIController_heating":
+        return PIController_heating()
+    elif s == "PIController_cooling":
+        return PIController_cooling()
+    elif s == "PController_heating":
+        return PController_heating()
+    elif s == "RandomSchedulePController":
+        return RandomSchedulePController()
+    # to add new controller, import class above and insert:
+    # elif s == "<my_controller>":
+    #     return <my_controller>()
 
-        # to add new controller, import class above and insert:
-        # elif s == "<my_controller>":
-        #     return <my_controller>()
-
-        else:     
-            raise ValueError(f"No controller with name {s} found")
+    else:     
+        raise ValueError(f"No controller with name {s} found")
     return controllers
         
 
-def get_converter_function_by_string(s) -> ConverterFunction:
+def get_converter_function_by_string(s: str):
     ''''
     Function to get a certain converter function by providing an identifying string.
 
@@ -132,6 +116,17 @@ def get_converter_function_by_string(s) -> ConverterFunction:
 
     Returns: A converter function if there exists one with this string.
     '''
+    #%%converter functions
+    from src.converter_functions.converter_function import ConverterFunction
+    #custom classes
+    from src.converter_functions.custom_converter_functions.Component_properties_calculator import Component_properties_calculator
+    from src.converter_functions.custom_converter_functions.Link_resolver import Link_resolver
+    from src.converter_functions.custom_converter_functions.Miscellaneous_handler import Miscellaneous_handler
+    from src.converter_functions.custom_converter_functions.Model_compatibility_layer import Model_compatibility_layer
+    from src.converter_functions.custom_converter_functions.Nominal_heating_power_calculator import Nominal_heating_power_calculator
+    from src.converter_functions.custom_converter_functions.Nominal_cooling_power_calculator import Nominal_cooling_power_calculator
+    from src.converter_functions.custom_converter_functions.RC_Distribution_Configurator import RC_Distribution_Configurator
+    from src.converter_functions.custom_converter_functions.Zone_dimensions_calculator import Zone_dimensions_calculator
     if s == "Link_resolver":
         return Link_resolver()
     if s == "Miscellaneous_handler":
@@ -141,12 +136,13 @@ def get_converter_function_by_string(s) -> ConverterFunction:
     if s == "Component_properties_calculator":
         return Component_properties_calculator()
     if s == "Nominal_heating_power_calculator":
-        return Nominal_heating_power_calculator()
+        return Nominal_heating_power_calculator() 
+    if s == "Nominal_cooling_power_calculator":
+        return Nominal_cooling_power_calculator()
     if s == "RC_Distribution_Configurator":
         return RC_Distribution_Configurator()
     if s == "Model_compatibility_layer":
         return Model_compatibility_layer()
-
     # to add new converter function, import class above and insert:
     # elif s == "<my_converter_function>":
     #     return <my_converter_function>()
@@ -154,7 +150,7 @@ def get_converter_function_by_string(s) -> ConverterFunction:
     raise ValueError(f"No converter function with name {s} found")
 
 
-def get_step_size_arr(start_time, stop_time, writer_step_size, controller_step_size):
+def get_step_size_arr(start_time, stop_time, writer_step_size, controller_step_size, max_permitted_time_step):
     '''
     Generates a list halting points for the simulation.
 
@@ -167,7 +163,13 @@ def get_step_size_arr(start_time, stop_time, writer_step_size, controller_step_s
         stop_time (int): The end time of the simulation.
         writer_step_size (int): The time interval for writing output.
         controller_step_size (int): The time interval for external controller input.
-
+        max_permitted_time_step (int): This parameter defines the maximum allowable 
+            time step, expressed in seconds, that is consistent with the resolution 
+            of the external input files. It ensures that the time intervals between 
+            solver steps do not exceed this threshold, thereby ensuring, that all 
+            events defined by the external input files are seen by the model. 
+            In contrast to writer_step_size, it doesn't affect the the ability for events
+            to be seen by the user in the results.
     Returns:
         list: A list of step widths between sorted halting points.
 
@@ -176,7 +178,12 @@ def get_step_size_arr(start_time, stop_time, writer_step_size, controller_step_s
     '''
     writer_halting_point_array = [i for i in range(start_time, stop_time + 1, writer_step_size)]
     controller_halting_point_array = [i for i in range(start_time, stop_time + 1, controller_step_size)]
-    halting_point_set = set(writer_halting_point_array) | set(controller_halting_point_array)
+    if max_permitted_time_step < min(writer_step_size, controller_step_size):
+        required_halting_point_array=[i for i in range(start_time,stop_time+1, max_permitted_time_step)]
+        print(f"##Creating additional halting points because max_permitted_time_step(={max_permitted_time_step} s, based on model input files) is smaller than writer_step_size and controller_step_size")
+    else:
+        required_halting_point_array=[]
+    halting_point_set = set(writer_halting_point_array) | set(controller_halting_point_array) | set(required_halting_point_array)
     sorted_halting_point_list = sorted(list(halting_point_set))
     step_list = [sorted_halting_point_list[i] - sorted_halting_point_list[i-1] for i in range(1, len(sorted_halting_point_list))]
 
@@ -218,3 +225,69 @@ def setup_paths(user_config:dict):
         output_path = user_config["output_path"]
 
     return config_path, fmu_path, output_path
+
+
+def load_weather_data(tr):
+    '''
+    Load weather data from a Modelica weather file.
+
+    Parameters:
+    tr (dict): A dictionary containing the key 'weaDat.fileName' with the path to the weather data file.
+
+    Returns:
+    pd.DataFrame: A DataFrame with weather data, indexed by time starting from January 1, 2025, 
+                and columns named according to the file header.
+    '''
+    fname=tr["weaDat.fileName"]
+    if isinstance(fname,list): fname=fname[0]
+    header=open(fname,"r").read().split("\n")[11:40]
+    df=pd.read_csv(fname, sep='\t', decimal='.', skiprows=40,header=None,index_col=0).iloc[:,0:29]
+    df.columns=header
+    df.index=pd.to_timedelta(df.index,unit="s")+pd.to_datetime("2025-1-1")
+    return df
+
+def load_internalGain_data(tr):
+    '''
+    Load internal gain data from a specified file.
+
+    Parameters:
+    tr (dict): A dictionary containing the key 'internalGain.fileName' with the path to the internal gain data file.
+
+    Returns:
+    pd.DataFrame: A DataFrame with internal gain data, indexed by time starting from January 1, 2025.
+    '''
+    fname=tr["internalGain.fileName"]
+    if isinstance(fname,list): fname=fname[0]
+    df=pd.read_csv(fname,sep="\t",skiprows=[1],index_col=0)
+    df.index=pd.to_timedelta(df.index,unit="h")+pd.to_datetime("2025-1-1")
+    return df
+
+def load_hygienicalWindowOpening_data(tr):
+    '''
+    Load hygienicalWindowOpening data from a specified file.
+
+    Parameters:
+    tr (dict): A dictionary containing the key  'hygienicalWindowOpening.fileName' with the path to the internal gain data file.
+
+    Returns:
+    pd.DataFrame: A DataFrame with hygienicalWindowOpening data, indexed by time starting from January 1, 2025.
+    '''
+    fname=tr["hygienicalWindowOpening.fileName"]
+    if isinstance(fname,list): fname=fname[0]
+    df=pd.read_csv(fname,sep="\t",skiprows=[1],index_col=0)
+    df.index=pd.to_timedelta(df.index,unit="min")+pd.to_datetime("2025-1-1")
+    return df
+
+def df_findcol(df,sstr,b_ignorecase=True):
+    '''
+    Search for columns in a pandas DataFrame that match a specified search string.
+
+    Parameters:
+    df (pd.DataFrame): The DataFrame to search within.
+    sstr (str): The search string to match against column names.
+    b_ignorecase (bool): If True, the search will be case-insensitive; otherwise, it will be case-sensitive.
+
+    Returns:
+    pd.DataFrame: A DataFrame containing only the columns that match the search string.
+    '''
+    return df.loc[:,df.columns.str.contains(sstr,case=not(b_ignorecase))]

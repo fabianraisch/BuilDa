@@ -9,7 +9,9 @@ class TwoPointController_windowOpening(TwoPointController_heating):
     when it exceeds the setpoint.
 
     In this case, it is used to simulate window opening when indoor air temperature 
-    exceeds the setpoint. 
+    exceeds the setpoint. Thus the described control action is reversed. 
+    The b_reversed_action_control is set to True to indicate that the controller should be active if 
+    the process variable y exceeds the setpoint, rather than when it's below it.
 
     The hysteresis parameter defines the range within which the controller will not 
     switch states to prevent rapid cycling. The b_reversed_action_control is set to True 

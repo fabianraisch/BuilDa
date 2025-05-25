@@ -1,4 +1,5 @@
 from abc import ABC
+import pandas as pd
 
 class ConverterFunction(ABC):
 
@@ -9,7 +10,7 @@ class ConverterFunction(ABC):
 
         '''
         pass
-
+    
 
     def convert(self, variable_dict):
         '''

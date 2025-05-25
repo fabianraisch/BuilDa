@@ -7,7 +7,7 @@ class PIController_cooling(PIController_heating):
     and the integral of past errors, providing improved stability and 
     eliminating steady-state error compared to a P-controller.
 
-    This controller is used for cooling.
+    This controller is used for cooling. Thus the described control action is reversed. 
     It also has clamping implemented as an anti-windup technique to prevent excessive 
     accumulation of the integral term.
     The b_reversed_action_control is set to True to indicate that the controller should be active if 
