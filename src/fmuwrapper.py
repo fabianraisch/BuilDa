@@ -73,13 +73,15 @@ class FMUWrapper:
         n_errors=0
         fmu_state_dict=self.get_fmu_state_dict(parameters.keys())
         for k in parameters.keys():
+            fmu_value=fmu_state_dict[k]
             if type(parameters[k]) in [float,int,bool]:
-                b_properly_written=abs(parameters[k]-fmu_state_dict[k] >= error_threshold)
+                b_properly_written=abs(parameters[k]-fmu_value) < error_threshold
             elif type(parameters[k]) in [str]:
-                b_properly_written=parameters[k]==fmu_state_dict[k]
+                if isinstance(fmu_value,bytes): fmu_value=fmu_value.decode()
+                b_properly_written=parameters[k]==fmu_value
             else: print("##not handled datatype ",type(parameters[k]),"parameter",k,"cannot be testet.")
-            if b_properly_written:
-                print("##WARNING - MISMATCH: tried to set",k,"to",parameters[k],"actual value",fmu_state_dict[k])
+            if not(b_properly_written):
+                print("##WARNING - MISMATCH: tried to set",k,"to",parameters[k],"actual value",fmu_value)
                 n_errors+=1
             else:
                 #check if fmu parameter attributes are appropriate for values to be set after fmu compilation
@@ -87,11 +89,11 @@ class FMUWrapper:
                 causality=fmu_variable.__getattribute__("causality")
                 variability=fmu_variable.__getattribute__("variability")
                 if causality!="parameter" and (variability=="tunable" or variability=="fixed"):
-                    print("##WARNING - INAPROPRIATE ATRIBUTE CAUSALITY: tried to set",k,"to",parameters[k],"actual value is "+str(fmu_state_dict[k])+", but causality is","\""+causality+"\"","and variability is","\""+variability+"\".","The set parameter value probably wouldn't be used in simulation")
+                    print("##WARNING - INAPROPRIATE ATRIBUTE CAUSALITY: tried to set",k,"to",parameters[k],"actual value is "+str(fmu_value)+", but causality is","\""+causality+"\"","and variability is","\""+variability+"\".","The set parameter value probably wouldn't be used in simulation")
                     n_errors+=1
                 else:
                     if b_verbose_mode:
-                        print("#SUCCESSFULLY SET PARAMETER: tried to set",k,"to",parameters[k],"value is now",fmu_state_dict[k],"parameter attributes(causality:variability):",causality+":"+variability)
+                        print("#SUCCESSFULLY SET PARAMETER: tried to set",k,"to",parameters[k],"value is now",fmu_value,"parameter attributes(causality:variability):",causality+":"+variability)
         return n_errors
 
     def init_FMU(self):
