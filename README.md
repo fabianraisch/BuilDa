@@ -208,6 +208,7 @@ For citation please use:
     BuilDa2025,
     title={BUILDA: A THERMAL BUILDING DATA GENERATION FRAMEWORK FOR TRANSFER LEARNING},
     author={Thomas Krug and Fabian Raisch and Dominik Aimer and Markus Wirnsberger and Ferdinand Sigg and Benjamin Schäfer and Benjamin Tischler},
+    booktitle={2025 Annual Modeling and Simulation Conference (ANNSIM)},
     year= {2025}
 }
 ```
