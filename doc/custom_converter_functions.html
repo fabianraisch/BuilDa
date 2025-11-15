@@ -1,0 +1,2309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>custom_converter_functions API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>custom_converter_functions</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="custom_converter_functions.Component_configurator"><code class="flex name class">
+<span>class <span class="ident">Component_configurator</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Component_configurator(ConverterFunction):
+    &#39;&#39;&#39;
+    Sets up preconfigured wall construction profiles comprising U-Value, 
+    heat capacity and R- and C-distributions.
+    Profiles include e.g., &#39;heavy&#39;, &#39;lightweight&#39;, &#39;gasConcrete&#39;, 
+        &#39;pumiceAndBrick&#39;, &#39;baloonFraming&#39;
+    &#39;&#39;&#39;
+    def __init__(self):
+        super().__init__()
+        # Definition of Component_constructions_n3, only use, when number of elements n=3,
+        self.Component_constructions_n3={
+
+            &#34;heavy&#34;:{               #from ashrae 140-2004 TC900
+                &#34;UExt&#34;:0.512,
+                &#34;heatCapacity_wall&#34;:145154,
+                &#34;extWall_C_distribution&#34;:&#34;heavy&#34;,
+                &#34;extWall_R_distribution&#34;:&#34;heavy&#34;,
+            },     
+            &#34;lightweight&#34;:{               #from ashrae 140-2004 TC600
+                &#34;UExt&#34;:0.514,
+                &#34;heatCapacity_wall&#34;:14534.28,
+                &#34;extWall_C_distribution&#34;:&#34;lightweight&#34;,
+                &#34;extWall_R_distribution&#34;:&#34;lightweight&#34;,
+            },       
+
+
+            #wall constructrion according to: 
+            # https://www.ubakus.de/u-wert-rechner/index.php?c=2&amp;M0=132061I1&amp;M1=132153I33&amp;l1=0.23&amp;r1=550&amp;name1=Geschosshohe%20Porenbetonplatten&amp;v1=f2f2f2&amp;tex1=gf&amp;M2=77i5&amp;T_i=20&amp;RH_i=50&amp;Te=-5&amp;RH_e=80&amp;outside=0&amp;bt=0&amp;unorm=enev14alt&amp;cq=2947871&amp;name=AW%20Porenbeton%20Fassadenelemente%20GSB%2035%2C%2033%20cm%2C%20ab%201952&amp;fz=14
+            &#34;gasConcrete&#34;:{               #from ashrae 140-2004 TC600
+                &#34;UExt&#34;:0.615,
+                &#34;heatCapacity_wall&#34;:201500,
+                &#34;extWall_C_distribution&#34;:&#34;gasConcrete&#34;,
+                &#34;extWall_R_distribution&#34;:&#34;gasConcrete&#34;,
+            },     
+
+
+            #wall constructrion according to: 
+            # https://www.ubakus.de/u-wert-rechner/index.php?c=2&amp;M0=199i15&amp;M1=132261I24&amp;v1=b7b7b7&amp;tex1=0&amp;M2=133477I2&amp;M3=136921i115&amp;v3=cc5c4a&amp;tex3=vz2&amp;T_i=20&amp;RH_i=50&amp;Te=-5&amp;RH_e=80&amp;outside=0&amp;bt=0&amp;Rsi=U&amp;unorm=enev14alt&amp;cq=2947497&amp;name=AW%20Bims-Schwemmstein%2024%20cm%2C%20Schalenfuge%2FVZ-Vormauer%201200%20kg%2Fm%C2%B3%2C%20ab%201952&amp;fz=14
+            &#34;pumiceAndBrick&#34;:{ 
+                &#34;UExt&#34;:0.9,
+                &#34;heatCapacity_wall&#34;:333100,
+                &#34;extWall_C_distribution&#34;:&#34;pumiceAndBrick&#34;,
+                &#34;extWall_R_distribution&#34;:&#34;pumiceAndBrick&#34;,
+            },
+
+            #wall constructrion according to: 
+            # https://www.ubakus.de/u-wert-rechner/index.php?c=2&amp;M0=133859i6&amp;M1=36i24&amp;M2=137011i2&amp;M3=86I6&amp;M4=36I9&amp;x4=-0.05&amp;y4=0.2&amp;w4=6&amp;R4=60&amp;M5=132403I3&amp;v5=81674f&amp;tex5=kork&amp;M6=132657i3&amp;M7=90i24&amp;M8=36i24&amp;y8=0&amp;w8=4.8&amp;R8=30&amp;hz8=1&amp;M9=119929i44&amp;T_i=20&amp;RH_i=50&amp;Te=-5&amp;RH_e=80&amp;outside=0&amp;bt=0&amp;unorm=enev14alt&amp;cq=2947513&amp;name=AW%20Einsteins%20Sommerhaus%2C%20Holzrahmen%2012%20cm%2C%203%20cm%20Torfd%C3%A4mmung%2C%201929&amp;fz=14
+            &#34;baloonFraming&#34;:{ 
+                &#34;UExt&#34;:0.732,
+                &#34;heatCapacity_wall&#34;:37176,
+                &#34;extWall_C_distribution&#34;:&#34;baloonFraming&#34;,
+                &#34;extWall_R_distribution&#34;:&#34;baloonFraming&#34;,
+            },
+
+            ##Draft for additional Component_constructions_n3 profile:
+            # &#34;templateWall&#34;:{ 
+            #     &#34;UExt&#34;:*value_of_template_wall*,
+            #     &#34;heatCapacity_wall&#34;:*value_of_template_wall*,
+            #     &#34;extWall_C_distribution&#34;:*C-Distribution_of_template_wall*,
+            #     &#34;extWall_R_distribution&#34;:*R-Distribution_of_template_wall*,
+            #     add other expressions as needed...
+            # },
+        }
+
+    def convert(self, variable_dict):
+        tr=variable_dict
+        for key in tr.keys():
+            #check if configured parameter value of parameter key is within the 
+            # Component construction profiles, indicating that an existing 
+            # profile should be applied for configuration
+            if type(tr[key]) is str   and   tr[key] in self.Component_constructions_n3.keys():
+                try:
+                    #replace formerly configured link to profile by corresponding 
+                    # value from profile
+                    tr[key]=self.Component_constructions_n3[tr[key]] [key]
+                except KeyError:
+                    #raises an error, if there is no value for the parameter configured
+                    # in profile, except parameter is starting with &#39;#&#39;
+                    if not(key.startswith(&#34;#&#34;)):
+                        raise IndexError(f&#34;&#34;&#34;Could not read out value for parameter &#39;{key}&#39; on component profile &#39;{tr[key]}&#39;. There is none configured.&#34;&#34;&#34;)        
+        return tr</code></pre>
+</details>
+<div class="desc"><p>Sets up preconfigured wall construction profiles comprising U-Value,
+heat capacity and R- and C-distributions.
+Profiles include e.g., 'heavy', 'lightweight', 'gasConcrete',
+'pumiceAndBrick', 'baloonFraming'</p>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="custom_converter_functions.Component_configurator.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    tr=variable_dict
+    for key in tr.keys():
+        #check if configured parameter value of parameter key is within the 
+        # Component construction profiles, indicating that an existing 
+        # profile should be applied for configuration
+        if type(tr[key]) is str   and   tr[key] in self.Component_constructions_n3.keys():
+            try:
+                #replace formerly configured link to profile by corresponding 
+                # value from profile
+                tr[key]=self.Component_constructions_n3[tr[key]] [key]
+            except KeyError:
+                #raises an error, if there is no value for the parameter configured
+                # in profile, except parameter is starting with &#39;#&#39;
+                if not(key.startswith(&#34;#&#34;)):
+                    raise IndexError(f&#34;&#34;&#34;Could not read out value for parameter &#39;{key}&#39; on component profile &#39;{tr[key]}&#39;. There is none configured.&#34;&#34;&#34;)        
+    return tr</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="custom_converter_functions.Component_properties_calculator"><code class="flex name class">
+<span>class <span class="ident">Component_properties_calculator</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Component_properties_calculator(ConverterFunction):
+    &#39;&#39;&#39;
+    Calculate: the R- and C-Value distributions for the RC-Elements in the components (e.g. wall, floor, roof, internal wall)
+    Based on: number of RC-Elements, overall U-Value and heat capacitance of the components, zone dimensions
+    &#39;&#39;&#39;
+    def __init__(self):
+        super().__init__()
+
+    @staticmethod
+    def calc_distribution(self,value,n,distribution=None):
+        &#34;&#34;&#34;
+        Distributes a given value into n parts based on a specified distribution list.
+
+        Args:
+            value (float): The total value to be distributed.
+            n (int): The number of parts to distribute the value into.
+            distribution (list of floats, optional): A list of fractions representing the distribution. 
+                If None, the value will be distributed equally among all parts.
+                If the sum of the distribution is not equal to 1, the values will be normalized.
+
+        Returns:
+            list of floats: The distributed values as a list, where each element of the list corresponds to a part.
+        &#34;&#34;&#34;
+        if distribution==None:
+                print(&#34;WARNING: calc_distribution: no distribution given for value&#34;,value)
+                print(&#34;\t==&gt; assuming homogeneous distribution&#34;)
+                distribution=[1/n for c in range(n)]
+        if len(distribution)&lt;n:
+                raise ValueError(&#34;distribution has too few elements, there should be &#34;+str(n)+&#34; but distribution has &#34;+str(len(distribution))+&#34;: &#39;&#34;+str(distribution)+&#34;&#39;&#34;)
+        if len(distribution)&gt;n:
+                raise ValueError(&#34;distribution has too much elements, there should be &#34;+str(n)+&#34; but distribution has &#34;+str(len(distribution))+&#34;: &#39;&#34;+str(distribution)+&#34;&#39;&#34;)
+        if sum(distribution)!=1: 
+                #print(f&#34;Sum of elements in in distribution {distribution} !=1-&gt; scaling values to correct distribution&#34;)
+                correction_factor=1/sum(distribution)
+                distribution=[distribution[i]*correction_factor for i in range(len(distribution))]
+        value_distributed=[value*distribution[i] for i in range(len(distribution))]
+        return(value_distributed)
+    
+    @staticmethod
+    def calc_R_conductive(self,U,Rsi,Rse,A):
+        &#34;&#34;&#34;
+        calculate the conductive resistance of the entire component from U-Value by subtracting the heat transfer resistances Rsi (interior) and Rse (exterior) and dividing through the area
+        Args:
+            U-value:  U-value of component
+            Rsi    :  interior heat transfer resistor of component
+            Rse    :  exterior heat transfer resistor of component
+            A      :  Area of component
+        returns:
+            R_cond   : conductive heat resistor of component
+        &#34;&#34;&#34;
+        R_cond=((1/U)-Rsi-Rse)/A
+        return(R_cond)
+
+
+    def convert(self, variable_dict):
+        tr = variable_dict
+        # The wall consists of n R-C-elements + one RRem
+        # the total R-value and the total C-Value of the component(exterior wall, floor, roof, interior wall+ceiling) is divided according to the distribution parameter between the RC-Elements
+        #%%external wall
+        tr.update(
+            dict(zip(
+                    [&#34;thermalZone.RExt[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nExt&#34;]+1)]+[&#34;thermalZone.RExt&#34;+&#34;Rem&#34;],
+                    self.calc_distribution(self,
+                        value=self.calc_R_conductive(self,U=tr[&#34;UExt&#34;],  Rsi=tr[&#34;Rsi_extWall&#34;],  Rse=tr[&#34;Rse_extWall&#34;],  A=tr[&#34;wallExt_area_total&#34;]),
+                        n=tr[&#34;thermalZone.nExt&#34;]+1,
+                        distribution=tr[&#34;extWall_R_distribution&#34;]
+                    )
+                )
+            )
+        )
+        tr.update(
+            dict(
+                zip(
+                    [&#34;thermalZone.CExt[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nExt&#34;]+1)],
+                    self.calc_distribution(self,
+                        value=tr[&#34;heatCapacity_wall&#34;]*tr[&#34;wallExt_area_total&#34;],
+                        n=tr[&#34;thermalZone.nExt&#34;],
+                        distribution=tr[&#34;extWall_C_distribution&#34;]
+                    )
+                )
+            )
+        )
+
+        #%%floor
+        tr.update(
+            dict(zip(
+                    [&#34;thermalZone.RFloor[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nFloor&#34;]+1)]+[&#34;thermalZone.RFloor&#34;+&#34;Rem&#34;],
+                    self.calc_distribution(self,
+                        value=self.calc_R_conductive(self,U=tr[&#34;UFloor&#34;],Rsi=tr[&#34;Rsi_floor&#34;],Rse=0,A=tr[&#34;thermalZone.AFloor&#34;]),
+                        n=tr[&#34;thermalZone.nFloor&#34;]+1,
+                        distribution=tr[&#34;floor_R_distribution&#34;]
+                     )
+                )
+            )
+        )
+        tr.update(
+            dict(
+                zip(
+                    [&#34;thermalZone.CFloor[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nFloor&#34;]+1)],
+                    self.calc_distribution(self,
+                        value=tr[&#34;heatCapacity_floor&#34;]*tr[&#34;thermalZone.AFloor&#34;],
+                        n=tr[&#34;thermalZone.nFloor&#34;],
+                        distribution=tr[&#34;floor_C_distribution&#34;]
+                    )  
+                )
+            )
+        )
+        #%%roof
+        tr.update(
+            dict(zip(
+                    [&#34;thermalZone.RRoof[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nRoof&#34;]+1)]+[&#34;thermalZone.RRoof&#34;+&#34;Rem&#34;],
+                    self.calc_distribution(self,
+                        value=self.calc_R_conductive(self,U=tr[&#34;URoof&#34;],Rsi=tr[&#34;Rsi_roof&#34;],Rse=tr[&#34;Rse_roof&#34;],A=tr[&#34;thermalZone.ARoof&#34;]),
+                        n=tr[&#34;thermalZone.nRoof&#34;]+1,
+                        distribution=tr[&#34;roof_R_distribution&#34;]
+                    )
+                )
+            )
+        )
+        tr.update(
+            dict(
+                zip(
+                    [&#34;thermalZone.CRoof[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nRoof&#34;]+1)],
+                    self.calc_distribution(self,
+                        value=tr[&#34;heatCapacity_roof&#34;]*tr[&#34;thermalZone.ARoof&#34;],
+                        n=tr[&#34;thermalZone.nRoof&#34;],
+                        distribution=tr[&#34;roof_C_distribution&#34;]
+                    ) 
+                )
+            )
+        )
+        #%%internal wall
+        tr.update(
+            dict(zip(
+                    [&#34;thermalZone.RInt[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nInt&#34;]+1)],
+                    self.calc_distribution(self,
+                        value=self.calc_R_conductive(self,U=tr[&#34;UInt&#34;] * 2,  Rsi=tr[&#34;Rsi_intWall&#34;],  Rse=0,  A=tr[&#34;thermalZone.AInt&#34;] + (tr[&#34;n_floors&#34;]-1) * tr[&#34;thermalZone.AFloor&#34;] * 2),  #Simplified, thickness of the wall already specified by resistance, no transition Rse on one side because it&#39;s only half of the wall, modeling the intermediate ceilings as internal walls.
+                        n=tr[&#34;thermalZone.nInt&#34;],
+                        distribution=tr[&#34;intWall_R_distribution&#34;]
+                    )
+                )
+            )
+        )
+        heat_capacity_furniture=tr[&#34;zone_length&#34;]*tr[&#34;zone_width&#34;]*tr[&#34;heatCapacity_furniture_per_m2&#34;]*tr[&#34;n_floors&#34;] #J/(K*m²)*m²
+        tr.update(
+            dict(
+                zip(
+                    [&#34;thermalZone.CInt[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nInt&#34;]+1)],
+                    self.calc_distribution(self,
+                        value=tr[&#34;heatCapacity_internalWall&#34;] * tr[&#34;thermalZone.AInt&#34;] + (tr[&#34;n_floors&#34;]-1)*tr[&#34;thermalZone.AFloor&#34;] * tr[&#34;heatCapacity_floor&#34;] + heat_capacity_furniture,    #simplified, thickness of the wall already determined by capacity + capacity of the intermediate floors.
+                        n=tr[&#34;thermalZone.nInt&#34;],
+                        distribution=tr[&#34;intWall_C_distribution&#34;]
+                    )
+                )
+            )
+        )
+        #%%window
+        tr[&#34;thermalZone.RWin&#34;]=self.calc_R_conductive(self,U=tr[&#34;UWin&#34;],Rsi=tr[&#34;Rsi_window&#34;],Rse=tr[&#34;Rse_window&#34;],A=tr[&#34;win_area_total&#34;])
+
+        return tr</code></pre>
+</details>
+<div class="desc"><p>Calculate: the R- and C-Value distributions for the RC-Elements in the components (e.g. wall, floor, roof, internal wall)
+Based on: number of RC-Elements, overall U-Value and heat capacitance of the components, zone dimensions</p>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="custom_converter_functions.Component_properties_calculator.calc_R_conductive"><code class="name flex">
+<span>def <span class="ident">calc_R_conductive</span></span>(<span>self, U, Rsi, Rse, A)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def calc_R_conductive(self,U,Rsi,Rse,A):
+    &#34;&#34;&#34;
+    calculate the conductive resistance of the entire component from U-Value by subtracting the heat transfer resistances Rsi (interior) and Rse (exterior) and dividing through the area
+    Args:
+        U-value:  U-value of component
+        Rsi    :  interior heat transfer resistor of component
+        Rse    :  exterior heat transfer resistor of component
+        A      :  Area of component
+    returns:
+        R_cond   : conductive heat resistor of component
+    &#34;&#34;&#34;
+    R_cond=((1/U)-Rsi-Rse)/A
+    return(R_cond)</code></pre>
+</details>
+<div class="desc"><p>calculate the conductive resistance of the entire component from U-Value by subtracting the heat transfer resistances Rsi (interior) and Rse (exterior) and dividing through the area</p>
+<h2 id="args">Args</h2>
+<p>U-value:
+U-value of component
+Rsi
+:
+interior heat transfer resistor of component
+Rse
+:
+exterior heat transfer resistor of component
+A
+:
+Area of component
+returns:
+R_cond
+: conductive heat resistor of component</p></div>
+</dd>
+<dt id="custom_converter_functions.Component_properties_calculator.calc_distribution"><code class="name flex">
+<span>def <span class="ident">calc_distribution</span></span>(<span>self, value, n, distribution=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def calc_distribution(self,value,n,distribution=None):
+    &#34;&#34;&#34;
+    Distributes a given value into n parts based on a specified distribution list.
+
+    Args:
+        value (float): The total value to be distributed.
+        n (int): The number of parts to distribute the value into.
+        distribution (list of floats, optional): A list of fractions representing the distribution. 
+            If None, the value will be distributed equally among all parts.
+            If the sum of the distribution is not equal to 1, the values will be normalized.
+
+    Returns:
+        list of floats: The distributed values as a list, where each element of the list corresponds to a part.
+    &#34;&#34;&#34;
+    if distribution==None:
+            print(&#34;WARNING: calc_distribution: no distribution given for value&#34;,value)
+            print(&#34;\t==&gt; assuming homogeneous distribution&#34;)
+            distribution=[1/n for c in range(n)]
+    if len(distribution)&lt;n:
+            raise ValueError(&#34;distribution has too few elements, there should be &#34;+str(n)+&#34; but distribution has &#34;+str(len(distribution))+&#34;: &#39;&#34;+str(distribution)+&#34;&#39;&#34;)
+    if len(distribution)&gt;n:
+            raise ValueError(&#34;distribution has too much elements, there should be &#34;+str(n)+&#34; but distribution has &#34;+str(len(distribution))+&#34;: &#39;&#34;+str(distribution)+&#34;&#39;&#34;)
+    if sum(distribution)!=1: 
+            #print(f&#34;Sum of elements in in distribution {distribution} !=1-&gt; scaling values to correct distribution&#34;)
+            correction_factor=1/sum(distribution)
+            distribution=[distribution[i]*correction_factor for i in range(len(distribution))]
+    value_distributed=[value*distribution[i] for i in range(len(distribution))]
+    return(value_distributed)</code></pre>
+</details>
+<div class="desc"><p>Distributes a given value into n parts based on a specified distribution list.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>float</code></dt>
+<dd>The total value to be distributed.</dd>
+<dt><strong><code>n</code></strong> :&ensp;<code>int</code></dt>
+<dd>The number of parts to distribute the value into.</dd>
+<dt><strong><code>distribution</code></strong> :&ensp;<code>list</code> of <code>floats</code>, optional</dt>
+<dd>A list of fractions representing the distribution.
+If None, the value will be distributed equally among all parts.
+If the sum of the distribution is not equal to 1, the values will be normalized.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code> of <code>floats</code></dt>
+<dd>The distributed values as a list, where each element of the list corresponds to a part.</dd>
+</dl></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="custom_converter_functions.Component_properties_calculator.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    tr = variable_dict
+    # The wall consists of n R-C-elements + one RRem
+    # the total R-value and the total C-Value of the component(exterior wall, floor, roof, interior wall+ceiling) is divided according to the distribution parameter between the RC-Elements
+    #%%external wall
+    tr.update(
+        dict(zip(
+                [&#34;thermalZone.RExt[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nExt&#34;]+1)]+[&#34;thermalZone.RExt&#34;+&#34;Rem&#34;],
+                self.calc_distribution(self,
+                    value=self.calc_R_conductive(self,U=tr[&#34;UExt&#34;],  Rsi=tr[&#34;Rsi_extWall&#34;],  Rse=tr[&#34;Rse_extWall&#34;],  A=tr[&#34;wallExt_area_total&#34;]),
+                    n=tr[&#34;thermalZone.nExt&#34;]+1,
+                    distribution=tr[&#34;extWall_R_distribution&#34;]
+                )
+            )
+        )
+    )
+    tr.update(
+        dict(
+            zip(
+                [&#34;thermalZone.CExt[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nExt&#34;]+1)],
+                self.calc_distribution(self,
+                    value=tr[&#34;heatCapacity_wall&#34;]*tr[&#34;wallExt_area_total&#34;],
+                    n=tr[&#34;thermalZone.nExt&#34;],
+                    distribution=tr[&#34;extWall_C_distribution&#34;]
+                )
+            )
+        )
+    )
+
+    #%%floor
+    tr.update(
+        dict(zip(
+                [&#34;thermalZone.RFloor[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nFloor&#34;]+1)]+[&#34;thermalZone.RFloor&#34;+&#34;Rem&#34;],
+                self.calc_distribution(self,
+                    value=self.calc_R_conductive(self,U=tr[&#34;UFloor&#34;],Rsi=tr[&#34;Rsi_floor&#34;],Rse=0,A=tr[&#34;thermalZone.AFloor&#34;]),
+                    n=tr[&#34;thermalZone.nFloor&#34;]+1,
+                    distribution=tr[&#34;floor_R_distribution&#34;]
+                 )
+            )
+        )
+    )
+    tr.update(
+        dict(
+            zip(
+                [&#34;thermalZone.CFloor[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nFloor&#34;]+1)],
+                self.calc_distribution(self,
+                    value=tr[&#34;heatCapacity_floor&#34;]*tr[&#34;thermalZone.AFloor&#34;],
+                    n=tr[&#34;thermalZone.nFloor&#34;],
+                    distribution=tr[&#34;floor_C_distribution&#34;]
+                )  
+            )
+        )
+    )
+    #%%roof
+    tr.update(
+        dict(zip(
+                [&#34;thermalZone.RRoof[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nRoof&#34;]+1)]+[&#34;thermalZone.RRoof&#34;+&#34;Rem&#34;],
+                self.calc_distribution(self,
+                    value=self.calc_R_conductive(self,U=tr[&#34;URoof&#34;],Rsi=tr[&#34;Rsi_roof&#34;],Rse=tr[&#34;Rse_roof&#34;],A=tr[&#34;thermalZone.ARoof&#34;]),
+                    n=tr[&#34;thermalZone.nRoof&#34;]+1,
+                    distribution=tr[&#34;roof_R_distribution&#34;]
+                )
+            )
+        )
+    )
+    tr.update(
+        dict(
+            zip(
+                [&#34;thermalZone.CRoof[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nRoof&#34;]+1)],
+                self.calc_distribution(self,
+                    value=tr[&#34;heatCapacity_roof&#34;]*tr[&#34;thermalZone.ARoof&#34;],
+                    n=tr[&#34;thermalZone.nRoof&#34;],
+                    distribution=tr[&#34;roof_C_distribution&#34;]
+                ) 
+            )
+        )
+    )
+    #%%internal wall
+    tr.update(
+        dict(zip(
+                [&#34;thermalZone.RInt[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nInt&#34;]+1)],
+                self.calc_distribution(self,
+                    value=self.calc_R_conductive(self,U=tr[&#34;UInt&#34;] * 2,  Rsi=tr[&#34;Rsi_intWall&#34;],  Rse=0,  A=tr[&#34;thermalZone.AInt&#34;] + (tr[&#34;n_floors&#34;]-1) * tr[&#34;thermalZone.AFloor&#34;] * 2),  #Simplified, thickness of the wall already specified by resistance, no transition Rse on one side because it&#39;s only half of the wall, modeling the intermediate ceilings as internal walls.
+                    n=tr[&#34;thermalZone.nInt&#34;],
+                    distribution=tr[&#34;intWall_R_distribution&#34;]
+                )
+            )
+        )
+    )
+    heat_capacity_furniture=tr[&#34;zone_length&#34;]*tr[&#34;zone_width&#34;]*tr[&#34;heatCapacity_furniture_per_m2&#34;]*tr[&#34;n_floors&#34;] #J/(K*m²)*m²
+    tr.update(
+        dict(
+            zip(
+                [&#34;thermalZone.CInt[&#34;+str(c)+&#34;]&#34; for c in range(1,tr[&#34;thermalZone.nInt&#34;]+1)],
+                self.calc_distribution(self,
+                    value=tr[&#34;heatCapacity_internalWall&#34;] * tr[&#34;thermalZone.AInt&#34;] + (tr[&#34;n_floors&#34;]-1)*tr[&#34;thermalZone.AFloor&#34;] * tr[&#34;heatCapacity_floor&#34;] + heat_capacity_furniture,    #simplified, thickness of the wall already determined by capacity + capacity of the intermediate floors.
+                    n=tr[&#34;thermalZone.nInt&#34;],
+                    distribution=tr[&#34;intWall_C_distribution&#34;]
+                )
+            )
+        )
+    )
+    #%%window
+    tr[&#34;thermalZone.RWin&#34;]=self.calc_R_conductive(self,U=tr[&#34;UWin&#34;],Rsi=tr[&#34;Rsi_window&#34;],Rse=tr[&#34;Rse_window&#34;],A=tr[&#34;win_area_total&#34;])
+
+    return tr</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="custom_converter_functions.Link_resolver"><code class="flex name class">
+<span>class <span class="ident">Link_resolver</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Link_resolver(ConverterFunction):
+    &#39;&#39;&#39;
+        Resolves linked config-json-parameters to the correspoinding target values
+        Should always be executed before all other converter functions
+    &#39;&#39;&#39;
+    def __init__(self):
+        super().__init__()
+
+    def convert(self, variable_dict):
+        to_return=dict()
+        #Checks if there&#39;s an intersection of key and value sets (indicates linked parameters).
+        #If so, applies link resolution applying the values of the link targets parameters to the 
+        #parameters where the link was configured.
+        #e.g.: parameter1=&#34;parameter1&#34;; parameter2=2 ---&gt; parameter1=2
+        #only str-type values are considered
+        for key in variable_dict.keys():
+            value=variable_dict[key]
+            if type(value) is str and value in variable_dict.keys():
+                to_return[key]=variable_dict[value]
+
+        return to_return</code></pre>
+</details>
+<div class="desc"><p>Resolves linked config-json-parameters to the correspoinding target values
+Should always be executed before all other converter functions</p>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="custom_converter_functions.Link_resolver.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    to_return=dict()
+    #Checks if there&#39;s an intersection of key and value sets (indicates linked parameters).
+    #If so, applies link resolution applying the values of the link targets parameters to the 
+    #parameters where the link was configured.
+    #e.g.: parameter1=&#34;parameter1&#34;; parameter2=2 ---&gt; parameter1=2
+    #only str-type values are considered
+    for key in variable_dict.keys():
+        value=variable_dict[key]
+        if type(value) is str and value in variable_dict.keys():
+            to_return[key]=variable_dict[value]
+
+    return to_return</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="custom_converter_functions.Miscellaneous_handler"><code class="flex name class">
+<span>class <span class="ident">Miscellaneous_handler</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Miscellaneous_handler(ConverterFunction):
+    &#39;&#39;&#39;
+        Handles everything that does require a separate converter function
+    &#39;&#39;&#39;
+    def __init__(self):
+        super().__init__()
+
+    def convert(self, variable_dict):
+        to_return = variable_dict
+
+        # Convert config.json parameter names to fmu-parameter names, where necessary
+        to_return[&#34;UseInternalController.k&#34;]=to_return[&#34;UseInternalController&#34;]
+        to_return[&#34;weaDat.filNam&#34;]=to_return[&#34;weaDat.fileName&#34;]
+
+        # Assign value for U-value radiation correction
+        to_return[&#34;corGDouPan.UWin&#34;] = to_return[&#34;UWin&#34;] 
+
+        return to_return</code></pre>
+</details>
+<div class="desc"><p>Handles everything that does require a separate converter function</p>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="custom_converter_functions.Miscellaneous_handler.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    to_return = variable_dict
+
+    # Convert config.json parameter names to fmu-parameter names, where necessary
+    to_return[&#34;UseInternalController.k&#34;]=to_return[&#34;UseInternalController&#34;]
+    to_return[&#34;weaDat.filNam&#34;]=to_return[&#34;weaDat.fileName&#34;]
+
+    # Assign value for U-value radiation correction
+    to_return[&#34;corGDouPan.UWin&#34;] = to_return[&#34;UWin&#34;] 
+
+    return to_return</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="custom_converter_functions.Model_compatibility_layer"><code class="flex name class">
+<span>class <span class="ident">Model_compatibility_layer</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Model_compatibility_layer(ConverterFunction):
+    &#39;&#39;&#39;
+        Ensures that model parameter values can be applied without conflict 
+        by modifying user input parameter values of the configuration file accordingly. 
+        E.g., avoid division by zero errors in model FMU by setting user input parameters 
+        to be slightly greater than zero
+    &#39;&#39;&#39;
+    def __init__(self):
+        super().__init__()
+        
+    @staticmethod
+    def ensure_GT_zero(n,replacement_value=1e-5):
+        &#34;&#34;&#34;
+        Returns a value that is nearly zero if the input is zero; otherwise, returns the input value.
+
+        Parameters:
+        n (float): The input number to check.
+
+        Returns:
+        float: A small number if the input is zero, otherwise the input number.
+        &#34;&#34;&#34;
+        return replacement_value if abs(n) &lt; replacement_value else n
+    
+    def convert(self, variable_dict):
+        list_gt_0=[&#34;fAInt&#34;,&#34;_distribution&#34;,&#34;fAWin_&#34;,
+        &#34;UExt&#34;,&#34;UInt&#34;,&#34;UFloor&#34;,&#34;URoof&#34;,
+        &#34;heatCapacity_wall&#34;,&#34;heatCapacity_internalWall&#34;,&#34;heatCapacity_floor&#34;,&#34;heatCapacity_roof&#34;,
+        &#34;delay_heatingPiping&#34;,&#34;delay_temperautreSensorIndoor&#34;,
+        &#34;cRadiator&#34;,&#34;rRadiator&#34;,&#34;thickness_radiator_envelope&#34;,&#34;ARadiator&#34;,&#34;mRadiator&#34;]
+        for key in variable_dict.keys():
+            if any([sstr for sstr in list_gt_0 if sstr in key]):
+                e=variable_dict[key]
+                if isinstance(e,(float,int)):
+                    variable_dict[key]=self.ensure_GT_zero(e)
+                elif isinstance(e,(list,tuple)):
+                    variable_dict[key]=[self.ensure_GT_zero(ee) for ee in e]
+                elif isinstance(e,str):
+                    #strings are explicitly ignored as they are handled by other converter functions or resolved to other input parameters
+                    continue
+                else: raise TypeError(&#34;No behaviour defined for type &#34;+str(type(e))+&#34; but parameter &#34;+key+&#34; in list of parameters that should be greater than zero.&#34;)
+        tr=variable_dict
+        return tr</code></pre>
+</details>
+<div class="desc"><p>Ensures that model parameter values can be applied without conflict
+by modifying user input parameter values of the configuration file accordingly.
+E.g., avoid division by zero errors in model FMU by setting user input parameters
+to be slightly greater than zero</p>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="custom_converter_functions.Model_compatibility_layer.ensure_GT_zero"><code class="name flex">
+<span>def <span class="ident">ensure_GT_zero</span></span>(<span>n, replacement_value=1e-05)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def ensure_GT_zero(n,replacement_value=1e-5):
+    &#34;&#34;&#34;
+    Returns a value that is nearly zero if the input is zero; otherwise, returns the input value.
+
+    Parameters:
+    n (float): The input number to check.
+
+    Returns:
+    float: A small number if the input is zero, otherwise the input number.
+    &#34;&#34;&#34;
+    return replacement_value if abs(n) &lt; replacement_value else n</code></pre>
+</details>
+<div class="desc"><p>Returns a value that is nearly zero if the input is zero; otherwise, returns the input value.</p>
+<p>Parameters:
+n (float): The input number to check.</p>
+<p>Returns:
+float: A small number if the input is zero, otherwise the input number.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="custom_converter_functions.Model_compatibility_layer.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    list_gt_0=[&#34;fAInt&#34;,&#34;_distribution&#34;,&#34;fAWin_&#34;,
+    &#34;UExt&#34;,&#34;UInt&#34;,&#34;UFloor&#34;,&#34;URoof&#34;,
+    &#34;heatCapacity_wall&#34;,&#34;heatCapacity_internalWall&#34;,&#34;heatCapacity_floor&#34;,&#34;heatCapacity_roof&#34;,
+    &#34;delay_heatingPiping&#34;,&#34;delay_temperautreSensorIndoor&#34;,
+    &#34;cRadiator&#34;,&#34;rRadiator&#34;,&#34;thickness_radiator_envelope&#34;,&#34;ARadiator&#34;,&#34;mRadiator&#34;]
+    for key in variable_dict.keys():
+        if any([sstr for sstr in list_gt_0 if sstr in key]):
+            e=variable_dict[key]
+            if isinstance(e,(float,int)):
+                variable_dict[key]=self.ensure_GT_zero(e)
+            elif isinstance(e,(list,tuple)):
+                variable_dict[key]=[self.ensure_GT_zero(ee) for ee in e]
+            elif isinstance(e,str):
+                #strings are explicitly ignored as they are handled by other converter functions or resolved to other input parameters
+                continue
+            else: raise TypeError(&#34;No behaviour defined for type &#34;+str(type(e))+&#34; but parameter &#34;+key+&#34; in list of parameters that should be greater than zero.&#34;)
+    tr=variable_dict
+    return tr</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="custom_converter_functions.NaiveConverterFunction"><code class="flex name class">
+<span>class <span class="ident">NaiveConverterFunction</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class NaiveConverterFunction(ConverterFunction):
+
+    &#39;&#39;&#39;
+    An exmple of a custom Conveter Function. You can use this as a blueprint.
+
+    Every custom converter function must implement the ConverterFunction ABC. If not, the concept does not work.
+    &#39;&#39;&#39;
+
+    def __init__(self):
+        &#39;&#39;&#39;
+        Example init function of a custom converter function.
+        &#39;&#39;&#39;
+
+        super().__init__()
+
+    def convert(self, variable_dict):
+        &#39;&#39;&#39;
+        Example of converting a dict of variables (for variations). 
+        You can use this as a blueprint.
+        &#39;&#39;&#39;
+
+        to_return = {}
+
+        to_return[&#34;A_room_start&#34;] = variable_dict[&#34;A_room_start&#34;] * 2
+
+        return to_return</code></pre>
+</details>
+<div class="desc"><p>An exmple of a custom Conveter Function. You can use this as a blueprint.</p>
+<p>Every custom converter function must implement the ConverterFunction ABC. If not, the concept does not work.</p>
+<p>Example init function of a custom converter function.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="custom_converter_functions.NaiveConverterFunction.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    &#39;&#39;&#39;
+    Example of converting a dict of variables (for variations). 
+    You can use this as a blueprint.
+    &#39;&#39;&#39;
+
+    to_return = {}
+
+    to_return[&#34;A_room_start&#34;] = variable_dict[&#34;A_room_start&#34;] * 2
+
+    return to_return</code></pre>
+</details>
+<div class="desc"><p>Example of converting a dict of variables (for variations).
+You can use this as a blueprint.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="custom_converter_functions.Nominal_cooling_power_calculator"><code class="flex name class">
+<span>class <span class="ident">Nominal_cooling_power_calculator</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Nominal_cooling_power_calculator(ConverterFunction):
+    &#39;&#39;&#39;
+    A class to calculate the nominal cooling power required for a 
+    building based on various parameters including building 
+    characteristics and environmental conditions.
+
+    This class is designed to implement the calculation of nominal
+     cooling power as per the guidelines established in DIN 18599-2. 
+    It takes into account both the internal and external temperature
+    settings, as well as heat loss due to ventilation and building 
+    materials.
+
+    Note: Some comments reference variable descriptions in the 
+    standard, which is why there are mentions of formulas and sections.
+
+    The following assumptions and simplifications have been made:
+    
+        ---------Assumptions---------
+        Assumption: Residential building
+        Assumptions: Compliance with the requirements for building 
+            tightness according to DIN 4108-7 (i.e., the tightness test 
+            is conducted according to the criteria of this standard 
+            after completion);
+        Assumption: mechanical ventilation system if n &gt; 0.1 (n_inf)
+        Assumption: the entire zone envelope area is heat-transmitting (e.g. no adjacent zones)
+        Assumption: Operating time of the ventilation system 24 h/d, 
+            because a constantly operated system is assumed in the model
+        Assumption: 24 h/d in operation (the daily operating duration 
+            of the cooling system).
+        Assumption: There are no adjacent zones, thus, heat flow to 
+            other zones dQ_T_j is assumed to be 0
+        Assumption: no internal heat sinks
+        Assumption: No detailed building information available; 
+            thermal bridge supplement is assumed to 
+            ΔUWB = 0.10 W/(m²·K) according to standard
+        Assumption: No heat transmission between heated and unheated
+             zones
+        Assumption: If there is a supply and exhaust air system, then 
+            assume the complete air exchange rate as the supply air 
+            exchange rate.
+
+        ---------Simplifications---------
+        Simplification from standard: Assuming effective wall heat 
+            capacity according to building class: light-&gt;50 Wh/k, 
+            medium-&gt; 90 Wh/K, heavy-&gt;130 Wh/k
+            -&gt; Own calculation to find out building class (light, 
+                medium or heavy), using exemplary wall profiles&#39; heat 
+                capacity to compare it with the actual heat capacity of
+                the external walls configured in the model
+        Simplification/Assumption: Highest daily average of 
+            weather data = the average outdoor temperature on the 
+            design day according to DIN V 18599-10
+        Simplification: maximum hourly average of horizontal global
+            radiation from the weather file = the maximum hourly solar 
+            radiation on the design day (see DIN V 18599-10);
+        Simplification: own calculation based on DIN 18599-10 Table 9: 
+            factor to convert global horizontal radiation to radiation
+            on vertical surfaces facing south, east, north, west in 
+            Germany in the month of July
+        Simplification: g-value of the window * reduction factor due 
+            to possible shading for calculating the overall energy 
+            transmission coefficient including sun protection
+        Simplification: Orientation of the roof (cardinal directions) 
+            is irrelevant
+        Simplification: own calculation, using the mean of the 
+            maximum hourly radiation for the roof in the case of 
+            roof_angle &gt; 60°
+        Simplification: Heat flow through the floor is calculated 
+            based on a statically configured floor temperature and cooling 
+            setpoint temperature in the model 
+            (according to: dQ_T_s=H_T_sdelta_theta_source #Equation C.8)
+        Simplification: only distinction between exhaust air and 
+            heat recovery system
+        Simplification: sum of internal gains from internal gains 
+            file is used to represent the internal gains
+        Simplification: Interior wall is considered as a simple surface
+            between only two building zones
+        Simplification: Heat transfer coefficient of floor is only 
+            calculated from floor area and U-value of the floor, analogous to H_T_D in 6.2.1
+        Simplification from the standard due to the assumption that 
+            the ventilation system has no cooling function: For 
+            ventilation systems without cooling function and apartment 
+            ventilation systems, the uncorrected H θ H ventilation heat
+            transfer coefficient of the system air flow is to be used 
+            in Equation (135). It applies: H_V_mech_theta=H_V_mech; 
+            the temperature-weighted heat transfer coefficient of 
+            mechanical ventilation, according to 
+            Equations (136) to (138).
+    &#39;&#39;&#39;
+
+    def __init__(self):
+        super().__init__()
+
+    def convert(self, variable_dict):
+        #-------------------------------------------------------
+        # Setup input variables
+        #-------------------------------------------------------
+        tr = variable_dict
+
+        weather_data = load_weather_data(tr)
+        AExt_list = [tr[&#34;thermalZone.AExt[1]&#34;], tr[&#34;thermalZone.AExt[2]&#34;], 
+                    tr[&#34;thermalZone.AExt[3]&#34;], tr[&#34;thermalZone.AExt[4]&#34;]]
+        AWin_list = [tr[&#34;thermalZone.AWin[1]&#34;], tr[&#34;thermalZone.AWin[2]&#34;], 
+                    tr[&#34;thermalZone.AWin[3]&#34;], tr[&#34;thermalZone.AWin[4]&#34;]]
+
+        V = tr[&#34;thermalZone.VAir&#34;]  # the net room volume
+
+        t_c_op_d = 24  # daily operating time of the cooling system
+        delta_theta = 2  # permissible fluctuation of indoor temperature 
+                         # (typically 2 K)
+
+        #-------------------------------------------------------
+        #calculate effective heat capacity of the building
+        #-------------------------------------------------------
+
+        # own calculation: determines whether there is inner insulation on the
+        # external walls by comparing the proportion of the innermost 1/4 of 
+        # the external wall R-elements to a threshold value
+        b_inner_wall_insulation = 0.1 &lt; sum(tr[&#34;extWall_R_distribution&#34;] \
+                    [:len(tr[&#34;extWall_R_distribution&#34;])//4]) / \
+                    sum(tr[&#34;extWall_R_distribution&#34;])  
+        b_high_room = tr[&#34;zone_height&#34;] &gt; 4.5
+
+        #%%own calculation of heatCapacity_limits between lightweight, 
+        # medium and heavy
+        # source of material constants in this 
+        # section: https://www.ubakus.de/u-wert-rechner
+        # rho_limit*thickness*c_douglas=600 kg/m³*0.1 m *1600 J/(kg*K) 
+        # -&gt; density slightly differs from Douglas fir (530 kg/m³) to meet standard
+        # conditions
+        heatCapacity_limit1 = 600 * 0.1 * 1600  
+        # rho_limit*thickness*c_adobe=1600 kg/m³*0.18 m *1600 J/(kg*K) 
+        # -&gt; density slightly differs from adobe (1500 kg/m³) to meet standard
+        # conditions
+        heatCapacity_limit2 = 1600 * 0.18 * 1000  
+
+        A_NGF = tr[&#34;thermalZone.AFloor&#34;]
+        # simplification from standard: 50: light, 90: medium, 130: heavy 
+        # in Wh/K, effective heat capacity of the building zone per 6.7.1
+        C_wirk = (50 if (tr[&#34;heatCapacity_wall&#34;] &lt; heatCapacity_limit1 or 
+                              b_high_room or b_inner_wall_insulation) else 
+                  90 if tr[&#34;heatCapacity_wall&#34;] &lt; heatCapacity_limit2 else
+                 130) * A_NGF  
+
+        #-------------------------------------------------------
+        #assumed temperature difference for heat flow into the building
+        #-------------------------------------------------------
+
+        # assumption: residential building, maximum allowed indoor 
+        # temperature on the design day per DIN V 18599-10
+        theta_i_c_max = 26  
+        # assumption: residential building, target room 
+        # temperature for cooling per DIN V 18599-10
+        theta_i_c_soll = 25  
+        # design indoor temperature per equation (C.2)
+        theta_i = (theta_i_c_max + theta_i_c_soll - 2) / 2  
+         # simplification/assumption: highest daily mean from 
+         # weather data, external design temperature per DIN V 18599-10
+        theta_e_max = df_findcol(weather_data, &#34;dry bulb temperature&#34;).\
+            resample(&#34;1d&#34;).mean().max().item() 
+        delta_theta_source = max(0, theta_e_max - theta_i)
+
+        #-------------------------------------------------------
+        # calculate solar heat gains
+        #-------------------------------------------------------
+
+        #%%dQ_S_tr
+         # simplification: maximum hourly mean global horizontal radiation 
+         # from weather file, max hourly solar radiation on the design day 
+         # per DIN V 18599-10
+        I_S_max_global_horizontal = df_findcol(weather_data, \
+            &#34;global horizontal radiation&#34;).\
+            resample(&#34;1h&#34;).mean().max().item() 
+        # simplification: own calculation from DIN 18599-10 Table 9, 
+        # factor to convert horizontal radiation to vertical (S, E, N, W) 
+        # in July
+        factor_I_S_max = np.array([605/927, 739/927, 164/927, 739/927])  
+        I_S_max_windows = I_S_max_global_horizontal * factor_I_S_max
+        A = np.array(AWin_list)  # transparent surface area
+         # reduction factor for frame portion, ratio of 
+         # transparent area to total glazed unit area, default F=0.7
+        F_F = tr[&#34;fATransToAWindow&#34;] 
+        # residential buildings: 1 (no dirt), reduction 
+        # factor due to dirt per DIN V 18599-10
+        F_V = 1  
+        # own factor for shading device, etc., 
+        # to be used when shading is implemented
+        factor_shading = 1  
+        # simplification: window g-value * shading reduction f
+        # actor, total energy transmittance including shading
+        g_tot = tr[&#34;thermalZone.gWin&#34;] * factor_shading  
+        # solar heat gains through transparent components
+        dQ_S_tr = sum(A * F_F * F_V * g_tot * I_S_max_windows).item()  
+
+        Rse = tr[&#34;Rse_extWall&#34;]  # external heat transfer resistance
+        # heat transfer coefficient of component
+        U = np.array([tr[&#34;UExt&#34;], tr[&#34;UExt&#34;], tr[&#34;UExt&#34;], tr[&#34;UExt&#34;], 
+            tr[&#34;URoof&#34;]])  
+        A = np.array([*AExt_list, tr[&#34;thermalZone.ARoof&#34;]])
+        alpha = np.array([tr[&#34;eqAirTemp.aExt&#34;], tr[&#34;eqAirTemp.aExt&#34;], 
+            tr[&#34;eqAirTemp.aExt&#34;], tr[&#34;eqAirTemp.aExt&#34;], 
+            tr[&#34;eqAirTempVDI.aExt&#34;]])  # solar absorptance of surface
+        #own calculation: on a right triangle (roof inclination 45°) the sum 
+        # of legs (roof) = sqrt(2)*hypotenuse (floor), when inclination is 
+        # higher, then the sum is greater
+        F_f_roof=1 if tr[&#34;fARoofToAFloor&#34;]&gt;2**.5 else 0.5 
+        # simplification: roof orientation irrelevant, 
+        # shape factor between component and sky
+        F_f = [0.5, 0.5, 0.5, 0.5, F_f_roof]  
+        h_r = np.array([tr[&#34;eqAirTemp.hRad&#34;], tr[&#34;eqAirTemp.hRad&#34;], 
+            tr[&#34;eqAirTemp.hRad&#34;], tr[&#34;eqAirTemp.hRad&#34;], 
+            tr[&#34;eqAirTempVDI.hRad&#34;]])  # external radiation coefficient
+        # simplification from standard: 10 K difference between ambient air and sky temp
+        delta_theta_er = 10  
+        I_S_max_walls = I_S_max_global_horizontal * factor_I_S_max
+        # own calc: roof angle from cosine law and area factor
+        roof_angle = (np.pi - 2 * np.arccos(1 - tr[&#34;fARoofToAFloor&#34;]**-2)) /\
+             2 / np.pi * 180  
+        # simplification: use wall radiation for roof if steep
+        I_S_max_roof = I_S_max_walls.mean() if roof_angle &gt; 60 else \
+            I_S_max_global_horizontal  
+        I_S_max_wallsRoof = np.array([*I_S_max_walls, I_S_max_roof])
+        dQ_S_opak = sum(Rse * U * A * (alpha * I_S_max_wallsRoof - 
+            F_f * h_r * delta_theta_er)).item()
+        # total solar heat gains per equations (C.18)–(C.21)
+        dQ_S = dQ_S_tr + dQ_S_opak  
+
+        #-------------------------------------------------------
+        # calculate transmission heat gain
+        #-------------------------------------------------------
+
+        # heat transfer coefficient between cooled zone and outside
+        H_T_D = sum(AExt_list) * tr[&#34;UExt&#34;] + tr[&#34;thermalZone.ARoof&#34;] * \
+            tr[&#34;URoof&#34;] + sum(AWin_list) * tr[&#34;UWin&#34;]  
+        dQ_T_e__source = H_T_D * delta_theta_source  # equation C.6
+
+        # simplification: ground heat flow from STATIC model soil 
+        # temp and target temp
+        dQ_T_s__source = max(0, (tr[&#34;TGro.k&#34;] - 273.15) - theta_i) * \
+        tr[&#34;thermalZone.AFloor&#34;] * tr[&#34;UFloor&#34;]  
+        # total transmission heat gain if θi,c,max,d &lt; θe,max, 
+        # per C.6 and C.8
+        dQ_T__source = dQ_T_e__source + dQ_T_s__source  
+
+        #-------------------------------------------------------
+        # calculate ventilation heat gains
+        #-------------------------------------------------------
+
+        #%%n50
+        # if no airtightness test or only planned: use standard values 
+        # per Table 7 or Equation (61) with Table 7
+        # Table assumptions: Category I: compliance with DIN 4108-7 
+        # for airtightness test
+        # assumption: mechanical ventilation system if n &gt; 0.1
+        b_ventilation_system = tr[&#34;airChangeRate&#34;] &gt; .1  
+        # assumption: entire zone envelope is heat-transferring surface (e.g. no adjacent zones)
+        A_E = sum(AExt_list) + tr[&#34;thermalZone.ARoof&#34;] + sum(AWin_list) + \
+            tr[&#34;thermalZone.AFloor&#34;]  
+        # air change at 50 Pa per standard
+        n50 =  (1 if b_ventilation_system and V &lt;= 1500 else      
+                2 if V &lt;= 1500 else 
+                2 * A_E / V if b_ventilation_system else 
+                3 * A_E / V)
+
+        # volume flow coefficient, standard value = 0.07, 
+        # shielding coefficient per DIN EN ISO 13789
+        e = .07  
+        # exhaust air system with air transfer devices if no heat recovery
+        b_exhaust_air_ventilation_system = b_air_transfer_device = \
+            b_ventilation_system and tr[&#34;heatRecoveryRate&#34;] == 0  
+        # factor for air transfer devices per equations (63) or (64)
+        f_ATD = min(16, (n50 - 1.5) / n50) if b_air_transfer_device else 1  
+
+        # coefficient for wind exposure, standard value for moderate shielding
+        f = 15  
+        # simplification: distinguish between exhaust and HR system
+        n_sup = 0 if b_exhaust_air_ventilation_system else 1  
+        # simplification: normalized value to differentiate between 
+        # full balance and imbalance
+        n_eta = 1  
+        # eq. 67: factor for increased/decreased infiltration 
+        # by mechanical system
+        f_e = 1 / (1 + f / e * ((n_eta - n_sup) / (n50 * f_ATD))**2)  
+        t_v_mech = 24  # assumption: 24 h/day operation in model
+        # eq. 62: infiltration rate with mechanical ventilation
+        n_inf = n50 * e * f_ATD * (1 + (f_e - 1) * t_v_mech / 24)  
+        c_p_aXrho_a = .34  # set to 0.34 Wh/(m³·K)
+        # heat transfer coefficient for infiltration per 6.3.1
+        H_V_inf = n_inf * V * c_p_aXrho_a  
+        # equation C.13
+        dQ_V_inf__source = H_V_inf * delta_theta_source  
+
+        # heat transfer coefficient for window ventilation with 
+        # assumed air change n_win = 0.1 h–1
+        H_V_win = 0.1 * V * c_p_aXrho_a  
+        dQ_V_win__source = H_V_win * delta_theta_source  # equation C.15
+        # total ventilation heat gains if θi,c,max,d &lt; θe,max, 
+        # per eq. C.13 and C.15
+        dQ_V__source = dQ_V_inf__source + dQ_V_win__source  
+
+        #-------------------------------------------------------
+        # calculate internal heat gain
+        #-------------------------------------------------------
+        dQ_I_source = load_internalGain_data(tr).resample(&#34;1d&#34;).mean().max().item()  # simplification: sum of internal gains from internal gains file
+        dQ_source_max = dQ_S + dQ_T__source + dQ_V__source + dQ_I_source  # total heat gains on the design day inside the building zone (power value) per equation (C.3)
+
+        # simplification: sum of internal gains from internal gains file 
+        # is used to represent the internal gains
+        dQ_I_source = load_internalGain_data(tr).resample(&#34;1d&#34;).mean().max().item()  
+
+        #-------------------------------------------------------
+        # calculate total heat gain
+        #-------------------------------------------------------
+        # total heat gains on the design day inside the building 
+        # zone (power value) per equation (C.3)
+        dQ_source_max = dQ_S + dQ_T__source + dQ_V__source + dQ_I_source  
+
+
+        #-------------------------------------------------------
+        # calculate temperature difference for heat sink 
+        # calculations
+        #-------------------------------------------------------
+        delta_theta_sink = max(0, theta_i - theta_e_max)
+
+        #-------------------------------------------------------
+        # calculate transmission heat flow out of the building
+        #-------------------------------------------------------
+        # Heat transmission to the outside, Equation (C.5)
+        dQ_T_e__sink = H_T_D * delta_theta_sink  
+        # Simplification: Heat flow through the ground is calculated using 
+        # the statically configured ground temperature and cooling setpoint 
+        # temperature in the model; according to the standard: 
+        # dQ_T_s = H_T_s * delta_theta_sink, Equation (C.7)
+        dQ_T_s__sink = max(0, theta_i - (tr[&#34;TGro.k&#34;] - 273.15)) * \
+            tr[&#34;thermalZone.AFloor&#34;] * tr[&#34;UFloor&#34;]  
+        # Assumption: No adjacent zones, thus dQ_T_j = 0; Other transmission 
+        # heat flows, 
+        # Equation (C.10): dQ_T_j = H_T_j * max(0, theta_i - theta_j)
+        dQ_T_j = 0  
+        # The sum of the transmission heat sinks when θi,c,max,d &gt; θe,max, 
+        # according to Equations (C.5), (C.7), and (C.10)
+        dQ_T__sink = dQ_T_e__sink + dQ_T_s__sink + dQ_T_j  
+
+        #-------------------------------------------------------
+        # calculate ventilation heat flow out of the building
+        #-------------------------------------------------------
+        # Heat flow due to infiltration, Equation (C.12)
+        dQ_V_inf__sink = H_V_win * delta_theta_sink  
+        # Heat flow due to window ventilation, Equation (C.14)
+        dQ_V_win__sink = H_V_inf * delta_theta_sink  
+        # The sum of ventilation heat sinks when θi,c,max,d &gt; θe,max, 
+        # according to Equations (C.12) and (C.14)
+        dQ_V__sink = dQ_V_inf__sink + dQ_V_win__sink  
+
+        #-------------------------------------------------------
+        # calculate internal heat sink
+        #-------------------------------------------------------
+        # Assumption: No internal heat sinks; Q_I,sink is the 
+        # sum of internal heat sinks according to Equation (C.24)
+        dQ_I_sink = 0  
+
+        #-------------------------------------------------------
+        # calculate total heat sinks
+        #-------------------------------------------------------
+        dQ_sink_max = dQ_T__sink + dQ_V__sink + dQ_I_sink  # Equation (C.4)
+
+        #-------------------------------------------------------
+        # calculate time constant of the building
+        #-------------------------------------------------------
+        # Temperature correction factor for calculating the time constant
+        # 1 for direct transmission to outside (external components) and 
+        # transmission through F = ground according to DIN EN ISO 13370
+        Fx_in2out = 1  
+        Fx_in2in = 0.5  # for all other components
+
+        # Assumption: No detailed building information available; 
+        # thermal bridge supplement; without proof, ΔUWB = 0.10 W/(m²·K) 
+        # is generally applied. For external components with internal 
+        # insulation and integrated solid ceilings, ΔUWB = 0.15 W/(m²·K)
+        delta_U_WB = 0.1  
+        # The area of each component that bounds the building zone to outside 
+        # air, unheated or uncooled zones, or the ground. For windows and 
+        # doors, the clear internal structural opening dimensions are used.
+        sum_A_j = sum(AExt_list) + sum(AWin_list) + \
+            tr[&#34;thermalZone.ARoof&#34;] + tr[&#34;thermalZone.AFloor&#34;]  
+        # Heat transfer coefficient for 2D thermal bridges
+        H_T_WB = sum_A_j * delta_U_WB  
+        # Assumption: No heat transfer between heated and 
+        # unheated zones; the heat transfer coefficient between 
+        # heated and unheated or cooled and uncooled zones according 
+        # to Equation (50) or DIN EN ISO 13789 (equivalent to H_D)
+        H_T_iu = 0  
+        # Simplification: Interior wall is treated as a simple area 
+        # between two zones only; heat transfer coefficient between the 
+        # zone and the neighboring zone according to Equation (53) or 
+        # DIN EN ISO 13789 (equivalent to H_D)
+        H_T_iz = tr[&#34;UInt&#34;] * tr[&#34;thermalZone.AInt&#34;]  
+        # Simplification: Calculated only from floor area and U-value 
+        # of the floor, analogous to H_T_D in 6.2.1; heat transfer coefficient
+        # through the ground (H_T,s corresponds to G according to 
+        # DIN EN ISO 13370)
+        H_T_s_simplified = tr[&#34;thermalZone.AFloor&#34;] * tr[&#34;UFloor&#34;]  
+        # Sum of the heat transfer coefficients j for all components in the 
+        # thermal envelope of the building zone to be included in the 
+        # balance according to section 6.2
+        sumH_T_j = H_T_D * Fx_in2out + H_T_WB * Fx_in2out + H_T_iu * \
+            Fx_in2in + H_T_iz * Fx_in2in + H_T_s_simplified * Fx_in2out  
+
+        #%%sumH_V_k: Sum of ventilation heat transfer coefficients
+        # Sum over all ventilation heat transfer coefficients of airflows 
+        # entering with outdoor temperature
+        sumH_V_k = H_V_inf + H_V_win  
+
+        #%%H_V_mech_theta: Mechanical ventilation
+        # Assumption: If a supply and exhaust air system is present, 
+        # use total air change rate as supply rate; airflow of the supply air 
+        # during system operation according to Equations (92) to (93)
+        n_mech_sup = 0 if b_exhaust_air_ventilation_system or not \
+            (b_ventilation_system) else tr[&#34;airChangeRate&#34;]  
+        # Daily average air change rate through mechanical ventilation 
+        # according to Equation (90)
+        n_mech = n_mech_sup * t_v_mech / 24  
+        # Ventilation heat transfer coefficient of mechanical 
+        # ventilation (see 6.3.3)
+        H_V_mech = n_mech * V * c_p_aXrho_a  
+        # Simplification from standard assuming HVAC without cooling 
+        # function: For HVAC systems without cooling and residential 
+        # ventilation systems, the uncorrected heat transfer coefficient 
+        # of the system airflow is used in Equation (135). 
+        # Thus: H_V_mech_theta = H_V_mech; temperature-weighted heat transfer 
+        # coefficient of mechanical ventilation, according to 
+        # Equations (136) to (138)
+        H_V_mech_theta = H_V_mech  
+        # Total heat transfer coefficient of the building zone, 
+        # calculated from transmission and ventilation heat transfer 
+        # coefficients according to 5.5.2
+        H = sumH_T_j + sumH_V_k + H_V_mech_theta  
+        # Time constant of the building zone according to 6.7.2, 
+        # but without mechanical ventilation
+        tau = C_wirk / H  
+
+        #-------------------------------------------------------
+        # calculate cooling demand
+        #-------------------------------------------------------
+        #%% dQ_c_max: Cooling load
+        # Approximate calculation of required maximum cooling 
+        # capacity according to Equation (C.1)
+        dQ_c_max = 0.8 * (dQ_source_max - dQ_sink_max) * (1 + 0.3 * 
+            np.exp(-tau / 120)) - C_wirk / 60 * (delta_theta - 2) + \
+                C_wirk / 40 * (12 / t_c_op_d - 1)  
+        
+        tr[&#34;coolingPower&#34;] = dQ_c_max.item()
+
+        return tr
+        from src.converter_functions.converter_function import ConverterFunction</code></pre>
+</details>
+<div class="desc"><p>A class to calculate the nominal cooling power required for a
+building based on various parameters including building
+characteristics and environmental conditions.</p>
+<p>This class is designed to implement the calculation of nominal
+cooling power as per the guidelines established in DIN 18599-2.
+It takes into account both the internal and external temperature
+settings, as well as heat loss due to ventilation and building
+materials.</p>
+<p>Note: Some comments reference variable descriptions in the
+standard, which is why there are mentions of formulas and sections.</p>
+<p>The following assumptions and simplifications have been made:</p>
+<pre><code>---------Assumptions---------
+Assumption: Residential building
+Assumptions: Compliance with the requirements for building 
+    tightness according to DIN 4108-7 (i.e., the tightness test 
+    is conducted according to the criteria of this standard 
+    after completion);
+Assumption: mechanical ventilation system if n &gt; 0.1 (n_inf)
+Assumption: the entire zone envelope area is heat-transmitting (e.g. no adjacent zones)
+Assumption: Operating time of the ventilation system 24 h/d, 
+    because a constantly operated system is assumed in the model
+Assumption: 24 h/d in operation (the daily operating duration 
+    of the cooling system).
+Assumption: There are no adjacent zones, thus, heat flow to 
+    other zones dQ_T_j is assumed to be 0
+Assumption: no internal heat sinks
+Assumption: No detailed building information available; 
+    thermal bridge supplement is assumed to 
+    ΔUWB = 0.10 W/(m²·K) according to standard
+Assumption: No heat transmission between heated and unheated
+     zones
+Assumption: If there is a supply and exhaust air system, then 
+    assume the complete air exchange rate as the supply air 
+    exchange rate.
+
+---------Simplifications---------
+Simplification from standard: Assuming effective wall heat 
+    capacity according to building class: light-&gt;50 Wh/k, 
+    medium-&gt; 90 Wh/K, heavy-&gt;130 Wh/k
+    -&gt; Own calculation to find out building class (light, 
+        medium or heavy), using exemplary wall profiles' heat 
+        capacity to compare it with the actual heat capacity of
+        the external walls configured in the model
+Simplification/Assumption: Highest daily average of 
+    weather data = the average outdoor temperature on the 
+    design day according to DIN V 18599-10
+Simplification: maximum hourly average of horizontal global
+    radiation from the weather file = the maximum hourly solar 
+    radiation on the design day (see DIN V 18599-10);
+Simplification: own calculation based on DIN 18599-10 Table 9: 
+    factor to convert global horizontal radiation to radiation
+    on vertical surfaces facing south, east, north, west in 
+    Germany in the month of July
+Simplification: g-value of the window * reduction factor due 
+    to possible shading for calculating the overall energy 
+    transmission coefficient including sun protection
+Simplification: Orientation of the roof (cardinal directions) 
+    is irrelevant
+Simplification: own calculation, using the mean of the 
+    maximum hourly radiation for the roof in the case of 
+    roof_angle &gt; 60°
+Simplification: Heat flow through the floor is calculated 
+    based on a statically configured floor temperature and cooling 
+    setpoint temperature in the model 
+    (according to: dQ_T_s=H_T_sdelta_theta_source #Equation C.8)
+Simplification: only distinction between exhaust air and 
+    heat recovery system
+Simplification: sum of internal gains from internal gains 
+    file is used to represent the internal gains
+Simplification: Interior wall is considered as a simple surface
+    between only two building zones
+Simplification: Heat transfer coefficient of floor is only 
+    calculated from floor area and U-value of the floor, analogous to H_T_D in 6.2.1
+Simplification from the standard due to the assumption that 
+    the ventilation system has no cooling function: For 
+    ventilation systems without cooling function and apartment 
+    ventilation systems, the uncorrected H θ H ventilation heat
+    transfer coefficient of the system air flow is to be used 
+    in Equation (135). It applies: H_V_mech_theta=H_V_mech; 
+    the temperature-weighted heat transfer coefficient of 
+    mechanical ventilation, according to 
+    Equations (136) to (138).
+</code></pre>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="custom_converter_functions.Nominal_cooling_power_calculator.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    #-------------------------------------------------------
+    # Setup input variables
+    #-------------------------------------------------------
+    tr = variable_dict
+
+    weather_data = load_weather_data(tr)
+    AExt_list = [tr[&#34;thermalZone.AExt[1]&#34;], tr[&#34;thermalZone.AExt[2]&#34;], 
+                tr[&#34;thermalZone.AExt[3]&#34;], tr[&#34;thermalZone.AExt[4]&#34;]]
+    AWin_list = [tr[&#34;thermalZone.AWin[1]&#34;], tr[&#34;thermalZone.AWin[2]&#34;], 
+                tr[&#34;thermalZone.AWin[3]&#34;], tr[&#34;thermalZone.AWin[4]&#34;]]
+
+    V = tr[&#34;thermalZone.VAir&#34;]  # the net room volume
+
+    t_c_op_d = 24  # daily operating time of the cooling system
+    delta_theta = 2  # permissible fluctuation of indoor temperature 
+                     # (typically 2 K)
+
+    #-------------------------------------------------------
+    #calculate effective heat capacity of the building
+    #-------------------------------------------------------
+
+    # own calculation: determines whether there is inner insulation on the
+    # external walls by comparing the proportion of the innermost 1/4 of 
+    # the external wall R-elements to a threshold value
+    b_inner_wall_insulation = 0.1 &lt; sum(tr[&#34;extWall_R_distribution&#34;] \
+                [:len(tr[&#34;extWall_R_distribution&#34;])//4]) / \
+                sum(tr[&#34;extWall_R_distribution&#34;])  
+    b_high_room = tr[&#34;zone_height&#34;] &gt; 4.5
+
+    #%%own calculation of heatCapacity_limits between lightweight, 
+    # medium and heavy
+    # source of material constants in this 
+    # section: https://www.ubakus.de/u-wert-rechner
+    # rho_limit*thickness*c_douglas=600 kg/m³*0.1 m *1600 J/(kg*K) 
+    # -&gt; density slightly differs from Douglas fir (530 kg/m³) to meet standard
+    # conditions
+    heatCapacity_limit1 = 600 * 0.1 * 1600  
+    # rho_limit*thickness*c_adobe=1600 kg/m³*0.18 m *1600 J/(kg*K) 
+    # -&gt; density slightly differs from adobe (1500 kg/m³) to meet standard
+    # conditions
+    heatCapacity_limit2 = 1600 * 0.18 * 1000  
+
+    A_NGF = tr[&#34;thermalZone.AFloor&#34;]
+    # simplification from standard: 50: light, 90: medium, 130: heavy 
+    # in Wh/K, effective heat capacity of the building zone per 6.7.1
+    C_wirk = (50 if (tr[&#34;heatCapacity_wall&#34;] &lt; heatCapacity_limit1 or 
+                          b_high_room or b_inner_wall_insulation) else 
+              90 if tr[&#34;heatCapacity_wall&#34;] &lt; heatCapacity_limit2 else
+             130) * A_NGF  
+
+    #-------------------------------------------------------
+    #assumed temperature difference for heat flow into the building
+    #-------------------------------------------------------
+
+    # assumption: residential building, maximum allowed indoor 
+    # temperature on the design day per DIN V 18599-10
+    theta_i_c_max = 26  
+    # assumption: residential building, target room 
+    # temperature for cooling per DIN V 18599-10
+    theta_i_c_soll = 25  
+    # design indoor temperature per equation (C.2)
+    theta_i = (theta_i_c_max + theta_i_c_soll - 2) / 2  
+     # simplification/assumption: highest daily mean from 
+     # weather data, external design temperature per DIN V 18599-10
+    theta_e_max = df_findcol(weather_data, &#34;dry bulb temperature&#34;).\
+        resample(&#34;1d&#34;).mean().max().item() 
+    delta_theta_source = max(0, theta_e_max - theta_i)
+
+    #-------------------------------------------------------
+    # calculate solar heat gains
+    #-------------------------------------------------------
+
+    #%%dQ_S_tr
+     # simplification: maximum hourly mean global horizontal radiation 
+     # from weather file, max hourly solar radiation on the design day 
+     # per DIN V 18599-10
+    I_S_max_global_horizontal = df_findcol(weather_data, \
+        &#34;global horizontal radiation&#34;).\
+        resample(&#34;1h&#34;).mean().max().item() 
+    # simplification: own calculation from DIN 18599-10 Table 9, 
+    # factor to convert horizontal radiation to vertical (S, E, N, W) 
+    # in July
+    factor_I_S_max = np.array([605/927, 739/927, 164/927, 739/927])  
+    I_S_max_windows = I_S_max_global_horizontal * factor_I_S_max
+    A = np.array(AWin_list)  # transparent surface area
+     # reduction factor for frame portion, ratio of 
+     # transparent area to total glazed unit area, default F=0.7
+    F_F = tr[&#34;fATransToAWindow&#34;] 
+    # residential buildings: 1 (no dirt), reduction 
+    # factor due to dirt per DIN V 18599-10
+    F_V = 1  
+    # own factor for shading device, etc., 
+    # to be used when shading is implemented
+    factor_shading = 1  
+    # simplification: window g-value * shading reduction f
+    # actor, total energy transmittance including shading
+    g_tot = tr[&#34;thermalZone.gWin&#34;] * factor_shading  
+    # solar heat gains through transparent components
+    dQ_S_tr = sum(A * F_F * F_V * g_tot * I_S_max_windows).item()  
+
+    Rse = tr[&#34;Rse_extWall&#34;]  # external heat transfer resistance
+    # heat transfer coefficient of component
+    U = np.array([tr[&#34;UExt&#34;], tr[&#34;UExt&#34;], tr[&#34;UExt&#34;], tr[&#34;UExt&#34;], 
+        tr[&#34;URoof&#34;]])  
+    A = np.array([*AExt_list, tr[&#34;thermalZone.ARoof&#34;]])
+    alpha = np.array([tr[&#34;eqAirTemp.aExt&#34;], tr[&#34;eqAirTemp.aExt&#34;], 
+        tr[&#34;eqAirTemp.aExt&#34;], tr[&#34;eqAirTemp.aExt&#34;], 
+        tr[&#34;eqAirTempVDI.aExt&#34;]])  # solar absorptance of surface
+    #own calculation: on a right triangle (roof inclination 45°) the sum 
+    # of legs (roof) = sqrt(2)*hypotenuse (floor), when inclination is 
+    # higher, then the sum is greater
+    F_f_roof=1 if tr[&#34;fARoofToAFloor&#34;]&gt;2**.5 else 0.5 
+    # simplification: roof orientation irrelevant, 
+    # shape factor between component and sky
+    F_f = [0.5, 0.5, 0.5, 0.5, F_f_roof]  
+    h_r = np.array([tr[&#34;eqAirTemp.hRad&#34;], tr[&#34;eqAirTemp.hRad&#34;], 
+        tr[&#34;eqAirTemp.hRad&#34;], tr[&#34;eqAirTemp.hRad&#34;], 
+        tr[&#34;eqAirTempVDI.hRad&#34;]])  # external radiation coefficient
+    # simplification from standard: 10 K difference between ambient air and sky temp
+    delta_theta_er = 10  
+    I_S_max_walls = I_S_max_global_horizontal * factor_I_S_max
+    # own calc: roof angle from cosine law and area factor
+    roof_angle = (np.pi - 2 * np.arccos(1 - tr[&#34;fARoofToAFloor&#34;]**-2)) /\
+         2 / np.pi * 180  
+    # simplification: use wall radiation for roof if steep
+    I_S_max_roof = I_S_max_walls.mean() if roof_angle &gt; 60 else \
+        I_S_max_global_horizontal  
+    I_S_max_wallsRoof = np.array([*I_S_max_walls, I_S_max_roof])
+    dQ_S_opak = sum(Rse * U * A * (alpha * I_S_max_wallsRoof - 
+        F_f * h_r * delta_theta_er)).item()
+    # total solar heat gains per equations (C.18)–(C.21)
+    dQ_S = dQ_S_tr + dQ_S_opak  
+
+    #-------------------------------------------------------
+    # calculate transmission heat gain
+    #-------------------------------------------------------
+
+    # heat transfer coefficient between cooled zone and outside
+    H_T_D = sum(AExt_list) * tr[&#34;UExt&#34;] + tr[&#34;thermalZone.ARoof&#34;] * \
+        tr[&#34;URoof&#34;] + sum(AWin_list) * tr[&#34;UWin&#34;]  
+    dQ_T_e__source = H_T_D * delta_theta_source  # equation C.6
+
+    # simplification: ground heat flow from STATIC model soil 
+    # temp and target temp
+    dQ_T_s__source = max(0, (tr[&#34;TGro.k&#34;] - 273.15) - theta_i) * \
+    tr[&#34;thermalZone.AFloor&#34;] * tr[&#34;UFloor&#34;]  
+    # total transmission heat gain if θi,c,max,d &lt; θe,max, 
+    # per C.6 and C.8
+    dQ_T__source = dQ_T_e__source + dQ_T_s__source  
+
+    #-------------------------------------------------------
+    # calculate ventilation heat gains
+    #-------------------------------------------------------
+
+    #%%n50
+    # if no airtightness test or only planned: use standard values 
+    # per Table 7 or Equation (61) with Table 7
+    # Table assumptions: Category I: compliance with DIN 4108-7 
+    # for airtightness test
+    # assumption: mechanical ventilation system if n &gt; 0.1
+    b_ventilation_system = tr[&#34;airChangeRate&#34;] &gt; .1  
+    # assumption: entire zone envelope is heat-transferring surface (e.g. no adjacent zones)
+    A_E = sum(AExt_list) + tr[&#34;thermalZone.ARoof&#34;] + sum(AWin_list) + \
+        tr[&#34;thermalZone.AFloor&#34;]  
+    # air change at 50 Pa per standard
+    n50 =  (1 if b_ventilation_system and V &lt;= 1500 else      
+            2 if V &lt;= 1500 else 
+            2 * A_E / V if b_ventilation_system else 
+            3 * A_E / V)
+
+    # volume flow coefficient, standard value = 0.07, 
+    # shielding coefficient per DIN EN ISO 13789
+    e = .07  
+    # exhaust air system with air transfer devices if no heat recovery
+    b_exhaust_air_ventilation_system = b_air_transfer_device = \
+        b_ventilation_system and tr[&#34;heatRecoveryRate&#34;] == 0  
+    # factor for air transfer devices per equations (63) or (64)
+    f_ATD = min(16, (n50 - 1.5) / n50) if b_air_transfer_device else 1  
+
+    # coefficient for wind exposure, standard value for moderate shielding
+    f = 15  
+    # simplification: distinguish between exhaust and HR system
+    n_sup = 0 if b_exhaust_air_ventilation_system else 1  
+    # simplification: normalized value to differentiate between 
+    # full balance and imbalance
+    n_eta = 1  
+    # eq. 67: factor for increased/decreased infiltration 
+    # by mechanical system
+    f_e = 1 / (1 + f / e * ((n_eta - n_sup) / (n50 * f_ATD))**2)  
+    t_v_mech = 24  # assumption: 24 h/day operation in model
+    # eq. 62: infiltration rate with mechanical ventilation
+    n_inf = n50 * e * f_ATD * (1 + (f_e - 1) * t_v_mech / 24)  
+    c_p_aXrho_a = .34  # set to 0.34 Wh/(m³·K)
+    # heat transfer coefficient for infiltration per 6.3.1
+    H_V_inf = n_inf * V * c_p_aXrho_a  
+    # equation C.13
+    dQ_V_inf__source = H_V_inf * delta_theta_source  
+
+    # heat transfer coefficient for window ventilation with 
+    # assumed air change n_win = 0.1 h–1
+    H_V_win = 0.1 * V * c_p_aXrho_a  
+    dQ_V_win__source = H_V_win * delta_theta_source  # equation C.15
+    # total ventilation heat gains if θi,c,max,d &lt; θe,max, 
+    # per eq. C.13 and C.15
+    dQ_V__source = dQ_V_inf__source + dQ_V_win__source  
+
+    #-------------------------------------------------------
+    # calculate internal heat gain
+    #-------------------------------------------------------
+    dQ_I_source = load_internalGain_data(tr).resample(&#34;1d&#34;).mean().max().item()  # simplification: sum of internal gains from internal gains file
+    dQ_source_max = dQ_S + dQ_T__source + dQ_V__source + dQ_I_source  # total heat gains on the design day inside the building zone (power value) per equation (C.3)
+
+    # simplification: sum of internal gains from internal gains file 
+    # is used to represent the internal gains
+    dQ_I_source = load_internalGain_data(tr).resample(&#34;1d&#34;).mean().max().item()  
+
+    #-------------------------------------------------------
+    # calculate total heat gain
+    #-------------------------------------------------------
+    # total heat gains on the design day inside the building 
+    # zone (power value) per equation (C.3)
+    dQ_source_max = dQ_S + dQ_T__source + dQ_V__source + dQ_I_source  
+
+
+    #-------------------------------------------------------
+    # calculate temperature difference for heat sink 
+    # calculations
+    #-------------------------------------------------------
+    delta_theta_sink = max(0, theta_i - theta_e_max)
+
+    #-------------------------------------------------------
+    # calculate transmission heat flow out of the building
+    #-------------------------------------------------------
+    # Heat transmission to the outside, Equation (C.5)
+    dQ_T_e__sink = H_T_D * delta_theta_sink  
+    # Simplification: Heat flow through the ground is calculated using 
+    # the statically configured ground temperature and cooling setpoint 
+    # temperature in the model; according to the standard: 
+    # dQ_T_s = H_T_s * delta_theta_sink, Equation (C.7)
+    dQ_T_s__sink = max(0, theta_i - (tr[&#34;TGro.k&#34;] - 273.15)) * \
+        tr[&#34;thermalZone.AFloor&#34;] * tr[&#34;UFloor&#34;]  
+    # Assumption: No adjacent zones, thus dQ_T_j = 0; Other transmission 
+    # heat flows, 
+    # Equation (C.10): dQ_T_j = H_T_j * max(0, theta_i - theta_j)
+    dQ_T_j = 0  
+    # The sum of the transmission heat sinks when θi,c,max,d &gt; θe,max, 
+    # according to Equations (C.5), (C.7), and (C.10)
+    dQ_T__sink = dQ_T_e__sink + dQ_T_s__sink + dQ_T_j  
+
+    #-------------------------------------------------------
+    # calculate ventilation heat flow out of the building
+    #-------------------------------------------------------
+    # Heat flow due to infiltration, Equation (C.12)
+    dQ_V_inf__sink = H_V_win * delta_theta_sink  
+    # Heat flow due to window ventilation, Equation (C.14)
+    dQ_V_win__sink = H_V_inf * delta_theta_sink  
+    # The sum of ventilation heat sinks when θi,c,max,d &gt; θe,max, 
+    # according to Equations (C.12) and (C.14)
+    dQ_V__sink = dQ_V_inf__sink + dQ_V_win__sink  
+
+    #-------------------------------------------------------
+    # calculate internal heat sink
+    #-------------------------------------------------------
+    # Assumption: No internal heat sinks; Q_I,sink is the 
+    # sum of internal heat sinks according to Equation (C.24)
+    dQ_I_sink = 0  
+
+    #-------------------------------------------------------
+    # calculate total heat sinks
+    #-------------------------------------------------------
+    dQ_sink_max = dQ_T__sink + dQ_V__sink + dQ_I_sink  # Equation (C.4)
+
+    #-------------------------------------------------------
+    # calculate time constant of the building
+    #-------------------------------------------------------
+    # Temperature correction factor for calculating the time constant
+    # 1 for direct transmission to outside (external components) and 
+    # transmission through F = ground according to DIN EN ISO 13370
+    Fx_in2out = 1  
+    Fx_in2in = 0.5  # for all other components
+
+    # Assumption: No detailed building information available; 
+    # thermal bridge supplement; without proof, ΔUWB = 0.10 W/(m²·K) 
+    # is generally applied. For external components with internal 
+    # insulation and integrated solid ceilings, ΔUWB = 0.15 W/(m²·K)
+    delta_U_WB = 0.1  
+    # The area of each component that bounds the building zone to outside 
+    # air, unheated or uncooled zones, or the ground. For windows and 
+    # doors, the clear internal structural opening dimensions are used.
+    sum_A_j = sum(AExt_list) + sum(AWin_list) + \
+        tr[&#34;thermalZone.ARoof&#34;] + tr[&#34;thermalZone.AFloor&#34;]  
+    # Heat transfer coefficient for 2D thermal bridges
+    H_T_WB = sum_A_j * delta_U_WB  
+    # Assumption: No heat transfer between heated and 
+    # unheated zones; the heat transfer coefficient between 
+    # heated and unheated or cooled and uncooled zones according 
+    # to Equation (50) or DIN EN ISO 13789 (equivalent to H_D)
+    H_T_iu = 0  
+    # Simplification: Interior wall is treated as a simple area 
+    # between two zones only; heat transfer coefficient between the 
+    # zone and the neighboring zone according to Equation (53) or 
+    # DIN EN ISO 13789 (equivalent to H_D)
+    H_T_iz = tr[&#34;UInt&#34;] * tr[&#34;thermalZone.AInt&#34;]  
+    # Simplification: Calculated only from floor area and U-value 
+    # of the floor, analogous to H_T_D in 6.2.1; heat transfer coefficient
+    # through the ground (H_T,s corresponds to G according to 
+    # DIN EN ISO 13370)
+    H_T_s_simplified = tr[&#34;thermalZone.AFloor&#34;] * tr[&#34;UFloor&#34;]  
+    # Sum of the heat transfer coefficients j for all components in the 
+    # thermal envelope of the building zone to be included in the 
+    # balance according to section 6.2
+    sumH_T_j = H_T_D * Fx_in2out + H_T_WB * Fx_in2out + H_T_iu * \
+        Fx_in2in + H_T_iz * Fx_in2in + H_T_s_simplified * Fx_in2out  
+
+    #%%sumH_V_k: Sum of ventilation heat transfer coefficients
+    # Sum over all ventilation heat transfer coefficients of airflows 
+    # entering with outdoor temperature
+    sumH_V_k = H_V_inf + H_V_win  
+
+    #%%H_V_mech_theta: Mechanical ventilation
+    # Assumption: If a supply and exhaust air system is present, 
+    # use total air change rate as supply rate; airflow of the supply air 
+    # during system operation according to Equations (92) to (93)
+    n_mech_sup = 0 if b_exhaust_air_ventilation_system or not \
+        (b_ventilation_system) else tr[&#34;airChangeRate&#34;]  
+    # Daily average air change rate through mechanical ventilation 
+    # according to Equation (90)
+    n_mech = n_mech_sup * t_v_mech / 24  
+    # Ventilation heat transfer coefficient of mechanical 
+    # ventilation (see 6.3.3)
+    H_V_mech = n_mech * V * c_p_aXrho_a  
+    # Simplification from standard assuming HVAC without cooling 
+    # function: For HVAC systems without cooling and residential 
+    # ventilation systems, the uncorrected heat transfer coefficient 
+    # of the system airflow is used in Equation (135). 
+    # Thus: H_V_mech_theta = H_V_mech; temperature-weighted heat transfer 
+    # coefficient of mechanical ventilation, according to 
+    # Equations (136) to (138)
+    H_V_mech_theta = H_V_mech  
+    # Total heat transfer coefficient of the building zone, 
+    # calculated from transmission and ventilation heat transfer 
+    # coefficients according to 5.5.2
+    H = sumH_T_j + sumH_V_k + H_V_mech_theta  
+    # Time constant of the building zone according to 6.7.2, 
+    # but without mechanical ventilation
+    tau = C_wirk / H  
+
+    #-------------------------------------------------------
+    # calculate cooling demand
+    #-------------------------------------------------------
+    #%% dQ_c_max: Cooling load
+    # Approximate calculation of required maximum cooling 
+    # capacity according to Equation (C.1)
+    dQ_c_max = 0.8 * (dQ_source_max - dQ_sink_max) * (1 + 0.3 * 
+        np.exp(-tau / 120)) - C_wirk / 60 * (delta_theta - 2) + \
+            C_wirk / 40 * (12 / t_c_op_d - 1)  
+    
+    tr[&#34;coolingPower&#34;] = dQ_c_max.item()
+
+    return tr
+    from src.converter_functions.converter_function import ConverterFunction</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="custom_converter_functions.Nominal_heating_power_calculator"><code class="flex name class">
+<span>class <span class="ident">Nominal_heating_power_calculator</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Nominal_heating_power_calculator(ConverterFunction):
+    &#39;&#39;&#39;
+    A class to calculate the nominal heating power required for a building based on 
+    various parameters including building characteristics and environmental conditions.
+
+    This class is designed to implement the calculation of nominal heating power as per 
+    the guidelines established in DIN 18599-2. 
+    It takes into account both the internal and external temperature settings, 
+    as well as heat loss due to ventilation and building materials.
+    &#39;&#39;&#39;
+    def __init__(self):
+        super().__init__()
+
+    def convert(self, variable_dict):
+        to_return = variable_dict
+        
+        #%% For the calculation of the nominal heating power according to DIN 18599-2, 
+        # the normal outside temperatures according to DIN/TS 12831-1 from April 2020 
+        # and the zone temperature should be used. 
+        # However, no explicit values are available for all locations - therefore, there are two solutions: 
+        #%% 1. Explicitly configure normal outside temperature and zone temperature in the config file 
+        # 2. Estimating parameters based on the weather file and from roomTemperatureUpperSetpoint 
+        # behavior, if parameters are explicitly set to null in the config file.
+
+        temp_inside=to_return[&#34;ti_set&#34;] if to_return[&#34;ti_set&#34;]!=None else to_return[&#34;roomTempUpperSetpoint&#34;]
+        temp_outside=to_return[&#34;ta_min&#34;] if to_return[&#34;ta_min&#34;]!=None else float(pd.read_csv(to_return[&#34;weaDat.fileName&#34;], sep=&#39;\t&#39;, decimal=&#39;.&#39;, skiprows=40).iloc[:,1].min())
+
+        fk=0.6 # reduction factor against soil fk = 0.6 according to DIN 4108-6
+        c_rho_air=0.34 # product of specific heat capacity and density of air in Wh/(m³*K), according to DIN 18599-2
+
+        # calculate ventilation heat losses
+        if all(type(param) is not list for param in [to_return[&#34;heatRecoveryRate&#34;], to_return[&#34;airChangeRate&#34;], to_return[&#34;thermalZone.VAir&#34;]]):
+            ventilationHeatLosses = (1 - to_return[&#34;heatRecoveryRate&#34;]) * to_return[&#34;airChangeRate&#34;] * (to_return[&#34;thermalZone.VAir&#34;]) * c_rho_air  # Calculation of the reciprocal of the ventilation heat transfer coefficient H_v in W/K, 
+        else:
+            ventilationHeatLosses = 0
+
+        # Calculation of the nominal heating load
+        # Calculate the reciprocals for each list
+        product = to_return[&#34;UExt&#34;] * to_return[&#34;wallExt_area_total&#34;] + to_return[&#34;UWin&#34;] * to_return[&#34;win_area_total&#34;] + to_return[&#34;UFloor&#34;] * to_return[&#34;thermalZone.AFloor&#34;] * fk + to_return[&#34;URoof&#34;] * to_return[&#34;thermalZone.ARoof&#34;]
+        product = product + ventilationHeatLosses # Add ventilation heat losses
+
+        # Calculate the element-wise sum of the reciprocals
+        to_return[&#34;heatingPower&#34;] = (temp_inside-temp_outside) * product
+        
+        return to_return</code></pre>
+</details>
+<div class="desc"><p>A class to calculate the nominal heating power required for a building based on
+various parameters including building characteristics and environmental conditions.</p>
+<p>This class is designed to implement the calculation of nominal heating power as per
+the guidelines established in DIN 18599-2.
+It takes into account both the internal and external temperature settings,
+as well as heat loss due to ventilation and building materials.</p>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="custom_converter_functions.Nominal_heating_power_calculator.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    to_return = variable_dict
+    
+    #%% For the calculation of the nominal heating power according to DIN 18599-2, 
+    # the normal outside temperatures according to DIN/TS 12831-1 from April 2020 
+    # and the zone temperature should be used. 
+    # However, no explicit values are available for all locations - therefore, there are two solutions: 
+    #%% 1. Explicitly configure normal outside temperature and zone temperature in the config file 
+    # 2. Estimating parameters based on the weather file and from roomTemperatureUpperSetpoint 
+    # behavior, if parameters are explicitly set to null in the config file.
+
+    temp_inside=to_return[&#34;ti_set&#34;] if to_return[&#34;ti_set&#34;]!=None else to_return[&#34;roomTempUpperSetpoint&#34;]
+    temp_outside=to_return[&#34;ta_min&#34;] if to_return[&#34;ta_min&#34;]!=None else float(pd.read_csv(to_return[&#34;weaDat.fileName&#34;], sep=&#39;\t&#39;, decimal=&#39;.&#39;, skiprows=40).iloc[:,1].min())
+
+    fk=0.6 # reduction factor against soil fk = 0.6 according to DIN 4108-6
+    c_rho_air=0.34 # product of specific heat capacity and density of air in Wh/(m³*K), according to DIN 18599-2
+
+    # calculate ventilation heat losses
+    if all(type(param) is not list for param in [to_return[&#34;heatRecoveryRate&#34;], to_return[&#34;airChangeRate&#34;], to_return[&#34;thermalZone.VAir&#34;]]):
+        ventilationHeatLosses = (1 - to_return[&#34;heatRecoveryRate&#34;]) * to_return[&#34;airChangeRate&#34;] * (to_return[&#34;thermalZone.VAir&#34;]) * c_rho_air  # Calculation of the reciprocal of the ventilation heat transfer coefficient H_v in W/K, 
+    else:
+        ventilationHeatLosses = 0
+
+    # Calculation of the nominal heating load
+    # Calculate the reciprocals for each list
+    product = to_return[&#34;UExt&#34;] * to_return[&#34;wallExt_area_total&#34;] + to_return[&#34;UWin&#34;] * to_return[&#34;win_area_total&#34;] + to_return[&#34;UFloor&#34;] * to_return[&#34;thermalZone.AFloor&#34;] * fk + to_return[&#34;URoof&#34;] * to_return[&#34;thermalZone.ARoof&#34;]
+    product = product + ventilationHeatLosses # Add ventilation heat losses
+
+    # Calculate the element-wise sum of the reciprocals
+    to_return[&#34;heatingPower&#34;] = (temp_inside-temp_outside) * product
+    
+    return to_return</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="custom_converter_functions.RC_Distribution_Configurator"><code class="flex name class">
+<span>class <span class="ident">RC_Distribution_Configurator</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RC_Distribution_Configurator(ConverterFunction):
+    &#39;&#39;&#39;
+    Sets up preconfigured R and C distribution profiles that are part of the definition of the component 
+    properties together with U-values and heat capacity (e.g. the wall structure).
+    In the configuration file, the profiles for R and C distributions defined in this class can be configured as strings, 
+    e.g., monolithic, heavy, lightweight. 
+    If configured, the real distribution is identified by the parameter name in the config file and the configured profile name.
+    &#39;&#39;&#39;
+    def __init__(self):
+        super().__init__()
+        # Definition of RC_distribution_profiles_n3, only use, when number of elements n=3,
+        # Groupwise definition of components possible (syntax: &#34;floor|roof|extWall|...&#34;)
+        self.RC_distribution_profiles_n3={
+            &#34;monolythic&#34;:{
+                &#34;floor|roof|extWall&#34;:{&#34;C&#34;:[1,1,1],&#34;R&#34;:[1,1,1,1]},
+                &#34;intWall&#34;:{&#34;C&#34;:[1,1,1],&#34;R&#34;:[1,1,1]}
+            },
+            #Placement of the capacities always in the middle of the layer (set-up: R1/2-C1-mean(R12)-C2-mean(R23)-C3-R3/2)
+            &#34;heavy&#34;:{               #from ashrae 140-2004 TC900
+                &#34;floor&#34;:{&#34;C&#34;:[112000,0.001,0.001],&#34;R&#34;:[0.000739583333333333, 0.131859375, 0.262239583333333, 0.131119791666667]},
+                &#34;roof&#34;:{&#34;C&#34;:[7980,1126.944,9063],&#34;R&#34;:[0.00065625, 0.0297604166666667, 0.0305208333333333, 0.00141666666666667]},
+                &#34;extWall&#34;:{&#34;C&#34;:[140000,861,4293],&#34;R&#34;:[0.00154088050314465, 0.013624213836478, 0.0125864779874214, 0.00050314465408805]},
+                &#34;intWall&#34;:{&#34;C&#34;:[1,1,1],&#34;R&#34;:[1,1,1]},
+            },          
+            &#34;lightweight&#34;:{        #from ashrae 140-2004 TC600    
+                &#34;floor&#34;:{&#34;C&#34;:[19500,5055.12,5055.12],&#34;R&#34;:[0.00186458333333333, 0.132463541666667, 0.261197916666667, 0.130598958333333]},
+                &#34;roof&#34;:{&#34;C&#34;:[7980,1126.944,9063],&#34;R&#34;:[0.00065625, 0.0297604166666667, 0.0305208333333333, 0.00141666666666667]},
+                &#34;extWall&#34;:{&#34;C&#34;:[9576,665.28,4293],&#34;R&#34;:[0.000589622641509434, 0.013561320754717, 0.0134748427672956, 0.00050314465408805]},
+                &#34;intWall&#34;:{&#34;C&#34;:[1,1,1],&#34;R&#34;:[1,1,1]},
+            }, 
+
+            #wall constructrion according to: 
+            # https://www.ubakus.de/u-wert-rechner/index.php?c=2&amp;M0=132061I1&amp;M1=132153I33&amp;l1=0.23&amp;r1=550&amp;name1=Geschosshohe%20Porenbetonplatten&amp;v1=f2f2f2&amp;tex1=gf&amp;M2=77i5&amp;T_i=20&amp;RH_i=50&amp;Te=-5&amp;RH_e=80&amp;outside=0&amp;bt=0&amp;unorm=enev14alt&amp;cq=2947871&amp;name=AW%20Porenbeton%20Fassadenelemente%20GSB%2035%2C%2033%20cm%2C%20ab%201952&amp;fz=14
+            &#34;gasConcrete&#34;:{
+                &#34;extWall&#34;:{&#34;C&#34;:[14000, 181500, 6000 ],&#34;R&#34;:[0.07, 0.7875, 0.721, 0.0035 ]},
+            },
+
+            #wall constructrion according to: 
+            # https://www.ubakus.de/u-wert-rechner/index.php?c=2&amp;M0=199i15&amp;M1=132261I24&amp;v1=b7b7b7&amp;tex1=0&amp;M2=133477I2&amp;M3=136921i115&amp;v3=cc5c4a&amp;tex3=vz2&amp;T_i=20&amp;RH_i=50&amp;Te=-5&amp;RH_e=80&amp;outside=0&amp;bt=0&amp;Rsi=U&amp;unorm=enev14alt&amp;cq=2947497&amp;name=AW%20Bims-Schwemmstein%2024%20cm%2C%20Schalenfuge%2FVZ-Vormauer%201200%20kg%2Fm%C2%B3%2C%20ab%201952&amp;fz=14
+            &#34;pumiceAndBrick&#34;:{ 
+                &#34;extWall&#34;:{&#34;C&#34;:[167100, 28000, 138000 ],&#34;R&#34;:[0.3535, 0.3605, 0.117, 0.11  ]},
+            },
+
+            #wall constructrion according to: 
+            # https://www.ubakus.de/u-wert-rechner/index.php?c=2&amp;M0=133859i6&amp;M1=36i24&amp;M2=137011i2&amp;M3=86I6&amp;M4=36I9&amp;x4=-0.05&amp;y4=0.2&amp;w4=6&amp;R4=60&amp;M5=132403I3&amp;v5=81674f&amp;tex5=kork&amp;M6=132657i3&amp;M7=90i24&amp;M8=36i24&amp;y8=0&amp;w8=4.8&amp;R8=30&amp;hz8=1&amp;M9=119929i44&amp;T_i=20&amp;RH_i=50&amp;Te=-5&amp;RH_e=80&amp;outside=0&amp;bt=0&amp;unorm=enev14alt&amp;cq=2947513&amp;name=AW%20Einsteins%20Sommerhaus%2C%20Holzrahmen%2012%20cm%2C%203%20cm%20Torfd%C3%A4mmung%2C%201929&amp;fz=14
+            &#34;baloonFraming&#34;:{ 
+                &#34;extWall&#34;:{&#34;C&#34;:[26880,2446,7850],&#34;R&#34;:[0.1425,0.245191011235955,0.441691011235955,0.339]},
+            },
+            #Draft for additional distribution profile:
+            # // Placement of the innermost capacity in the center of the innermost layer, the rest on the inner side of the resistance. (set-up: R1/2-C1-R1/2-C2-R2-C3-R3)
+            #  &#34;extWall_R_distribution&#34;:[[0.098,0.098,1.537,0.064], [0.0375,0.0375,1.65,0.064]],  
+            #  &#34;floor_R_distribution&#34;:[[0.0355, 0.0355, 12.5875, 12.5875], [0.0895,0.0895,12.5375,12.5375]],
+            #  &#34;roof_R_distribution&#34;:[[0.0315, 0.0315, 2.794, 0.136], [0.0315,0.0315,2.794,0.136]],             
+        }
+
+    def convert(self, variable_dict):
+        tr=variable_dict
+        for k in tr.keys():
+            # Check if parameter is a distribution parameter and its value is of type string and if so, treat it as an RC_distribution_profile name
+            if k.endswith(&#34;_distribution&#34;) and type(tr[k]) is str:
+                profile=tr[k]
+                if profile in self.RC_distribution_profiles_n3.keys():
+                    component,part_key,_=k.split(&#34;_&#34;)
+                    # Get correct component_key, also in case if component is defined in group with other components (syntax: &#34;component1|component2|...&#34;)
+                    component_keys=[k for k in self.RC_distribution_profiles_n3[profile].keys() if component in k.split(&#34;|&#34;)]
+                    if len(component_keys)&gt;1: raise ValueError(&#34;Multiple defined profiles for &#34;,profile,component,part_key,&#34;distribution: &#34;,str(component_keys))
+                    else: component_key=component_keys[0]
+                    
+                    tr[k]=self.RC_distribution_profiles_n3[profile][component_key][part_key]
+                    ## debug print
+                    # print(component,component_key)
+                    # print(k,tr[k])
+                else:
+                    raise KeyError(&#34;RC-Distribution-profile &#39;&#34;+profile+&#34;&#39; not found. Available profiles are: &#34;+str(self.RC_distribution_profiles_n3.keys()))
+        return tr</code></pre>
+</details>
+<div class="desc"><p>Sets up preconfigured R and C distribution profiles that are part of the definition of the component
+properties together with U-values and heat capacity (e.g. the wall structure).
+In the configuration file, the profiles for R and C distributions defined in this class can be configured as strings,
+e.g., monolithic, heavy, lightweight.
+If configured, the real distribution is identified by the parameter name in the config file and the configured profile name.</p>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="custom_converter_functions.RC_Distribution_Configurator.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    tr=variable_dict
+    for k in tr.keys():
+        # Check if parameter is a distribution parameter and its value is of type string and if so, treat it as an RC_distribution_profile name
+        if k.endswith(&#34;_distribution&#34;) and type(tr[k]) is str:
+            profile=tr[k]
+            if profile in self.RC_distribution_profiles_n3.keys():
+                component,part_key,_=k.split(&#34;_&#34;)
+                # Get correct component_key, also in case if component is defined in group with other components (syntax: &#34;component1|component2|...&#34;)
+                component_keys=[k for k in self.RC_distribution_profiles_n3[profile].keys() if component in k.split(&#34;|&#34;)]
+                if len(component_keys)&gt;1: raise ValueError(&#34;Multiple defined profiles for &#34;,profile,component,part_key,&#34;distribution: &#34;,str(component_keys))
+                else: component_key=component_keys[0]
+                
+                tr[k]=self.RC_distribution_profiles_n3[profile][component_key][part_key]
+                ## debug print
+                # print(component,component_key)
+                # print(k,tr[k])
+            else:
+                raise KeyError(&#34;RC-Distribution-profile &#39;&#34;+profile+&#34;&#39; not found. Available profiles are: &#34;+str(self.RC_distribution_profiles_n3.keys()))
+    return tr</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="custom_converter_functions.Zone_dimensions_calculator"><code class="flex name class">
+<span>class <span class="ident">Zone_dimensions_calculator</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Zone_dimensions_calculator(ConverterFunction):
+    &#39;&#39;&#39;
+    Calculate:
+        - areas of internal and external walls, roof, floor, windows for each geographical direction
+        - weighting factors for windows and walls to calculate the EquivalentAirTemperature according to VDI6007
+    Based on:
+        - zone length, width and height, number of floor levels, window to wall fraction for each geographical direction
+    &#39;&#39;&#39;
+    def __init__(self):
+        super().__init__()
+
+    def convert(self, variable_dict):
+        to_return = variable_dict 
+
+        to_return[&#34;zone_height&#34;]=to_return[&#34;n_floors&#34;]*to_return[&#34;floor_height&#34;]
+        wall_area_south_north = to_return[&#34;zone_length&#34;] * to_return[&#34;zone_height&#34;] # Calculation of the wall area for south / north
+        wall_area_west_east = to_return[&#34;zone_width&#34;] *  to_return[&#34;zone_height&#34;]  # Calculation of the wall area for west / east
+        wall_area_floor_ceiling = to_return[&#34;zone_length&#34;] * to_return[&#34;zone_width&#34;] # Calculation of the floor and ceiling area
+        zone_volume = to_return[&#34;zone_length&#34;] * to_return[&#34;zone_width&#34;] * to_return[&#34;zone_height&#34;] # Calculation of the zone volume
+        to_return[&#34;thermalZone.VAir&#34;] = zone_volume * 0.76 # Calculation of the zone air volume (reduction factor 0.76 according to DIN 18599-1)
+
+        to_return[&#34;thermalZone.AExt[1]&#34;], to_return[&#34;thermalZone.AExt[3]&#34;] = wall_area_south_north, wall_area_south_north  # Assigning the wall area for south / north
+        to_return[&#34;thermalZone.AExt[2]&#34;], to_return[&#34;thermalZone.AExt[4]&#34;] = wall_area_west_east, wall_area_west_east  # Assigning the wall area for west / east
+        to_return[&#34;thermalZone.AFloor&#34;] = wall_area_floor_ceiling   # Assigning the floor area
+        to_return[&#34;thermalZone.ARoof&#34;] = wall_area_floor_ceiling * to_return[&#34;fARoofToAFloor&#34;]  # Assigning the roof area from the floor area and the ratio factor fARoofToAFloor
+        to_return[&#34;thermalZone.AInt&#34;]=to_return[&#34;fAInt&#34;]  *  (to_return[&#34;thermalZone.AExt[1]&#34;] + to_return[&#34;thermalZone.AExt[2]&#34;] + to_return[&#34;thermalZone.AExt[3]&#34;] +to_return[&#34;thermalZone.AExt[4]&#34;])
+
+        to_return[&#34;thermalZone.AWin[1]&#34;]=to_return[&#34;fAWin_south&#34;]  *  wall_area_south_north
+        to_return[&#34;thermalZone.AWin[2]&#34;]=to_return[&#34;fAWin_west&#34;]  *  wall_area_west_east
+        to_return[&#34;thermalZone.AWin[3]&#34;]=to_return[&#34;fAWin_north&#34;] * wall_area_south_north
+        to_return[&#34;thermalZone.AWin[4]&#34;]=to_return[&#34;fAWin_east&#34;]  *  wall_area_west_east
+
+        # Here, the transparent portion of the window is calculated. 
+        to_return[&#34;thermalZone.ATransparent[1]&#34;] = to_return[&#34;thermalZone.AWin[1]&#34;] * to_return[&#34;fATransToAWindow&#34;]  
+        to_return[&#34;thermalZone.ATransparent[2]&#34;] = to_return[&#34;thermalZone.AWin[2]&#34;] * to_return[&#34;fATransToAWindow&#34;]  
+        to_return[&#34;thermalZone.ATransparent[3]&#34;] = to_return[&#34;thermalZone.AWin[3]&#34;] * to_return[&#34;fATransToAWindow&#34;]  
+        to_return[&#34;thermalZone.ATransparent[4]&#34;] = to_return[&#34;thermalZone.AWin[4]&#34;] * to_return[&#34;fATransToAWindow&#34;]  
+
+        to_return[&#34;thermalZone.AExt[1]&#34;] =  (to_return[&#34;thermalZone.AExt[1]&#34;] - to_return[&#34;thermalZone.AWin[1]&#34;])
+        to_return[&#34;thermalZone.AExt[2]&#34;] =  (to_return[&#34;thermalZone.AExt[2]&#34;] - to_return[&#34;thermalZone.AWin[2]&#34;])
+        to_return[&#34;thermalZone.AExt[3]&#34;] =  (to_return[&#34;thermalZone.AExt[3]&#34;] - to_return[&#34;thermalZone.AWin[3]&#34;])
+        to_return[&#34;thermalZone.AExt[4]&#34;] =  (to_return[&#34;thermalZone.AExt[4]&#34;] - to_return[&#34;thermalZone.AWin[4]&#34;])
+        
+        to_return[&#34;wallExt_area_total&#34;] =   to_return[&#34;thermalZone.AExt[1]&#34;] + to_return[&#34;thermalZone.AExt[2]&#34;] + to_return[&#34;thermalZone.AExt[3]&#34;] + to_return[&#34;thermalZone.AExt[4]&#34;] # Calculation of the total external wall area (without the window area)
+        to_return[&#34;win_area_total&#34;] =       to_return[&#34;thermalZone.AWin[1]&#34;]  + to_return[&#34;thermalZone.AWin[2]&#34;] + to_return[&#34;thermalZone.AWin[3]&#34;] + to_return[&#34;thermalZone.AWin[4]&#34;] # Calculation of the total window area
+        to_return[&#34;envelope_area_total&#34;] =  to_return[&#34;wallExt_area_total&#34;] + to_return[&#34;win_area_total&#34;] + to_return[&#34;thermalZone.AFloor&#34;] + to_return[&#34;thermalZone.ARoof&#34;] # Calculation of the total area of building envelope
+
+        to_return[&#34;eqAirTemp.wfWin[1]&#34;] =  to_return[&#34;thermalZone.AWin[1]&#34;] / to_return[&#34;win_area_total&#34;] # Calculating weighting factors for windows to calculate the EquivalentAirTemperature according to VDI6007
+        to_return[&#34;eqAirTemp.wfWin[2]&#34;] =  to_return[&#34;thermalZone.AWin[2]&#34;] / to_return[&#34;win_area_total&#34;]
+        to_return[&#34;eqAirTemp.wfWin[3]&#34;] =  to_return[&#34;thermalZone.AWin[3]&#34;] / to_return[&#34;win_area_total&#34;]
+        to_return[&#34;eqAirTemp.wfWin[4]&#34;] =  to_return[&#34;thermalZone.AWin[4]&#34;] / to_return[&#34;win_area_total&#34;]
+
+        to_return[&#34;eqAirTemp.wfWall[1]&#34;] =  to_return[&#34;thermalZone.AExt[1]&#34;]  / to_return[&#34;wallExt_area_total&#34;] # Calculating weighting factors for walls to calculate the EquivalentAirTemperature according to VDI6007
+        to_return[&#34;eqAirTemp.wfWall[2]&#34;] =  to_return[&#34;thermalZone.AExt[2]&#34;]  / to_return[&#34;wallExt_area_total&#34;]
+        to_return[&#34;eqAirTemp.wfWall[3]&#34;] =  to_return[&#34;thermalZone.AExt[3]&#34;]  / to_return[&#34;wallExt_area_total&#34;]
+        to_return[&#34;eqAirTemp.wfWall[4]&#34;] =  to_return[&#34;thermalZone.AExt[4]&#34;]  / to_return[&#34;wallExt_area_total&#34;]
+        
+        
+        return to_return</code></pre>
+</details>
+<div class="desc"><h2 id="calculate">Calculate</h2>
+<ul>
+<li>areas of internal and external walls, roof, floor, windows for each geographical direction</li>
+<li>weighting factors for windows and walls to calculate the EquivalentAirTemperature according to VDI6007
+Based on:<ul>
+<li>zone length, width and height, number of floor levels, window to wall fraction for each geographical direction</li>
+</ul>
+</li>
+</ul>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="custom_converter_functions.Zone_dimensions_calculator.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    to_return = variable_dict 
+
+    to_return[&#34;zone_height&#34;]=to_return[&#34;n_floors&#34;]*to_return[&#34;floor_height&#34;]
+    wall_area_south_north = to_return[&#34;zone_length&#34;] * to_return[&#34;zone_height&#34;] # Calculation of the wall area for south / north
+    wall_area_west_east = to_return[&#34;zone_width&#34;] *  to_return[&#34;zone_height&#34;]  # Calculation of the wall area for west / east
+    wall_area_floor_ceiling = to_return[&#34;zone_length&#34;] * to_return[&#34;zone_width&#34;] # Calculation of the floor and ceiling area
+    zone_volume = to_return[&#34;zone_length&#34;] * to_return[&#34;zone_width&#34;] * to_return[&#34;zone_height&#34;] # Calculation of the zone volume
+    to_return[&#34;thermalZone.VAir&#34;] = zone_volume * 0.76 # Calculation of the zone air volume (reduction factor 0.76 according to DIN 18599-1)
+
+    to_return[&#34;thermalZone.AExt[1]&#34;], to_return[&#34;thermalZone.AExt[3]&#34;] = wall_area_south_north, wall_area_south_north  # Assigning the wall area for south / north
+    to_return[&#34;thermalZone.AExt[2]&#34;], to_return[&#34;thermalZone.AExt[4]&#34;] = wall_area_west_east, wall_area_west_east  # Assigning the wall area for west / east
+    to_return[&#34;thermalZone.AFloor&#34;] = wall_area_floor_ceiling   # Assigning the floor area
+    to_return[&#34;thermalZone.ARoof&#34;] = wall_area_floor_ceiling * to_return[&#34;fARoofToAFloor&#34;]  # Assigning the roof area from the floor area and the ratio factor fARoofToAFloor
+    to_return[&#34;thermalZone.AInt&#34;]=to_return[&#34;fAInt&#34;]  *  (to_return[&#34;thermalZone.AExt[1]&#34;] + to_return[&#34;thermalZone.AExt[2]&#34;] + to_return[&#34;thermalZone.AExt[3]&#34;] +to_return[&#34;thermalZone.AExt[4]&#34;])
+
+    to_return[&#34;thermalZone.AWin[1]&#34;]=to_return[&#34;fAWin_south&#34;]  *  wall_area_south_north
+    to_return[&#34;thermalZone.AWin[2]&#34;]=to_return[&#34;fAWin_west&#34;]  *  wall_area_west_east
+    to_return[&#34;thermalZone.AWin[3]&#34;]=to_return[&#34;fAWin_north&#34;] * wall_area_south_north
+    to_return[&#34;thermalZone.AWin[4]&#34;]=to_return[&#34;fAWin_east&#34;]  *  wall_area_west_east
+
+    # Here, the transparent portion of the window is calculated. 
+    to_return[&#34;thermalZone.ATransparent[1]&#34;] = to_return[&#34;thermalZone.AWin[1]&#34;] * to_return[&#34;fATransToAWindow&#34;]  
+    to_return[&#34;thermalZone.ATransparent[2]&#34;] = to_return[&#34;thermalZone.AWin[2]&#34;] * to_return[&#34;fATransToAWindow&#34;]  
+    to_return[&#34;thermalZone.ATransparent[3]&#34;] = to_return[&#34;thermalZone.AWin[3]&#34;] * to_return[&#34;fATransToAWindow&#34;]  
+    to_return[&#34;thermalZone.ATransparent[4]&#34;] = to_return[&#34;thermalZone.AWin[4]&#34;] * to_return[&#34;fATransToAWindow&#34;]  
+
+    to_return[&#34;thermalZone.AExt[1]&#34;] =  (to_return[&#34;thermalZone.AExt[1]&#34;] - to_return[&#34;thermalZone.AWin[1]&#34;])
+    to_return[&#34;thermalZone.AExt[2]&#34;] =  (to_return[&#34;thermalZone.AExt[2]&#34;] - to_return[&#34;thermalZone.AWin[2]&#34;])
+    to_return[&#34;thermalZone.AExt[3]&#34;] =  (to_return[&#34;thermalZone.AExt[3]&#34;] - to_return[&#34;thermalZone.AWin[3]&#34;])
+    to_return[&#34;thermalZone.AExt[4]&#34;] =  (to_return[&#34;thermalZone.AExt[4]&#34;] - to_return[&#34;thermalZone.AWin[4]&#34;])
+    
+    to_return[&#34;wallExt_area_total&#34;] =   to_return[&#34;thermalZone.AExt[1]&#34;] + to_return[&#34;thermalZone.AExt[2]&#34;] + to_return[&#34;thermalZone.AExt[3]&#34;] + to_return[&#34;thermalZone.AExt[4]&#34;] # Calculation of the total external wall area (without the window area)
+    to_return[&#34;win_area_total&#34;] =       to_return[&#34;thermalZone.AWin[1]&#34;]  + to_return[&#34;thermalZone.AWin[2]&#34;] + to_return[&#34;thermalZone.AWin[3]&#34;] + to_return[&#34;thermalZone.AWin[4]&#34;] # Calculation of the total window area
+    to_return[&#34;envelope_area_total&#34;] =  to_return[&#34;wallExt_area_total&#34;] + to_return[&#34;win_area_total&#34;] + to_return[&#34;thermalZone.AFloor&#34;] + to_return[&#34;thermalZone.ARoof&#34;] # Calculation of the total area of building envelope
+
+    to_return[&#34;eqAirTemp.wfWin[1]&#34;] =  to_return[&#34;thermalZone.AWin[1]&#34;] / to_return[&#34;win_area_total&#34;] # Calculating weighting factors for windows to calculate the EquivalentAirTemperature according to VDI6007
+    to_return[&#34;eqAirTemp.wfWin[2]&#34;] =  to_return[&#34;thermalZone.AWin[2]&#34;] / to_return[&#34;win_area_total&#34;]
+    to_return[&#34;eqAirTemp.wfWin[3]&#34;] =  to_return[&#34;thermalZone.AWin[3]&#34;] / to_return[&#34;win_area_total&#34;]
+    to_return[&#34;eqAirTemp.wfWin[4]&#34;] =  to_return[&#34;thermalZone.AWin[4]&#34;] / to_return[&#34;win_area_total&#34;]
+
+    to_return[&#34;eqAirTemp.wfWall[1]&#34;] =  to_return[&#34;thermalZone.AExt[1]&#34;]  / to_return[&#34;wallExt_area_total&#34;] # Calculating weighting factors for walls to calculate the EquivalentAirTemperature according to VDI6007
+    to_return[&#34;eqAirTemp.wfWall[2]&#34;] =  to_return[&#34;thermalZone.AExt[2]&#34;]  / to_return[&#34;wallExt_area_total&#34;]
+    to_return[&#34;eqAirTemp.wfWall[3]&#34;] =  to_return[&#34;thermalZone.AExt[3]&#34;]  / to_return[&#34;wallExt_area_total&#34;]
+    to_return[&#34;eqAirTemp.wfWall[4]&#34;] =  to_return[&#34;thermalZone.AExt[4]&#34;]  / to_return[&#34;wallExt_area_total&#34;]
+    
+    
+    return to_return</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="custom_converter_functions.Component_configurator" href="#custom_converter_functions.Component_configurator">Component_configurator</a></code></h4>
+<ul class="">
+<li><code><a title="custom_converter_functions.Component_configurator.convert" href="#custom_converter_functions.Component_configurator.convert">convert</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="custom_converter_functions.Component_properties_calculator" href="#custom_converter_functions.Component_properties_calculator">Component_properties_calculator</a></code></h4>
+<ul class="">
+<li><code><a title="custom_converter_functions.Component_properties_calculator.calc_R_conductive" href="#custom_converter_functions.Component_properties_calculator.calc_R_conductive">calc_R_conductive</a></code></li>
+<li><code><a title="custom_converter_functions.Component_properties_calculator.calc_distribution" href="#custom_converter_functions.Component_properties_calculator.calc_distribution">calc_distribution</a></code></li>
+<li><code><a title="custom_converter_functions.Component_properties_calculator.convert" href="#custom_converter_functions.Component_properties_calculator.convert">convert</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="custom_converter_functions.Link_resolver" href="#custom_converter_functions.Link_resolver">Link_resolver</a></code></h4>
+<ul class="">
+<li><code><a title="custom_converter_functions.Link_resolver.convert" href="#custom_converter_functions.Link_resolver.convert">convert</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="custom_converter_functions.Miscellaneous_handler" href="#custom_converter_functions.Miscellaneous_handler">Miscellaneous_handler</a></code></h4>
+<ul class="">
+<li><code><a title="custom_converter_functions.Miscellaneous_handler.convert" href="#custom_converter_functions.Miscellaneous_handler.convert">convert</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="custom_converter_functions.Model_compatibility_layer" href="#custom_converter_functions.Model_compatibility_layer">Model_compatibility_layer</a></code></h4>
+<ul class="">
+<li><code><a title="custom_converter_functions.Model_compatibility_layer.convert" href="#custom_converter_functions.Model_compatibility_layer.convert">convert</a></code></li>
+<li><code><a title="custom_converter_functions.Model_compatibility_layer.ensure_GT_zero" href="#custom_converter_functions.Model_compatibility_layer.ensure_GT_zero">ensure_GT_zero</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="custom_converter_functions.NaiveConverterFunction" href="#custom_converter_functions.NaiveConverterFunction">NaiveConverterFunction</a></code></h4>
+<ul class="">
+<li><code><a title="custom_converter_functions.NaiveConverterFunction.convert" href="#custom_converter_functions.NaiveConverterFunction.convert">convert</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="custom_converter_functions.Nominal_cooling_power_calculator" href="#custom_converter_functions.Nominal_cooling_power_calculator">Nominal_cooling_power_calculator</a></code></h4>
+<ul class="">
+<li><code><a title="custom_converter_functions.Nominal_cooling_power_calculator.convert" href="#custom_converter_functions.Nominal_cooling_power_calculator.convert">convert</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="custom_converter_functions.Nominal_heating_power_calculator" href="#custom_converter_functions.Nominal_heating_power_calculator">Nominal_heating_power_calculator</a></code></h4>
+<ul class="">
+<li><code><a title="custom_converter_functions.Nominal_heating_power_calculator.convert" href="#custom_converter_functions.Nominal_heating_power_calculator.convert">convert</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="custom_converter_functions.RC_Distribution_Configurator" href="#custom_converter_functions.RC_Distribution_Configurator">RC_Distribution_Configurator</a></code></h4>
+<ul class="">
+<li><code><a title="custom_converter_functions.RC_Distribution_Configurator.convert" href="#custom_converter_functions.RC_Distribution_Configurator.convert">convert</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="custom_converter_functions.Zone_dimensions_calculator" href="#custom_converter_functions.Zone_dimensions_calculator">Zone_dimensions_calculator</a></code></h4>
+<ul class="">
+<li><code><a title="custom_converter_functions.Zone_dimensions_calculator.convert" href="#custom_converter_functions.Zone_dimensions_calculator.convert">convert</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

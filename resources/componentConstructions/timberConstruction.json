@@ -1,0 +1,20 @@
+{
+    "timberConstruction": {
+        "UExt": 0.15236934328813043,
+        "heatCapacity_wall": 50138.96000000001,
+        "R_si": 0.13,
+        "R_se": 0.04,
+        "extWall_C_distribution": [
+            8160.0,
+            29978.960000000003,
+            12000.0
+        ],
+        "extWall_R_distribution": [
+            0.025,
+            3.1211968843924627,
+            3.1001968843924628,
+            0.004
+        ],
+        "info": "https://www.ubakus.de/u-wert-rechner/?c=2&M0=23879i12.5&M1=58543i15&M2=4337I24&M3=182759I24&y3=0&w3=6&R3=83.3&M4=19I4&M5=47047i8&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=0&bt=0&unorm=geg20alt&fz=14&am=0_10.5_5_NaN_10_10_lw_0_c_n#"
+    }
+}

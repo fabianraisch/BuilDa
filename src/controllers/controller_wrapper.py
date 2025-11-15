@@ -30,7 +30,9 @@ class ControllerWrapper:
                 self.controllers.append(controller)
         
         #%%
-        self.controller_step_size = controller_step_size
+        #if no controller is going to be applied, set controller_step_size to None 
+        # to avoid controller steps in simulation
+        self.controller_step_size = controller_step_size if any(self.controllers) else None
 
         self.fmu_wrapper = fmu_wrapper
 

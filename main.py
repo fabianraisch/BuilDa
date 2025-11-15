@@ -4,7 +4,8 @@ from src.utils.exporter import Exporter
 from src.variator import Variator
 import sys
 import os
-import time
+import time,datetime
+import zipfile
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from src.simulations.simulation_controller import SimulationController
 from src.utils.util_functions import setup_paths
@@ -15,9 +16,10 @@ from multiprocessing import cpu_count
 #======================
 user_config={
     "config_name":"config_example_singleFamilyHouse.json",
+    "schedule_name": None,
     "output_path":"output",
-    "fmu_name_windows":"Model_v1_interiorWalls_Floor_Roof_Pctrl_windows_openmodelica.fmu",
-    "fmu_name_linux":"Model_v1_interiorWalls_Floor_Roof_Pctrl_linux_openmodelica.fmu",
+    "fmu_name_windows":"Model_v1_interiorWalls_Floor_Roof_Pctrl_windows_openmodelica_v2.fmu",
+    "fmu_name_linux":"Model_v1_interiorWalls_Floor_Roof_Pctrl_linux_openmodelica_v2.fmu",
     "multiprocessing":True
 }
 #======================
@@ -25,7 +27,7 @@ user_config={
 #======================
 
 
-def worker_start(worker_id: int, config: Config, variation: Variator):
+def worker_start(worker_id: int, config: Config, variation: Variator, schedule = None):
     """
     Entry point for a worker thread that executes a simulation.
 
@@ -47,7 +49,8 @@ def worker_start(worker_id: int, config: Config, variation: Variator):
     print(f'Worker {worker_id} starting to work!  ')
     worker = SimulationController(worker_id=worker_id, 
                     config=config,
-                    variation=variation)
+                    variation=variation,
+                    schedule = schedule)
     
     rows, header, converted_variation = worker.simulate_fmu()
     worker.fmu_wrapper.terminate_fmu()
@@ -55,12 +58,16 @@ def worker_start(worker_id: int, config: Config, variation: Variator):
 
 if __name__ == "__main__":
     time_begin=time.time()
-    config_path, fmu_path, output_path = setup_paths(user_config)
-
+    config_path, fmu_path, output_path, schedule = setup_paths(user_config)
+    
+    last_modification_timestamp=datetime.datetime(
+            *zipfile.ZipFile(fmu_path,"r").getinfo("modelDescription.xml").date_time) \
+        .isoformat()
     print("\n")
-    print(f"used FMU-File:\t\t'{fmu_path}' \n\t\t\t(last modified: {time.strftime('%Y-%m-%dT%H:%M:%S', time.localtime(os.path.getmtime(fmu_path)))})")
+    print(f"used FMU-File:\t\t'{fmu_path}' \n\t\t\t(last modified: {last_modification_timestamp})")
     print(f"used config-File:\t'{config_path}'")
     print(f"used output directory:\t'{output_path}'")
+    print(f"used schedule:\t{schedule}")
     print(f"Multiprocessing:\t'{user_config["multiprocessing"]}'")
     print("\n")
 
@@ -95,13 +102,13 @@ if __name__ == "__main__":
 
         # Loop through the completed futures as they finish
         if user_config["multiprocessing"]: 
-            futures = [executor.submit(worker_start, i+1, config, variation) for i, variation in enumerate(variation_list)]
+            futures = [executor.submit(worker_start, i+1, config, variation, schedule) for i, variation in enumerate(variation_list)]
             for future in as_completed(futures):
                 rows, header, converted_variation, original_variation = future.result()
                 export_and_printout()
         else: 
             for variation in variation_list:
-                rows, header, converted_variation, original_variation = worker_start(1,config,variation)
+                rows, header, converted_variation, original_variation = worker_start(1,config,variation, schedule)
                 export_and_printout()
         
         print(f"\nAll tasks are done!\n\n")

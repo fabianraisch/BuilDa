@@ -4,7 +4,7 @@ import pandas as pd
 
 class Link_resolver(ConverterFunction):
     '''
-        Resolves linked config-json-parameters to the correspoinding target values
+        Resolves linked config-json-parameters to the corresponding target values
         Should always be executed before all other converter functions
     '''
     def __init__(self):

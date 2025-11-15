@@ -1,0 +1,5 @@
+{
+"100d": {"UExt": 0.25, "UInt": 0.3},
+"150d": {"Occupancy": "Couple_over_65"},
+"200d": {"UWin": 1.0, "Heater": "new"}
+}

@@ -1,0 +1,20 @@
+{
+    "highHoleBrickToday": {
+        "UExt": 0.23463162834350074,
+        "heatCapacity_wall": 265435.0,
+        "R_si": 0.13,
+        "R_se": 0.04,
+        "extWall_C_distribution": [
+            28000.0,
+            225435.0,
+            12000.0
+        ],
+        "extWall_R_distribution": [
+            0.014500000000000002,
+            2.0425,
+            2.032,
+            0.004
+        ],
+        "info": "https://www.ubakus.de/u-wert-rechner/?c=2&M0=132061I2&M1=108i365&M2=47047i8&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=0&bt=0&unorm=geg20alt&fz=14&am=0_10.5_5_NaN_10_10_lw_0_c_n##"
+    }
+}

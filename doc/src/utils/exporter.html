@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>BuilDa.src.utils.exporter API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>BuilDa.src.utils.exporter</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="BuilDa.src.utils.exporter.Exporter"><code class="flex name class">
+<span>class <span class="ident">Exporter</span></span>
+<span>(</span><span>fmu_path, config_path, output_path)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Exporter():
+
+    def __init__(self,
+                 fmu_path,
+                 config_path,
+                 output_path
+                 ):
+        
+        &#39;&#39;&#39;
+        Initializes the exporter.
+
+        Args:
+            - fmu_path: The path containing the fmu that was used in this simulation.
+            - output_path: The path outputs will be loaded into.
+
+        Returns: None
+        &#39;&#39;&#39;
+        self.fmu_path = fmu_path
+        self.fmu_name = os.path.split(self.fmu_path)[-1]
+        self.config_path=config_path
+        self.config_name=os.path.split(config_path)[-1]
+        self.output_path = output_path
+        self.b_short_output_folder_name=True
+
+        self.ts_csv_prefix = &#34;_&#34;
+
+        self.dir_name = self.__create_dir_name()
+        self.__check_dir()                                              
+
+
+    def __create_dir_name(self):
+
+        &#39;&#39;&#39; Static function to create an output directory incorporating the current time.
+
+                Arguments: none.
+
+                Returns:
+                        a name string based on the current timestamp.
+                &#39;&#39;&#39;
+
+        name_prefix = self.fmu_name+&#34;__&#34;+self.config_name
+        name_suffix = str(datetime.datetime.now())[:19]
+        name_suffix = name_suffix.replace(&#34; &#34;, &#34;_&#34;)
+        name_suffix = name_suffix.replace(&#34;-&#34;, &#34;&#34;)
+        name_suffix = name_suffix.replace(&#34;:&#34;, &#34;&#34;)
+        if self.b_short_output_folder_name:
+            return f&#34;{name_suffix}&#34;
+        else:
+            return f&#34;{name_prefix}_{name_suffix}&#34;
+    
+
+    def export_csv(
+                        self, 
+                        rows, 
+                        header,
+            header_time_columns,
+            info,
+                        param_input_list,
+                        var_param
+                ):
+
+        &#39;&#39;&#39; Export a csv file to a new dir in the output directory
+
+                Arguments:
+                        arr:                            the array containing rows to export into the csv file.
+                        header:                         a list containing the header of the csv file.
+                        variations:                 variations for creating the variations info text file. 
+                        info:                           dict containing all variables with their respective values.
+
+                Returns:
+                        the newly created directory the csv file is written into.
+
+                The export csv function first creates a new dir inside the output
+                directory for this csv file only. After that, this function creates
+                a new csv file and writes the rows specified in the arr argument.
+                &#39;&#39;&#39;
+
+                #convert param_input_list and var_param to DataFrames
+        vars_start=pd.DataFrame(param_input_list,columns=[&#34;name&#34;,&#34;value&#34;]).set_index(&#34;name&#34;).sort_index(axis=0)
+        variated_param=pd.DataFrame(var_param,columns=[&#34;name&#34;]).set_index(&#34;name&#34;).sort_index(axis=0)
+
+                # Deduce denomination for results of variation by using list of varied parameters
+        # by creating a string that clearly identifies a simulation in the simulation series
+        identstr=&#34;_&#34;
+        #iterate only through variated parameters
+        for param in np.sort(np.unique(variated_param.index.values)):
+            val=vars_start.loc[param].value
+            #shorten suffix, if parameter is file path, only use prefix of file name
+            if type(val) is str and (&#34;fileNam&#34; in param or &#34;fileName&#34; in param): 
+                val=&#39;.&#39;.join(os.path.basename(val).split(&#39;.&#39;)[:-1])   #filename without suffix
+            #if parameter is component&#39;s RC-Distribution, shorten parameter values (lists) by rouding, removing brackets
+            elif type(val) is list and &#34;distribution&#34; in param:
+                val=re.sub(r&#34;[\[\] ]&#34;,&#34;&#34;,str([round(e/sum(val),2) for e in val]))
+            #shorten every element of the parameter name to 3 symbols
+            param=&#34;_&#34;.join([w[:3] for w in param.split(&#34;_&#34;)])
+            #extend identstr by adapted name of parameter in pascal case and value
+            identstr+=&#34;#&#34;+self.__to_pascal_case(param)+&#34;_&#34;+str(val)
+
+                # Create a new directory to save the csv file in.
+        dirname_prefix = identstr
+        if identstr==&#34;_&#34;:
+            dirname_prefix += &#34;single&#34;
+        save_dir = self.__make_csv_save_dir(dirname_prefix)
+        file_name=os.path.join(save_dir,os.path.basename(save_dir)+&#34;.csv&#34;)
+
+                # Save the csv file generated from the given array.
+        rows = self.__transform_timestamps(rows,time_columns=header_time_columns) 
+        header = header_time_columns + header[1:] # Replace the first column named &#34;timestamp&#34; with the new columns
+        df = pd.DataFrame(rows,columns=header)
+
+         #sort the columns, except the time_columns specified in &#34;header_time_columns&#34;, that are placed on the beginning
+        df=df[header_time_columns + sorted(set(df.columns)-set(header_time_columns)) ]
+
+        df.to_csv(file_name)
+
+                # Add csv file containing all info of the vars set.
+        pd.DataFrame(param_input_list).to_csv(os.path.join(save_dir,&#34;vars_start.csv&#34;),header=[&#34;config_var&#34;,&#34;value&#34;],index=False)
+
+                # Add parm.txt config to the save directory.
+        pd.DataFrame(info).to_csv(os.path.join(save_dir,&#34;para_to_fmu.csv&#34;),header=[&#34;config_var&#34;,&#34;value&#34;],index=False)
+
+                # Add csv file containg only the variated param for the specific simulation
+        pd.DataFrame(var_param).to_csv(os.path.join(save_dir,&#34;variated_param.csv&#34;),header=[&#34;fmu_var&#34;]*(len(var_param)&gt;0),index=False)
+
+        return self.dir_name
+    
+
+    def __make_csv_save_dir(self, dirname):
+
+        &#39;&#39;&#39; 
+        Function to make a custom directory to write the csv files.
+        If the path already exists, da current datetime is added.
+        If directory name is too long for the operating system, it&#39;s shortened.
+        
+        Arguments: 
+            dirname: name of the directory to be created.
+        
+        Returns:
+        - path to the newly created directory.
+        - the name of the newly created directory.
+        &#39;&#39;&#39;
+        dirname_length_margin=5
+        #get the OS limit for path names, set to 260 (usually windows), if os.pathconf doen&#39;t exist
+        max_path_length=os.pathconf(&#39;.&#39;, &#39;PC_NAME_MAX&#39;) if hasattr(os,&#34;pathconf&#34;) else 260  
+        while True:    #find an output path, that doesn&#39;t yet exist and whose folder length doesn&#39;t exceed the OS limit
+            path_to_save = os.path.join(self.__get_dir_path(), dirname)
+            if os.path.exists(path_to_save):
+                print(&#34;#output folder name &#39;&#34;+path_to_save+&#34;&#39; already exists - adding timestamp&#34;)
+                dirname+=&#34;__duplicate&#34;+datetime.datetime.now().isoformat().replace(&#34;:&#34;,&#34;-&#34;) #add timestamp if directory already exists
+            else:
+                #check if the path name exceeds the OS limit and shorten it if necessary
+                if len(dirname) &gt; max_path_length:  
+                    print(&#34;#Ouptut folder name too long - will be shortened...&#34;)  
+                    n_chars2cut=len(os.path.basename(dirname)) - os.pathconf(&#39;.&#39;, &#39;PC_NAME_MAX&#39;)
+                    dirname_splitted=dirname.split(&#34;__duplicate&#34;)
+                    dirname_splitted[0]=dirname_splitted[0][:-n_chars2cut-3-dirname_length_margin]+&#34;...&#34;
+                    dirname=&#34;__duplicate&#34;.join(dirname_splitted)
+                else:
+                    break
+
+        os.makedirs(path_to_save)
+        return path_to_save
+    
+
+    def __check_dir(self):
+
+        &#39;&#39;&#39; 
+        Checks if the designated directory already exists. If not, the directory will be created.
+
+                Arguments: none.
+
+                Returns: none.
+
+                &#39;&#39;&#39;
+
+        to_check = self.__get_dir_path()
+                
+        if not os.path.exists(to_check):
+            print(&#34;\ncreating directory:\n&#34;,to_check,&#34;\n&#34;)
+            os.makedirs(to_check)
+
+    
+    def __get_dir_path(self):
+
+        &#39;&#39;&#39; 
+        Create the new directory.
+
+                Arguments: none.
+
+                Returns:
+                        the current directory path.
+                &#39;&#39;&#39;
+
+        return os.path.join(self.output_path, self.dir_name)
+    
+
+    def __to_pascal_case(self,snake_str):
+                
+        &#39;&#39;&#39; 
+        Convert a snake_case string to a PascalCase string.
+
+                Arguments:
+                        snake_str: the snake_case string to convert.
+
+                Returns:
+                        the PascalCase string.
+                &#39;&#39;&#39;
+        components = snake_str.split(&#39;_&#39;)
+
+        return &#39;&#39;.join(x.title() for x in components)
+    
+
+    def __transform_timestamps(self,data,time_columns):
+        &#39;&#39;&#39;
+        Transform the first column of each sublist to new columns as stated in parameter time_columns:
+                     e.g. &#34;time:second_of_day&#34;: second of the day and &#34;time:day_of_year&#34;: day of the year.
+
+                Args:
+                        data (list of lists): Input data with each sublist containing a timestep in seconds.
+            time_columns (list of strings): Columns to be created based on the time stamp in seconds in the data (1st column).
+
+                Returns:
+                        list of lists: Transformed data with new columns replacing the original timestep column.
+                &#39;&#39;&#39;
+        time_expressions_available_functions_dict = {
+            &#34;second&#34;: lambda current_time: (current_time - start_time).total_seconds(),
+            &#34;minute&#34;: lambda current_time: (current_time - start_time).total_seconds()//60,
+            &#34;hour&#34;: lambda current_time: (current_time - start_time).total_seconds()//3600,
+            &#34;day&#34;: lambda current_time: (current_time - start_time).total_seconds()//86400,
+            &#34;year&#34;: lambda current_time: (current_time - start_time).total_seconds()//31536000,
+            &#34;second_of_day&#34;: lambda current_time: current_time.hour * 3600 + current_time.minute * 60 + current_time.second,
+            &#34;minute_of_day&#34;: lambda current_time: current_time.hour * 60 + current_time.minute,
+            &#34;day_of_year&#34;: lambda current_time: current_time.timetuple().tm_yday,
+            &#34;day_of_month&#34;: lambda current_time: current_time.day,
+            &#34;week_of_year&#34;: lambda current_time: current_time.isocalendar()[1],
+            &#34;nanosecond_of_month&#34;: lambda current_time: (current_time - current_time.replace(day=1)).total_seconds() * 1e9
+        }
+
+                # Assume the input time in seconds is elapsed time since the start of the first day
+        start_time = datetime.datetime(2023, 1, 1)  # An arbitrary starting point (start of a non leap year) to make datetime calculations and exctract seconds of day and day of year afterwards (--&gt; assuming here, it&#39;s January 1st, 2023 0 a.m.)
+
+        for index_row,row in enumerate(data):
+            second = row[0]    #total time in seconds (elapsed simulation time)
+            current_time = start_time + datetime.timedelta(seconds=second)
+
+            
+            time_expression_list=[time_expressions_available_functions_dict[v](current_time) for v in time_columns]
+
+                        # Add the new columns and retain column with original time stamp
+            data[index_row]=time_expression_list + row[1:]
+
+
+        return data
+
+
+    def copy_fmu_and_config(self):
+
+        &#39;&#39;&#39; 
+        Function to copy the FMU file given in the path argument to the output directory.
+
+                Arguments:
+                        fmu_path: the path where the fmu file will be copied from.
+
+                Returns: none
+                &#39;&#39;&#39;
+
+        dst_path = self.__get_dir_path()
+
+        shutil.copy(self.fmu_path, dst_path)
+        shutil.copy(self.config_path, dst_path)
+
+    def save_actual_git_commit_to_dir(self):
+        &#39;&#39;&#39; 
+        Function to save information about the actual commit of the git repository (where HEAD was pointing during the simulation series) into the simulation destination directory
+            
+        Arguments:
+                None
+
+        Returns: none
+        &#39;&#39;&#39;
+        gitdir=&#34;.git&#34;
+        c=0
+        while not(os.path.exists(gitdir)):
+            gitdir=os.path.join(&#34;..&#34;,gitdir)
+            if c&gt;999: break #avoid infinite loop if there is no git repository
+            c+=1
+        if c&lt;=999:
+            actual_commit_str=open(os.path.join(gitdir,&#34;logs&#34;,&#34;HEAD&#34;),&#34;r&#34;).read().split(&#34;\n&#34;)[-2:][0]
+            dst_path=os.path.join(self.__get_dir_path(),&#34;git_log_actual_commit.txt&#34;)
+            open(dst_path,&#34;w&#34;).write(actual_commit_str)</code></pre>
+</details>
+<div class="desc"><p>Initializes the exporter.</p>
+<h2 id="args">Args</h2>
+<ul>
+<li>fmu_path: The path containing the fmu that was used in this simulation.</li>
+<li>output_path: The path outputs will be loaded into.
+Returns: None</li>
+</ul></div>
+<h3>Methods</h3>
+<dl>
+<dt id="BuilDa.src.utils.exporter.Exporter.copy_fmu_and_config"><code class="name flex">
+<span>def <span class="ident">copy_fmu_and_config</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def copy_fmu_and_config(self):
+
+    &#39;&#39;&#39; 
+    Function to copy the FMU file given in the path argument to the output directory.
+
+            Arguments:
+                    fmu_path: the path where the fmu file will be copied from.
+
+            Returns: none
+            &#39;&#39;&#39;
+
+    dst_path = self.__get_dir_path()
+
+    shutil.copy(self.fmu_path, dst_path)
+    shutil.copy(self.config_path, dst_path)</code></pre>
+</details>
+<div class="desc"><p>Function to copy the FMU file given in the path argument to the output directory.</p>
+<pre><code>    Arguments:
+            fmu_path: the path where the fmu file will be copied from.
+
+    Returns: none
+</code></pre></div>
+</dd>
+<dt id="BuilDa.src.utils.exporter.Exporter.export_csv"><code class="name flex">
+<span>def <span class="ident">export_csv</span></span>(<span>self, rows, header, header_time_columns, info, param_input_list, var_param)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def export_csv(
+                    self, 
+                    rows, 
+                    header,
+        header_time_columns,
+        info,
+                    param_input_list,
+                    var_param
+            ):
+
+    &#39;&#39;&#39; Export a csv file to a new dir in the output directory
+
+            Arguments:
+                    arr:                            the array containing rows to export into the csv file.
+                    header:                         a list containing the header of the csv file.
+                    variations:                 variations for creating the variations info text file. 
+                    info:                           dict containing all variables with their respective values.
+
+            Returns:
+                    the newly created directory the csv file is written into.
+
+            The export csv function first creates a new dir inside the output
+            directory for this csv file only. After that, this function creates
+            a new csv file and writes the rows specified in the arr argument.
+            &#39;&#39;&#39;
+
+            #convert param_input_list and var_param to DataFrames
+    vars_start=pd.DataFrame(param_input_list,columns=[&#34;name&#34;,&#34;value&#34;]).set_index(&#34;name&#34;).sort_index(axis=0)
+    variated_param=pd.DataFrame(var_param,columns=[&#34;name&#34;]).set_index(&#34;name&#34;).sort_index(axis=0)
+
+            # Deduce denomination for results of variation by using list of varied parameters
+    # by creating a string that clearly identifies a simulation in the simulation series
+    identstr=&#34;_&#34;
+    #iterate only through variated parameters
+    for param in np.sort(np.unique(variated_param.index.values)):
+        val=vars_start.loc[param].value
+        #shorten suffix, if parameter is file path, only use prefix of file name
+        if type(val) is str and (&#34;fileNam&#34; in param or &#34;fileName&#34; in param): 
+            val=&#39;.&#39;.join(os.path.basename(val).split(&#39;.&#39;)[:-1])   #filename without suffix
+        #if parameter is component&#39;s RC-Distribution, shorten parameter values (lists) by rouding, removing brackets
+        elif type(val) is list and &#34;distribution&#34; in param:
+            val=re.sub(r&#34;[\[\] ]&#34;,&#34;&#34;,str([round(e/sum(val),2) for e in val]))
+        #shorten every element of the parameter name to 3 symbols
+        param=&#34;_&#34;.join([w[:3] for w in param.split(&#34;_&#34;)])
+        #extend identstr by adapted name of parameter in pascal case and value
+        identstr+=&#34;#&#34;+self.__to_pascal_case(param)+&#34;_&#34;+str(val)
+
+            # Create a new directory to save the csv file in.
+    dirname_prefix = identstr
+    if identstr==&#34;_&#34;:
+        dirname_prefix += &#34;single&#34;
+    save_dir = self.__make_csv_save_dir(dirname_prefix)
+    file_name=os.path.join(save_dir,os.path.basename(save_dir)+&#34;.csv&#34;)
+
+            # Save the csv file generated from the given array.
+    rows = self.__transform_timestamps(rows,time_columns=header_time_columns) 
+    header = header_time_columns + header[1:] # Replace the first column named &#34;timestamp&#34; with the new columns
+    df = pd.DataFrame(rows,columns=header)
+
+     #sort the columns, except the time_columns specified in &#34;header_time_columns&#34;, that are placed on the beginning
+    df=df[header_time_columns + sorted(set(df.columns)-set(header_time_columns)) ]
+
+    df.to_csv(file_name)
+
+            # Add csv file containing all info of the vars set.
+    pd.DataFrame(param_input_list).to_csv(os.path.join(save_dir,&#34;vars_start.csv&#34;),header=[&#34;config_var&#34;,&#34;value&#34;],index=False)
+
+            # Add parm.txt config to the save directory.
+    pd.DataFrame(info).to_csv(os.path.join(save_dir,&#34;para_to_fmu.csv&#34;),header=[&#34;config_var&#34;,&#34;value&#34;],index=False)
+
+            # Add csv file containg only the variated param for the specific simulation
+    pd.DataFrame(var_param).to_csv(os.path.join(save_dir,&#34;variated_param.csv&#34;),header=[&#34;fmu_var&#34;]*(len(var_param)&gt;0),index=False)
+
+    return self.dir_name</code></pre>
+</details>
+<div class="desc"><p>Export a csv file to a new dir in the output directory</p>
+<h2 id="arguments">Arguments</h2>
+<p>arr:
+the array containing rows to export into the csv file.
+header:
+a list containing the header of the csv file.
+variations:
+variations for creating the variations info text file.
+info:
+dict containing all variables with their respective values.</p>
+<h2 id="returns">Returns</h2>
+<p>the newly created directory the csv file is written into.
+The export csv function first creates a new dir inside the output
+directory for this csv file only. After that, this function creates
+a new csv file and writes the rows specified in the arr argument.</p></div>
+</dd>
+<dt id="BuilDa.src.utils.exporter.Exporter.save_actual_git_commit_to_dir"><code class="name flex">
+<span>def <span class="ident">save_actual_git_commit_to_dir</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_actual_git_commit_to_dir(self):
+    &#39;&#39;&#39; 
+    Function to save information about the actual commit of the git repository (where HEAD was pointing during the simulation series) into the simulation destination directory
+        
+    Arguments:
+            None
+
+    Returns: none
+    &#39;&#39;&#39;
+    gitdir=&#34;.git&#34;
+    c=0
+    while not(os.path.exists(gitdir)):
+        gitdir=os.path.join(&#34;..&#34;,gitdir)
+        if c&gt;999: break #avoid infinite loop if there is no git repository
+        c+=1
+    if c&lt;=999:
+        actual_commit_str=open(os.path.join(gitdir,&#34;logs&#34;,&#34;HEAD&#34;),&#34;r&#34;).read().split(&#34;\n&#34;)[-2:][0]
+        dst_path=os.path.join(self.__get_dir_path(),&#34;git_log_actual_commit.txt&#34;)
+        open(dst_path,&#34;w&#34;).write(actual_commit_str)</code></pre>
+</details>
+<div class="desc"><p>Function to save information about the actual commit of the git repository (where HEAD was pointing during the simulation series) into the simulation destination directory</p>
+<h2 id="arguments">Arguments</h2>
+<p>None</p>
+<p>Returns: none</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="BuilDa.src.utils" href="index.html">BuilDa.src.utils</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="BuilDa.src.utils.exporter.Exporter" href="#BuilDa.src.utils.exporter.Exporter">Exporter</a></code></h4>
+<ul class="">
+<li><code><a title="BuilDa.src.utils.exporter.Exporter.copy_fmu_and_config" href="#BuilDa.src.utils.exporter.Exporter.copy_fmu_and_config">copy_fmu_and_config</a></code></li>
+<li><code><a title="BuilDa.src.utils.exporter.Exporter.export_csv" href="#BuilDa.src.utils.exporter.Exporter.export_csv">export_csv</a></code></li>
+<li><code><a title="BuilDa.src.utils.exporter.Exporter.save_actual_git_commit_to_dir" href="#BuilDa.src.utils.exporter.Exporter.save_actual_git_commit_to_dir">save_actual_git_commit_to_dir</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

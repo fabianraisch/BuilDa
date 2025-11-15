@@ -23,11 +23,12 @@ class Model_compatibility_layer(ConverterFunction):
         Returns:
         float: A small number if the input is zero, otherwise the input number.
         """
-        replacement_value = 1e-5 
         return replacement_value if abs(n) < replacement_value else n
     
     def convert(self, variable_dict):
-        list_gt_0=["fAInt","_distribution","fAWin_"]
+        list_gt_0=["fAInt","_distribution","fAWin_",
+        "UExt","UInt","UFloor","URoof",
+        "heatCapacity_wall","heatCapacity_internalWall","heatCapacity_floor","heatCapacity_roof"]
         for key in variable_dict.keys():
             if any([sstr for sstr in list_gt_0 if sstr in key]):
                 e=variable_dict[key]

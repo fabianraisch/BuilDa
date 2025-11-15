@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>BuilDa.src.converter_functions.custom_converter_functions.Component_configurator API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>BuilDa.src.converter_functions.custom_converter_functions.Component_configurator</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="BuilDa.src.converter_functions.custom_converter_functions.Component_configurator.Component_configurator"><code class="flex name class">
+<span>class <span class="ident">Component_configurator</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Component_configurator(ConverterFunction):
+    &#39;&#39;&#39;
+    Sets up preconfigured wall construction profiles comprising U-Value, 
+    heat capacity and R- and C-distributions.
+    Profiles include e.g., &#39;heavy&#39;, &#39;lightweight&#39;, &#39;gasConcrete&#39;, 
+        &#39;pumiceAndBrick&#39;, &#39;baloonFraming&#39;
+    &#39;&#39;&#39;
+    def __init__(self):
+        super().__init__()
+        # Definition of Component_constructions_n3, only use, when number of elements n=3,
+        self.Component_constructions_n3={
+
+            &#34;heavy&#34;:{               #from ashrae 140-2004 TC900
+                &#34;UExt&#34;:0.512,
+                &#34;heatCapacity_wall&#34;:145154,
+                &#34;extWall_C_distribution&#34;:&#34;heavy&#34;,
+                &#34;extWall_R_distribution&#34;:&#34;heavy&#34;,
+            },     
+            &#34;lightweight&#34;:{               #from ashrae 140-2004 TC600
+                &#34;UExt&#34;:0.514,
+                &#34;heatCapacity_wall&#34;:14534.28,
+                &#34;extWall_C_distribution&#34;:&#34;lightweight&#34;,
+                &#34;extWall_R_distribution&#34;:&#34;lightweight&#34;,
+            },       
+
+
+            #wall constructrion according to: 
+            # https://www.ubakus.de/u-wert-rechner/index.php?c=2&amp;M0=132061I1&amp;M1=132153I33&amp;l1=0.23&amp;r1=550&amp;name1=Geschosshohe%20Porenbetonplatten&amp;v1=f2f2f2&amp;tex1=gf&amp;M2=77i5&amp;T_i=20&amp;RH_i=50&amp;Te=-5&amp;RH_e=80&amp;outside=0&amp;bt=0&amp;unorm=enev14alt&amp;cq=2947871&amp;name=AW%20Porenbeton%20Fassadenelemente%20GSB%2035%2C%2033%20cm%2C%20ab%201952&amp;fz=14
+            &#34;gasConcrete&#34;:{               #from ashrae 140-2004 TC600
+                &#34;UExt&#34;:0.615,
+                &#34;heatCapacity_wall&#34;:201500,
+                &#34;extWall_C_distribution&#34;:&#34;gasConcrete&#34;,
+                &#34;extWall_R_distribution&#34;:&#34;gasConcrete&#34;,
+            },     
+
+
+            #wall constructrion according to: 
+            # https://www.ubakus.de/u-wert-rechner/index.php?c=2&amp;M0=199i15&amp;M1=132261I24&amp;v1=b7b7b7&amp;tex1=0&amp;M2=133477I2&amp;M3=136921i115&amp;v3=cc5c4a&amp;tex3=vz2&amp;T_i=20&amp;RH_i=50&amp;Te=-5&amp;RH_e=80&amp;outside=0&amp;bt=0&amp;Rsi=U&amp;unorm=enev14alt&amp;cq=2947497&amp;name=AW%20Bims-Schwemmstein%2024%20cm%2C%20Schalenfuge%2FVZ-Vormauer%201200%20kg%2Fm%C2%B3%2C%20ab%201952&amp;fz=14
+            &#34;pumiceAndBrick&#34;:{ 
+                &#34;UExt&#34;:0.9,
+                &#34;heatCapacity_wall&#34;:333100,
+                &#34;extWall_C_distribution&#34;:&#34;pumiceAndBrick&#34;,
+                &#34;extWall_R_distribution&#34;:&#34;pumiceAndBrick&#34;,
+            },
+
+            #wall constructrion according to: 
+            # https://www.ubakus.de/u-wert-rechner/index.php?c=2&amp;M0=133859i6&amp;M1=36i24&amp;M2=137011i2&amp;M3=86I6&amp;M4=36I9&amp;x4=-0.05&amp;y4=0.2&amp;w4=6&amp;R4=60&amp;M5=132403I3&amp;v5=81674f&amp;tex5=kork&amp;M6=132657i3&amp;M7=90i24&amp;M8=36i24&amp;y8=0&amp;w8=4.8&amp;R8=30&amp;hz8=1&amp;M9=119929i44&amp;T_i=20&amp;RH_i=50&amp;Te=-5&amp;RH_e=80&amp;outside=0&amp;bt=0&amp;unorm=enev14alt&amp;cq=2947513&amp;name=AW%20Einsteins%20Sommerhaus%2C%20Holzrahmen%2012%20cm%2C%203%20cm%20Torfd%C3%A4mmung%2C%201929&amp;fz=14
+            &#34;baloonFraming&#34;:{ 
+                &#34;UExt&#34;:0.732,
+                &#34;heatCapacity_wall&#34;:37176,
+                &#34;extWall_C_distribution&#34;:&#34;baloonFraming&#34;,
+                &#34;extWall_R_distribution&#34;:&#34;baloonFraming&#34;,
+            },
+
+            ##Draft for additional Component_constructions_n3 profile:
+            # &#34;templateWall&#34;:{ 
+            #     &#34;UExt&#34;:*value_of_template_wall*,
+            #     &#34;heatCapacity_wall&#34;:*value_of_template_wall*,
+            #     &#34;extWall_C_distribution&#34;:*C-Distribution_of_template_wall*,
+            #     &#34;extWall_R_distribution&#34;:*R-Distribution_of_template_wall*,
+            #     add other expressions as needed...
+            # },
+        }
+
+    def convert(self, variable_dict):
+        tr=variable_dict
+        for key in tr.keys():
+            #check if configured parameter value of parameter key is within the 
+            # Component construction profiles, indicating that an existing 
+            # profile should be applied for configuration
+            if type(tr[key]) is str   and   tr[key] in self.Component_constructions_n3.keys():
+                try:
+                    #replace formerly configured link to profile by corresponding 
+                    # value from profile
+                    tr[key]=self.Component_constructions_n3[tr[key]] [key]
+                except KeyError:
+                    #raises an error, if there is no value for the parameter configured
+                    # in profile, except parameter is starting with &#39;#&#39;
+                    if not(key.startswith(&#34;#&#34;)):
+                        raise IndexError(f&#34;&#34;&#34;Could not read out value for parameter &#39;{key}&#39; on component profile &#39;{tr[key]}&#39;. There is none configured.&#34;&#34;&#34;)        
+        return tr</code></pre>
+</details>
+<div class="desc"><p>Sets up preconfigured wall construction profiles comprising U-Value,
+heat capacity and R- and C-distributions.
+Profiles include e.g., 'heavy', 'lightweight', 'gasConcrete',
+'pumiceAndBrick', 'baloonFraming'</p>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="BuilDa.src.converter_functions.custom_converter_functions.Component_configurator.Component_configurator.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    tr=variable_dict
+    for key in tr.keys():
+        #check if configured parameter value of parameter key is within the 
+        # Component construction profiles, indicating that an existing 
+        # profile should be applied for configuration
+        if type(tr[key]) is str   and   tr[key] in self.Component_constructions_n3.keys():
+            try:
+                #replace formerly configured link to profile by corresponding 
+                # value from profile
+                tr[key]=self.Component_constructions_n3[tr[key]] [key]
+            except KeyError:
+                #raises an error, if there is no value for the parameter configured
+                # in profile, except parameter is starting with &#39;#&#39;
+                if not(key.startswith(&#34;#&#34;)):
+                    raise IndexError(f&#34;&#34;&#34;Could not read out value for parameter &#39;{key}&#39; on component profile &#39;{tr[key]}&#39;. There is none configured.&#34;&#34;&#34;)        
+    return tr</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="BuilDa.src.converter_functions.custom_converter_functions" href="index.html">BuilDa.src.converter_functions.custom_converter_functions</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="BuilDa.src.converter_functions.custom_converter_functions.Component_configurator.Component_configurator" href="#BuilDa.src.converter_functions.custom_converter_functions.Component_configurator.Component_configurator">Component_configurator</a></code></h4>
+<ul class="">
+<li><code><a title="BuilDa.src.converter_functions.custom_converter_functions.Component_configurator.Component_configurator.convert" href="#BuilDa.src.converter_functions.custom_converter_functions.Component_configurator.Component_configurator.convert">convert</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

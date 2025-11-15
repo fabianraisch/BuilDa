@@ -6,6 +6,7 @@ from typing import List
 import sys
 import os
 import pandas as pd
+import argparse
 
 
 
@@ -126,6 +127,7 @@ def get_converter_function_by_string(s: str):
     from src.converter_functions.custom_converter_functions.Nominal_heating_power_calculator import Nominal_heating_power_calculator
     from src.converter_functions.custom_converter_functions.Nominal_cooling_power_calculator import Nominal_cooling_power_calculator
     from src.converter_functions.custom_converter_functions.RC_Distribution_Configurator import RC_Distribution_Configurator
+    from src.converter_functions.custom_converter_functions.Component_configurator import Component_configurator
     from src.converter_functions.custom_converter_functions.Zone_dimensions_calculator import Zone_dimensions_calculator
     if s == "Link_resolver":
         return Link_resolver()
@@ -143,6 +145,8 @@ def get_converter_function_by_string(s: str):
         return RC_Distribution_Configurator()
     if s == "Model_compatibility_layer":
         return Model_compatibility_layer()
+    if s == "Component_configurator":
+        return Component_configurator()
     # to add new converter function, import class above and insert:
     # elif s == "<my_converter_function>":
     #     return <my_converter_function>()
@@ -177,6 +181,9 @@ def get_step_size_arr(start_time, stop_time, writer_step_size, controller_step_s
         ValueError: If start_time is greater than stop_time or if step sizes are non-positive.
     '''
     writer_halting_point_array = [i for i in range(start_time, stop_time + 1, writer_step_size)]
+    #if controller_step_size is set to None (disabled due to missing controllers, etc.), 
+    # set it to stop_time to effectually disable controller steps
+    controller_step_size=writer_step_size if controller_step_size==None else controller_step_size
     controller_halting_point_array = [i for i in range(start_time, stop_time + 1, controller_step_size)]
     if max_permitted_time_step < min(writer_step_size, controller_step_size):
         required_halting_point_array=[i for i in range(start_time,stop_time+1, max_permitted_time_step)]
@@ -201,30 +208,39 @@ def setup_paths(user_config:dict):
         - config_path (str): The path to the configuration JSON file.
         - fmu_path (str): The path to the FMU file.
         - output_path (str): The path to the output directory.
+        - schedule (dict): The parsed schedule, None if nothing was selected.
 
     Raises:
         OSError: If no FMU is defined for the current operating system.
     '''
-    try:
-        config_path = [parameter for parameter in sys.argv[1:] if parameter.lower().endswith(".json")][0]
-    except IndexError:
-        config_path = os.path.join("resources","configurations", user_config["config_name"])
 
-    try:
-        fmu_path = [parameter for parameter in sys.argv[1:] if parameter.lower().endswith(".fmu")][0]
-    except IndexError:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--config", help=f"provide a custom configuration for the building that is simulated. Default: ./resources/configurations/{user_config["config_name"]}")
+    parser.add_argument("-s", "--schedule", help="provide a custom retrofit schedule, that is updates to building parameters or occupant habits. Defaults to no retrofits.")
+    parser.add_argument("--fmu", help=f"provide custom fmu. Default is ./resources/fmus/{user_config["fmu_name_linux"]} or resources/fmus/{user_config["fmu_name_windows"]} for linux and win32 respectively")
+    parser.add_argument("-o", "--output", help=f"provide custom output folder. Default is ./{user_config["output_path"]}")
+
+    args = parser.parse_args()
+    base_path = "resources/"
+    config_path=args.config if args.config else os.path.join("resources", "configurations", user_config["config_name"])
+    if args.fmu:
+        fmu_path = args.fmu
+    else:
         if sys.platform=="win32":   fmu_name=user_config["fmu_name_windows"]
         elif sys.platform=="linux": fmu_name=user_config["fmu_name_linux"]
         
         else: raise OSError("no FMU defined for OS "+str(sys.platform))
         fmu_path=os.path.join("resources","FMUs",fmu_name)
 
-    try:
-        output_path = [parameter for parameter in sys.argv[1:] if not(parameter.lower().endswith(".json") or parameter.lower().endswith(".fmu")) ][0]
-    except IndexError:
-        output_path = user_config["output_path"]
+    output_path = args.output if args.output else user_config["output_path"]
 
-    return config_path, fmu_path, output_path
+    schedule_path = args.schedule if args.schedule else user_config["schedule_name"]
+    if schedule_path:
+        schedule = json.loads(open(schedule_path).read())
+    else:
+        schedule = None
+
+    return config_path, fmu_path, output_path, schedule
 
 
 def load_weather_data(tr):

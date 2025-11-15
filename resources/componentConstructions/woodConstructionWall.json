@@ -1,0 +1,20 @@
+{
+    "woodConstructionWall": {
+        "UExt": 0.14742739200943533,
+        "heatCapacity_wall": 113536.72,
+        "R_si": 0.13,
+        "R_se": 0.04,
+        "extWall_C_distribution": [
+            29040.0,
+            36336.72,
+            48160.0
+        ],
+        "extWall_R_distribution": [
+            0.0505,
+            2.5178008706336663,
+            3.1608008706336665,
+            0.6935
+        ],
+        "info": "https://www.ubakus.de/u-wert-rechner/index.php?c=0&M0=58056i12.5&M1=102405i15&name1=Feuerschutzplatte%20GKF&M2=29I4&name2=Installationsebene%20(ged%C3%A4mmt)&M3=36I4&y3=0&w3=4&R3=64&M4=58543i15&M5=29I20&M6=36I20&y6=0&w6=8&R6=60&M7=19I6&M8=75I2&name8=Au%C3%9Fenputz&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=0&bt=0&unorm=enev14alt&name=Holzbauwand&fz=14&am=0_10.5_5_NaN_10_10_lw_0_c_n"
+    }
+}

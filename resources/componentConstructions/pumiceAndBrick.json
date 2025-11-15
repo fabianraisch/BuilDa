@@ -1,0 +1,20 @@
+{
+    "pumiceAndBrick": {
+        "UExt": 0.9000900090009001,
+        "heatCapacity_wall": 333100.0,
+        "R_si": 0.13,
+        "R_se": 0.04,
+        "extWall_C_distribution": [
+            23100.0,
+            172000.0,
+            138000.0
+        ],
+        "extWall_R_distribution": [
+            0.0105,
+            0.36050000000000004,
+            0.46,
+            0.10999999999999999
+        ],
+        "info": "https://www.ubakus.de/u-wert-rechner/index.php?c=2&M0=199i15&M1=132261I24&v1=b7b7b7&tex1=0&M2=133477I2&M3=136921i115&v3=cc5c4a&tex3=vz2&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=0&bt=0&Rsi=U&unorm=enev14alt&cq=2947497&name=AW%20Bims-Schwemmstein%2024%20cm%2C%20Schalenfuge%2FVZ-Vormauer%201200%20kg%2Fm%C2%B3%2C%20ab%201952&fz=14#"
+    }
+}

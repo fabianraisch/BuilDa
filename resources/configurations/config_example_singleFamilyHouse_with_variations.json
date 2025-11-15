@@ -1,14 +1,15 @@
-////comments are filtered before parsing
-//links to other parameters can be set by writing a string of the parameter name instead of the value (there's only one iteration of link resolving)
-//sometimes null can be used as parameter values, to let BuilDa deduce the parameters from other sources
+////Comments are filtered before parsing
+//Links to other parameters can be set by writing a string of the parameter name instead of the value (but: there's only one iteration of link resolving)
+//  This allows for bundling multiple parameter values into a single parameter. Arbitrary parameters can be added to facilitate this.
+//Aometimes null can be used as parameter values, to let BuilDa deduce the parameters from other sources
 
 //Configuration of tabula buildig DE.N.SFH.08.Gen and some variations
 {
     "variations": {
         // zone geometry
-            "zone_length":[5,9.4125], // length of zone from (east to west)
-            "zone_width":[8],       // width of zone from (north to south)
-            "floor_height":[3.04],  // heigth of one floor level
+            "zone_length":[5,9.4125], // length of zone from (east to west) in m
+            "zone_width":[8],       // width of zone from (north to south) in m
+            "floor_height":[3.04],  // heigth of one floor level in m
             "n_floors":[2,3],         // number or floor levels
         // windows
             "fAWin_south":[0.14056], // window to wall fraction on that geographical direction
@@ -17,14 +18,14 @@
             "fAWin_east":[0.14056],  // window to wall fraction on that geographical direction
         // relational factors
             "fATransToAWindow":[0.9],            // factor of transparent window area / overall window area
-            "fARoofToAFloor":[1.63612217795485], // factor of roof area / floor area (if inclined roof, this factor is > 1)
-            "fAInt":[1.238235294117647],         // factor of interior wall surfaces (both sides) / exterior wall surfaces (cannot be zero) 
+            "fARoofToAFloor":[1.63612217795485], // factor of roof area / floor area (usually the factor is > 1, indicating inclined roof)
+            "fAInt":[1.238235294117647],         // factor of interior wall surfaces (both sides) / exterior wall surfaces
                                                  // e.g. 1.238235294117647. This value is taken from a research apartment of the University of Applied Sciences of Rosenheim 
                                                  // it is calculated by fAInt = ((2.5+7+7)*7/10*2 + (7.7+2.5+3.1)*10/14*2) /34
 
 
         // thermal properties
-        "heatCapacity_furniture_per_m2":[2230], // the value is calculated by: wood equivalence of capacity m/m² (ida ice assumption) * density of spruce [kg/m³]* heat capacity of spruce [J(kg*K)]
+        "heatCapacity_furniture_per_m2":[2230], //heat capacity of furniture per floor area. The value is calculated by: wood equivalence of capacity m/m² (ida ice assumption) * density of spruce [kg/m³]* heat capacity of spruce [J(kg*K)]
             // building components
                 // external walls
                 "UExt":[0.2,0.665],               // U-value of the external walls in W/m²K
@@ -43,46 +44,57 @@
                 "thermalZone.gWin":[0.7],   // solar heat gain coefficient of windows
             
         //ventilation
-        "heatRecoveryRate":[0],     //heat recovery rate of ventilation system
-        "airChangeRate":[0.3],      //air change rate in zone (through mechanical or natural ventilation)
+        "heatRecoveryRate":[0],     //heat recovery rate of ventilation system. 0 indicates: no heat recovery, e.g., 0.8 indicates heat recovery
+        "airChangeRate":[0.3],      //air change rate in zone (through mechanical or natural ventilation) in 1/h
+
+        //heat pump
+        "heatingCurve_steepness": [1], // Steepness of the heat curve; higher values indicate a greater increase in supply temperature relative to the difference between outside and inside temperatures. Typical range: 0.2 - 1.5
+        "relative_heatPump_efficiency": [0.8], //efficiency of heat pump compared to reference heat pump, used in heat pump model
+
+        // detailled thermal properties
+        // convective fractions of heat sources
+	//e.g., 1 means, heat flow is completely convective
+	//0 means, heat flow is completely radiative
+        "internalGainsConvectiveFraction":[0.4],
+        "heatingConvectiveFraction":[1],
+             
 
         // external files (wildcard patterns can be used to specify more than one file)
             // path(s) to weather file(s) 
             "weaDat.fileName":["resources/weatherFiles/Munich.mos",
                             "resources/weatherFiles/Belgrade.mos"],
-            // path(s) to internal gain profile file(s) 
+            // path(s) to internal gain profile file(s). The file gives information, when e.g., persons are causing additional internal heat gains in the zone.
             "internalGain.fileName":["resources/internalGainProfiles/NoActivity.txt",
                                     "resources/internalGainProfiles/internalGains.txt"],
-            // path(s) to window opening profile file(s) 
+            // path(s) to window opening profile file(s). The file gives information, when window is opened, affecting heat exchange with environment.
             "hygienicalWindowOpening.fileName":["resources/hygienicalWindowOpeningProfiles/no_opening.txt",
                                                 "resources/hygienicalWindowOpeningProfiles/conscient.txt"],
 
 
         // model internal controller
-        "roomTempLowerSetpoint":[18],  //different temperature setpoints (upper setpoint) - usefull e.g. for nocturnal decrease or histeresis
-        "roomTempUpperSetpoint":[22],  //different temperature setpoints (lower setpoint) - usefull e.g. for nocturnal decrease or histeresis
-        "UseInternalController": [0],  // switches between model internal P-Controller for heating and external controller (configured below). 1: internal controller is used, 0: external controller input
+        "roomTempLowerSetpoint":[18],  //different temperature setpoints (upper setpoint) - used for nocturnal decrease on model internal heating controller
+        "roomTempUpperSetpoint":[22],  //different temperature setpoints (lower setpoint) - used for nocturnal decrease on model internal heating controller
+        "UseInternalController": [0],  // switches between model internal P-Controller for heating and external heating controller (doesn't affect other controllers configured below). 1: internal controller is used, 0: external controller input
         
         // RC-Element's distribution parameters
         // predefined distribution profiles can be used like 
         // 'monolythic', 
         // 'heavy', 'leightweight' (heavy and leightweigth origin form ASHRAE 140-2004 test cases TC600 and TC900)
-        // 'baloonFraming', 'perforatedBrick', 'gasConcrete' (origin from predefined wall constructions on https://www.ubakus.de/)            "extWall_C_distribution":["monolythic"], 
-            "floor_C_distribution":[[478800, 5040,	0.001]], 
-            "roof_C_distribution":[[22440,   58800,	0.001]], 
+        // 'baloonFraming', 'pumiceAndBrick', 'gasConcrete' (origin from predefined wall constructions on https://www.ubakus.de/)            
+            "extWall_C_distribution":["monolythic"],            //distribution of heat capacities in component from inside to outside
+            "floor_C_distribution":[[478800, 5040,	0.001]],    //distribution of heat capacities in component from inside to outside
+            "roof_C_distribution":[[22440,   58800,	0.001]],    //distribution of heat capacities in component from inside to outside
 
-            "extWall_R_distribution":["monolythic"],  
-            "floor_R_distribution":[[0.0525, 0.0525, 0.1579, 0.0001]],
-            "roof_R_distribution":[[1.1085,  1.1085, 0.1,    0.0001]],
+            "extWall_R_distribution":["monolythic"],            //distribution of heat resistances in component from inside to outside
+            "floor_R_distribution":[[0.0525, 0.0525, 0.1579, 0.0001]], //distribution of heat resistances in component from inside to outside
+            "roof_R_distribution":[[1.1085,  1.1085, 0.1,    0.0001]],//distribution of heat resistances in component from inside to outside
 
-            "intWall_R_distribution":["monolythic"],
-            "intWall_C_distribution":["monolythic"],
+            "intWall_R_distribution":["monolythic"], //distribution of heat resistances in component from inside to outside
+            "intWall_C_distribution":["monolythic"], //distribution of heat capacities in component from inside to outside
 
-        // detailled thermal properties
-            // radiation fractions of heat sources
-                "internalGainsConvectiveFraction":[0.4],
-                "heatingConvectiveFraction":[1],
+                
             // heat transfer coefficients (must match to parameters configured statically in the model)
+            //CAUTION: Modify only, when heat transfer coefficients in used model have also changed
                 "Rsi_extWall":[0.13333333333333333], //=1/(hConv+hRad)=1/(5+2.5) //horizontal heat flow
                 "Rsi_intWall":[0.13333333333333333], //=1/(hConv+hRad)=1/(5+2.5) //horizontal heat flow
                 "Rsi_floor":[0.17543859649122806],   //=1/(hConv+hRad)=1/(5+0.7) //downward heat flow
@@ -94,8 +106,8 @@
     
 
         // parameters for caluclation of nominal heat load (set to null for automatic calculation of parameter)
-        "ta_min":[null], 
-        "ti_set":[null]
+        "ta_min":[null], //supposed minimum outside temperature
+        "ti_set":[null]  //supposed indoor air setpoint temperature
     },
 	"variation_type": "cartesian_product",  // available: zip, cartesian_product
     "converter_functions": [
@@ -103,6 +115,7 @@
         "Miscellaneous_handler",
         "Model_compatibility_layer",
         "Zone_dimensions_calculator",
+        "Component_configurator",
         "RC_Distribution_Configurator",     // resolves to predefined distribution profiles for R and C, if configured so
         "Component_properties_calculator",
         "Nominal_heating_power_calculator",
@@ -119,10 +132,10 @@
                                                                             // if more than one controller generates output for the same model interface, the output of the last controller in list is applied
                                                                             // for development of own controllers, edit add a new controller class file to src/controllers/custom_controllers and add it in util_functions.py () 
     //time parameters - can be set as integer in seconds or as a string like 5s, 5min, 5d, 5w, 5y, representing 5 seconds, 5 minutes, 5 days, 5 weeks or 5 yrears in each case                                                                            
-    "controller_step_size": "1.5min", 
-    "start_time": 0,
-    "stop_time": "1y",
-    "writer_step_size": "15min",
+    "controller_step_size": 90,	//time step for external controller action
+    "start_time": 0,		//simulation start time in model
+    "stop_time": 31536000, 	//simulation end time in model
+    "writer_step_size": 900, 	//time step for extracting data from the model for variables listed in 'columns_included.'
     //time columns to be exported (optional, default is "second_of_day","day_of_year")
                                                                 //list of options
                                                                 // "second", "minute", "hour", "day", "year" (absolute values)
@@ -136,35 +149,51 @@
     //list the name of fmu parameter to be exported 
     "columns_included": ["thermalZone.TAir", "totalHeatingPower.y","totalCoolingPower.y","weaBus.TDryBul","weaBus.HDirNor","weaBus.HDifHor","weaDat.weaBus.HGloHor"]
 }
-    // other possible columns to export:
-    // "roomTempUpperSetpoint","thermalZone.TAir", "totalHeatingPower.y",
-    // "totalHeatingPowerWithGain.y","weaBus.TDryBul","weaBus.TBlaSky","weaBus.winSpe",
-    // "weaBus.HDirNor","weaBus.HDifHor","weaDat.weaBus.HGloHor", "HeatFlowFromPersons.port.Q_flow", 
-    // "HeatFlowFromPersons.Q_flow", "perCon.port.Q_flow", "perCon.Q_flow", "perRad.port.Q_flow", 
-    // "perRad.Q_flow", "preTem.port.Q_flow", "preTem1.port.Q_flow", "preTem2.port.Q_flow", 
-    // "preTemRoof.port.Q_flow", "theConRoof.fluid.Q_flow", "theConRoof.Q_flow", 
-    // "theConRoof.solid.Q_flow", "theConWall.fluid.Q_flow", "theConWall.Q_flow", 
-    // "theConWall.solid.Q_flow", "theConWin.fluid.Q_flow", "theConWin.Q_flow", "theConWin.solid.Q_flow", 
-    // "thermalZone.convHeatSol.port.Q_flow", "thermalZone.convHeatSol.Q_flow", "thermalZone.extWall.Q_flow", 
-    // "thermalZone.extWallRC.port_a.Q_flow", "thermalZone.extWallRC.port_b.Q_flow", 
-    // "thermalZone.extWallRC.thermCapExt[1].port.Q_flow", "thermalZone.extWallRC.thermCapExt[2].port.Q_flow", 
-    // "thermalZone.extWallRC.thermCapExt[3].port.Q_flow", "thermalZone.floor.Q_flow", "thermalZone.floorRC.port_a.Q_flow", 
-    // "thermalZone.floorRC.port_b.Q_flow", "thermalZone.floorRC.thermCapExt[1].port.Q_flow", "thermalZone.floorRC.thermCapExt[2].port.Q_flow", 
-    // "thermalZone.floorRC.thermCapExt[3].port.Q_flow", "thermalZone.intGainsConv.Q_flow", "thermalZone.intGainsRad.Q_flow", 
-    // "thermalZone.intWallRC.port_a.Q_flow", "thermalZone.intWallRC.thermCapInt[1].port.Q_flow", 
-    // "thermalZone.intWallRC.thermCapInt[2].port.Q_flow", "thermalZone.intWallRC.thermCapInt[3].port.Q_flow", 
-    // "thermalZone.radHeatSol[1].port.Q_flow", "thermalZone.radHeatSol[1].Q_flow", "thermalZone.radHeatSol[2].port.Q_flow", 
-    // "thermalZone.radHeatSol[2].Q_flow", "thermalZone.radHeatSol[3].port.Q_flow", "thermalZone.radHeatSol[3].Q_flow", 
-    // "thermalZone.radHeatSol[4].port.Q_flow", "thermalZone.radHeatSol[4].Q_flow", "thermalZone.resWin.port_a.Q_flow", 
-    // "thermalZone.resWin.port_b.Q_flow", "thermalZone.resWin.Q_flow", "thermalZone.roof.Q_flow", "thermalZone.roofRC.port_a.Q_flow", 
-    // "thermalZone.roofRC.port_b.Q_flow", "thermalZone.roofRC.thermCapExt[1].port.Q_flow", "thermalZone.roofRC.thermCapExt[2].port.Q_flow", 
-    // "thermalZone.roofRC.thermCapExt[3].port.Q_flow", "thermalZone.thermSplitterIntGains.portIn[1].Q_flow", 
-    // "thermalZone.thermSplitterIntGains.portOut[1].Q_flow", "thermalZone.thermSplitterIntGains.portOut[2].Q_flow", 
-    // "thermalZone.thermSplitterIntGains.portOut[3].Q_flow", "thermalZone.thermSplitterIntGains.portOut[4].Q_flow", 
-    // "thermalZone.thermSplitterIntGains.portOut[5].Q_flow", "thermalZone.thermSplitterSolRad.portIn[1].Q_flow", 
-    // "thermalZone.thermSplitterSolRad.portIn[2].Q_flow", "thermalZone.thermSplitterSolRad.portIn[3].Q_flow", 
-    // "thermalZone.thermSplitterSolRad.portIn[4].Q_flow", "thermalZone.thermSplitterSolRad.portOut[1].Q_flow", 
-    // "thermalZone.thermSplitterSolRad.portOut[2].Q_flow", "thermalZone.thermSplitterSolRad.portOut[3].Q_flow", 
-    // "thermalZone.thermSplitterSolRad.portOut[4].Q_flow", "thermalZone.thermSplitterSolRad.portOut[5].Q_flow", 
-    // "thermalZone.volAir.heatPort.Q_flow", "thermalZone.window.Q_flow", "ventilationHeatLosses.port.Q_flow", 
-    // "ventilationHeatLosses.Q_flow","Q_heating_MWh.y"
+// other possible columns to export:
+    // heat pump: 
+    //      "electricalZone.heatPump_air.COP", //COP of heat pump
+    //      "electricalZone.heatPump_air.P_el", //actual Power of heat pump (electrical)
+    //      "electricalZone.heatingCurve.t_sup", //supply temperature of heat pump
+    // heating system:
+    //      "roomTempUpperSetpoint", //upper setpoint for internal heating controller (i.e. setpoint during daytime)
+    //      "thermalZone.TAir", //indoor air temperature
+    //      "totalHeatingPower.y", //heating power emitted from heating system to zone
+    //      "totalCoolingPower.y", //cooling power emitted from heating/cooling system to zone
+    //      "totalHeatingCoolingPower.y",  //sum of cooling and heating power emitted from heating/cooling system to zone
+    //      "Q_heating_MWh.y", //total heating energy in MWh
+    //      "Q_cooling_MWh.y", //total cooling energy in MWh
+    //      "internalGain.y[1]", //internal gains emitted through persons or electrical devices
+    // weather:
+    //      "weaBus.TDryBul", //outisde air temperature
+    //      "weaBus.TBlaSky", //black sky temperature
+    //      "weaBus.HDirNor", //direct noral solar radiation
+    //      "weaBus.HDifHor", //diffuse horizontal solar radiation
+    //      "weaDat.weaBus.HGloHor", //gobal horizontal solar radiation
+    // ventilation heat flows:
+    //      "ventilationHeatLosses.Q_flow",
+    // detailed heat flows (standard unit is W):
+    //      "thermalZone.volAir.heatPort.Q_flow", //heat flow into zone's air volume
+    //      "thermalZone.[extWallRC|floorRC|roofRC].thermCapExt[1|2|2].port.Q_flow //heat flow into capacity 1,2 or 3 (choos one of three options) of external wall, floor or roof (choos one of three options)
+    //   conductive heat flow from outside into thermal zone's...
+    //      "thermalZone.extWall.Q_flow", //...external wall
+    //      "thermalZone.window.Q_flow", //...external wall
+    //      "thermalZone.roof.Q_flow", //...external roof
+    //      "thermalZone.floor.Q_flow", //...external floor
+    //  radiative heat flow from heating system and other internal gains to...
+    //      "thermalZone.thermSplitterIntGains.portOut[1].Q_flow", //...external walls
+    //      "thermalZone.thermSplitterIntGains.portOut[2].Q_flow", //...windows
+    //      "thermalZone.thermSplitterIntGains.portOut[3].Q_flow", //...internal walls
+    //      "thermalZone.thermSplitterIntGains.portOut[4].Q_flow", //...floor
+    //      "thermalZone.thermSplitterIntGains.portOut[5].Q_flow", //...roof
+    //  solar gains, that come through windows into zone and are passed to...
+    //      "thermalZone.thermSplitterSolRad.portOut[1].Q_flow", //...external walls
+    //      "thermalZone.thermSplitterSolRad.portOut[2].Q_flow", //...windows
+    //      "thermalZone.thermSplitterSolRad.portOut[3].Q_flow", //...internal walls
+    //      "thermalZone.thermSplitterSolRad.portOut[4].Q_flow", //...floor
+    //      "thermalZone.thermSplitterSolRad.portOut[5].Q_flow", //...roof
+    //  solar gains that come through windows into zone from...
+    //      "thermalZone.radHeatSol[1].Q_flow",  //...the south
+    //      "thermalZone.radHeatSol[2].Q_flow",  //...the west
+    //      "thermalZone.radHeatSol[3].Q_flow",  //...the north
+    //      "thermalZone.radHeatSol[4].Q_flow",  //...the east
+    

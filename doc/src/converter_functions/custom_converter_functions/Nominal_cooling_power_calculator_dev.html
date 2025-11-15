@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>BuilDa.src.converter_functions.custom_converter_functions.Nominal_cooling_power_calculator_dev API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>BuilDa.src.converter_functions.custom_converter_functions.Nominal_cooling_power_calculator_dev</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="BuilDa.src.converter_functions.custom_converter_functions.Nominal_cooling_power_calculator_dev.Nominal_cooling_power_calculator"><code class="flex name class">
+<span>class <span class="ident">Nominal_cooling_power_calculator</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Nominal_cooling_power_calculator(ConverterFunction):
+    &#39;&#39;&#39;
+    A class to calculate the nominal cooling power required for a building based on 
+    various parameters including building characteristics and environmental conditions.
+
+    This class is designed to implement the calculation of nominal cooling power as per 
+    the guidelines established in DIN 18599-2. 
+    It takes into account both the internal and external temperature settings, 
+    as well as heat loss due to ventilation and building materials.
+
+    The following assumptions and simplifications have been made:
+        Simplification from standard: Assuming effective wall heat capacity according to building class: light-&gt;50 Wh/k, medium-&gt; 90 Wh/K, heavy-&gt;130 Wh/k
+            -&gt; Own calculation to find out building class (light, medium or heavy), using exemplary wall profiles&#39; heat capacity to compare it with the actual heat capacity of the external walls configured in the model
+        Assumption: Residential building
+        Simplification/Assumption: Highest daily average of weather data = the average outdoor temperature on the design day according to DIN V 18599-10
+        Simplification: maximum hourly average of horizontal global radiation from the weather file = the maximum hourly solar radiation on the design day (see DIN V 18599-10);
+        Simplification: own calculation based on DIN 18599-10 Table 9: factor to convert global horizontal radiation to radiation on vertical surfaces facing south, east, north, west in Germany in the month of July
+        Simplification: g-value of the window * reduction factor due to possible shading for calculating the overall energy transmission coefficient including sun protection
+        Simplification: Orientation of the roof (cardinal directions) is irrelevant
+        Simplification: own calculation, using the mean of the maximum hourly radiation for the roof in the case of roof_angle &gt; 60°
+        Simplification: Heat flow through the floor is calculated based on a statically configured floor temperature and cooling setpoint temperature in the model (according to: dQ_T_s=H_T_sdelta_theta_source #Equation C.8)
+        Assumptions: Compliance with the requirements for building tightness according to DIN 4108-7 (i.e., the tightness test is conducted according to the criteria of this standard after completion);
+        Assumption: mechanical ventilation system if n &gt; 0.1 (n_inf)
+        Assumption: the entire zone envelope area is heat-transmitting
+        Simplification: only distinction between exhaust air and heat recovery system
+        Assumption: Operating time of the ventilation system 24 h/d, because a constantly operated system is assumed in the model
+        Assumption: 24 h/d in operation (the daily operating duration of the cooling system).
+        Simplification: Sum of internal gains from the internal gains file
+        Simplification: Heat flow through the floor is calculated based on a statically configured floor temperature and cooling setpoint temperature in the model (according to the standard: dQ_T_s=H_T_sdelta_theta_sink)
+        Assumption: There are no adjacent areas, hence dQ_T_j=0
+        Assumption: no internal heat sinks
+        Assumption: no more detailed information about the building is known; the thermal bridge surcharge; without proof, ΔUWB = 0.10 W/(m²·K) is generally to be set
+        Assumption: no heat transmission between heated and unheated zones
+        Simplification: Interior wall is considered as a simple surface between only two building zones
+        Simplification: Calculation is based solely on floor area and U-value for the floor, analogous to H_T_D in 6.2.1
+        Assumption: If there is a supply and exhaust air system, then assume the complete air exchange rate as the supply air exchange rate
+        Simplification from the standard due to the assumption that the ventilation system has no cooling function: For ventilation systems without cooling function and apartment ventilation systems, the uncorrected H θ H ventilation heat transfer coefficient of the system air flow is to be used in Equation (135). It applies: H_V_mech_theta=H_V_mech; the temperature-weighted heat transfer coefficient of mechanical ventilation, according to Equations (136) to (138).
+    &#39;&#39;&#39;
+    def __init__(self):
+        super().__init__()
+
+    def convert(self, variable_dict):
+        tr = variable_dict
+
+        weather_data=self.load_weather_data(tr)
+        AExt_list=[tr[&#34;thermalZone.AExt[1]&#34;],tr[&#34;thermalZone.AExt[2]&#34;],tr[&#34;thermalZone.AExt[3]&#34;],tr[&#34;thermalZone.AExt[4]&#34;]]
+        AWin_list=[tr[&#34;thermalZone.AWin[1]&#34;],tr[&#34;thermalZone.AWin[2]&#34;],tr[&#34;thermalZone.AWin[3]&#34;],tr[&#34;thermalZone.AWin[4]&#34;]]
+        V=tr[&#34;thermalZone.VAir&#34;]  # das Nettoraumvolumen;
+
+
+        t_c_op_d=24 #die tägliche Betriebsdauer der Kühlanlage
+        delta_theta=2 #die zugelassene Schwankung der Innentemperatur (üblicherweise 2 K)
+
+        #%%C_wirk
+        if True:
+            b_inner_wall_insulation= 0.1 &lt; sum(tr[&#34;extWall_R_distribution&#34;][:len(tr[&#34;extWall_R_distribution&#34;])//4]) / sum(tr[&#34;extWall_R_distribution&#34;]) #own calculation: decides, if there&#39;s an inner insulation on the external walls by comparing the fraction of the most inner 1/4 of the external walls R-Elements to a threshold value
+            b_high_room=tr[&#34;zone_height&#34;]&gt;4.5
+            if True:
+                #%%own calculation of heatCapacity_limits between lightweight, medium and heavy
+                    #source of material constants in this section: https://www.ubakus.de/u-wert-rechner
+                    heatCapacity_limit1=600*0.1*1600   #rho_limit*thickness*c_douglas=600 kg/m³*0.1 m *1600 J/(kg*K) -&gt; the density differs slightly from douglas fir (530 kg/m³) to met the conditions of the standard
+                    heatCapacity_limit2=1600*0.18*1000 #rho_limit*thickness*c_adobe=1600 kg/m³*0.18 m *1600 J/(kg*K) -&gt; the density differs slightly from adobe (1500 kg/m³) to met the conditions of the standard
+            A_NGF=tr[&#34;thermalZone.AFloor&#34;]
+            C_wirk=(50 if (tr[&#34;heatCapacity_wall&#34;]&lt;heatCapacity_limit1 or b_high_room or b_inner_wall_insulation) else 90 if tr[&#34;heatCapacity_wall&#34;]&lt;heatCapacity_limit2 else 130)*A_NGF  #Vereinfachung aus Norm: 50: leicht, 90: mittelschwer, 130: schwer in Wh/K  #die wirksame Wärmekapazität der Gebäudezone nach 6.7.1;
+        ##
+
+        #%%dQ_source_max: Wärmequellen
+            #%%theta_e_max                                                        
+            theta_i_c_max=26 #Annahme: Wohngebäude #die Maximaltemperatur (maximal zugelassene Innentemperatur am Auslegungstag) nach DIN V 18599-10;
+            theta_i_c_soll=25 #Annahme: Wohngebäude #die Raumsolltemperatur für den Kühlfall nach DIN V 18599-10.
+            theta_i=theta_i_c_max_d=(theta_i_c_max+theta_i_c_soll-2)/2        #die Berechnungswert der Innentemperatur für die Auslegung θi,c,max,d nach Gleichung (C.2);
+            theta_e_max=self.df_findcol(weather_data,&#34;dry bulb temperature&#34;).resample(&#34;1d&#34;).mean().max().item() #oder: load_weather_file- function in base class #?Vereinfachung/Annahme: Höchstes Tagesmittel der Wetterdaten #die mittlere Außentemperatur am Auslegungstag nach DIN V 18599-10
+            ##
+        delta_theta_source=max(0,theta_e_max-theta_i)   
+        if True:
+            #%%dQ_S
+            if True:
+                #%%dQ_S_tr   #hier werden Bauteile für alle Himmelsrichtungen angegeben
+                I_S_max_global_horizontal=self.df_findcol(weather_data,&#34;global horizontal radiation&#34;).resample(&#34;1h&#34;).mean().max().item() #Vereinfachung?: maximales Stundenmittel der Horizontalglobalstrahlung aus dem weather file#die maximale stündliche solare Einstrahlung am Auslegungstag (siehe DIN V 18599-10);
+                factor_I_S_max=np.array([605/927,739/927,164/927,739/927])  #Vereinfachung: own calculation from DIN 18599-10 Table 9: factor to convert global horizontal radiation to radiation on vertical surface on south, east, north, west in Germany in the month of Juli
+                I_S_max_windows=I_S_max_global_horizontal*factor_I_S_max
+                A=np.array(AWin_list) #die Fläche des transparenten Bauteils;
+                F_F=tr[&#34;fATransToAWindow&#34;] #der Abminderungsfaktor für den Rahmenanteil, welcher dem Verhältnis der durchsichtigen Fläche zur Gesamtfläche F der verglasten Einheit entspricht. Sofern keine genaueren Werte bekannt sind, ist F = 0,7 zu setzen;
+                F_V=1 #Wohngebäuden: 1 (keine Verschmutzung)#der Abminderungsfaktor infolge von Verschmutzung nach DIN V 18599-10;
+                factor_shading=1 #own factor for shading by shading device, etc. -&gt; use as soon as shading (parameter factor_shading) is implemented in BuilDa
+                g_tot=tr[&#34;thermalZone.gWin&#34;]*factor_shading #Vereinfachung: g-Wert des Fensters * Abminderungsfaktor durch evtl. vorhandene Verschattung #der Gesamtenergiedurchlassgrad einschließlich Sonnenschutz (nach 6.4.1). -&gt; unter 6.4.1: der Gesamtenergiedurchlassgrad einschließlich Sonnenschutzvorrichtung nach Tabelle 8, nach DIN EN 13363-1, DIN EN 13363-2 oder nach objektbezogenem Nachweis des Herstellers (zugesicherte Herstellerangaben) für kalorische und lichttechnische Kennwerte unter gleichen Randbedingungen;
+                dQ_S_tr=sum(A*F_F*F_V*g_tot*I_S_max_windows).item() #Solare Wärmeeinträge über transparente Bauteile
+                ##
+                #%%dQ_S_opa  #hier werden Bauteile für alle Himmelsrichtungen angegeben
+                Rse=tr[&#34;Rse_extWall&#34;]             #der äußere Wärmeübergangswiderstand;
+                U=np.array([tr[&#34;UExt&#34;],tr[&#34;UExt&#34;],tr[&#34;UExt&#34;],tr[&#34;UExt&#34;],tr[&#34;URoof&#34;]])            #der Wärmedurchgangskoeffizient des Bauteils;
+                A = np.array([*AExt_list, tr[&#34;thermalZone.ARoof&#34;]])        
+                alpha=np.array([tr[&#34;eqAirTemp.aExt&#34;],tr[&#34;eqAirTemp.aExt&#34;],tr[&#34;eqAirTemp.aExt&#34;],tr[&#34;eqAirTemp.aExt&#34;],tr[&#34;eqAirTempVDI.aExt&#34;]])         #der Absorptionskoeffizient des Bauteils für Solarstrahlung;
+                F_f_roof=1 if tr[&#34;fARoofToAFloor&#34;]&gt;2**.5 else 0.5 #own calculation: on a right triangle (roof inclination 45°) the sum of legs (roof) = sqrt(2)*hypotenuse (floor), when inclination is higher, then the sum is greater
+                F_f=[0.5,0.5,0.5,0.5,F_f_roof]               #Vereinfachung: Ausrichtung des Daches egal #der Formfaktor F zwischen dem Bauteil und dem Himmel: Ff = 1 für waagerechte Bauteile bis h 45° Neigung; f = 0,5 für senkrechte Bauteile ab 45° Neigung;
+                h_r=np.array([tr[&#34;eqAirTemp.hRad&#34;],tr[&#34;eqAirTemp.hRad&#34;],tr[&#34;eqAirTemp.hRad&#34;],tr[&#34;eqAirTemp.hRad&#34;],tr[&#34;eqAirTempVDI.hRad&#34;]])          #der äußere Abstrahlungskoeffizient;
+                delta_theta_er=10   #Vereinfacht: 10 K  #die mittlere Differenz zwischen der Temperatur der Umgebungsluft und der scheinbaren Temperatur des Himmels; vereinfachend kann Δθer = 10 K angenommen werden
+                I_S_max_walls=I_S_max_global_horizontal*factor_I_S_max
+                roof_angle=(np.pi-2*np.arccos(1-tr[&#34;fARoofToAFloor&#34;]**-2))/2 /np.pi*180   #own calculation: roof inclination angle deduced from law of consines using the conversion factor for roof to floor area
+                I_S_max_roof=I_S_max_walls.mean() if roof_angle&gt;60 else I_S_max_global_horizontal  #Vereinfachung: own calculation, using the mean the maximum hourly radiation for roof in the case roof_anlge&gt;60
+                I_S_max_wallsRoof=np.array([*I_S_max_walls,I_S_max_roof])
+                dQ_S_opak=sum(Rse*U*A*(alpha*I_S_max_wallsRoof-F_f*h_r*delta_theta_er) ).item()
+                ##
+            dQ_S=dQ_S_tr+dQ_S_opak    #die Summe der Wärmequellen aufgrund solarer Einstrahlung nach den Gleichungen (C.18) bis (C.21);
+            ##
+            #%%dQ_T
+            if True:
+                #%%dQ_T_e
+                if True:
+                    H_T_D=sum(AExt_list)*tr[&#34;UExt&#34;]+ \
+                        tr[&#34;thermalZone.ARoof&#34;]*tr[&#34;URoof&#34;]+ \
+                        sum(AWin_list)*tr[&#34;UWin&#34;]  #der Transmissionswärmetransferkoeffizient zwischen der beheizten oder gekühlten Gebäudezone und außen;
+
+                dQ_T_e__source=H_T_D*delta_theta_source  #Gleichung C.6
+                ##
+                #%%dQ_T_s
+                #H_T_s=  #Vereinfachung: nicht benötigt#der Wärmetransferkoeffizient über das Erdreich nach 6.2.4;  -&gt;  der Wärmetransferkoeffizient über das Erdreich (HT,s entspricht G nach DIN EN ISO 13370);
+                dQ_T_s__source=max(0,(tr[&#34;TGro.k&#34;]-273.15)-theta_i)*tr[&#34;thermalZone.AFloor&#34;]*tr[&#34;UFloor&#34;] #Vereinfachung: Wärmefluss über Boden wird über statisch im Modell konfigurierte Bodentemperatur und Kühlsolltemperatur berechnet#laut NOrm: dQ_T_s=H_T_s*delta_theta_source  #Gleichung C.8
+                ##  
+            dQ_T__source=dQ_T_e__source+dQ_T_s__source  #Ausgewählt: C.6 und C.8#die Summe der Transmissionswärmequellen, wenn θi,c,max,d &lt; θ e,max, nach den Gleichungen (C.6), (C.8) oder (C.9), (C.11);
+            ##
+            #%%dQ_V
+            if True:
+                #%%dQ_V_inf
+                if True:
+                    #%%n_inf
+                    if True:
+                        #%%n50
+                        #ohne erfolgte bzw. bei geplanter, aber noch ausstehender Dichtheitsprüfung:Standardwerte, vorgegeben nach Tabelle 7 bzw. nach Gleichung (61) in Verbindung mit Tabelle 7 berechneter Wert;
+                        #Annahmen in Tabelle: Kategorie I: Einhaltung der Anforderung an die Gebäudedichtheit nach DIN 4108-7 (d. h., die Dichtheitsprüfung wird entsprechend den Kriterien dieser Norm nach Fertigstellung durchgeführt); 
+                        b_ventilation_system=tr[&#34;airChangeRate&#34;]&gt;.1 #Annahme: mechanisches Lüftungssystem, wenn n&gt;0.1 (n_inf)
+                        A_E=sum(AExt_list)+ \
+                            tr[&#34;thermalZone.ARoof&#34;]+ \
+                            sum(AWin_list) + \
+                            tr[&#34;thermalZone.AFloor&#34;]   #Annahme: gesamte Zonenhüllfläche ist Wärmeübertragend #die Hüllfläche nach DIN EN ISO 9972. A Vereinfacht kann die nach DIN V 18599-1 ermittelte Wärmeübertragende Umfassungsfläche angesetzt werden;
+                        n50=(1 if b_ventilation_system else 2) if V&lt;=1500 else (2*A_E/V if b_ventilation_system else 3*A_E/V)  # der Luftwechsel bei 50 Pa Druckdifferenz; ohne erfolgte bzw. bei geplanter, aber noch ausstehender Dichtheitsprüfung:Standardwerte, vorgegeben nach Tabelle 7 bzw. nach Gleichung (61) in Verbindung mit  Tabelle 7 berechneter Wert;
+                        ##
+                    e=.07  #der Volumenstromkoeffizient, als Standardwert gilt: = 0,07 (entspricht Abschirmungskoeffizient nach DIN EN ISO 13789 bei gemäßigter Abschirmung, mehr als eine Fassade dem Wind ausgesetzt);
+                    b_exhaust_air_ventilation_system=b_air_transfer_device=  b_ventilation_system and tr[&#34;heatRecoveryRate&#34;]==0 #if ventilation system is used and heat recovery rate 0, then exhaust air system with air transfer devices is used
+                    f_ATD=min(16,(n50-1.5)/n50) if b_air_transfer_device else 1 #ein Faktor zur Berücksichtigung von Außenluftdurchlässen (ATD, en: air transfer device) nach Gleichung (63) bzw. (64).
+                    #%%f_e
+                    f=15      #Koeffizient zur Windexposition, als Standardwerte gelten: f=15 (entspricht Abschirmungskoeffizienten nach DIN EN ISO 13789 bei gemäßigter Abschirmung, mehr als eine Fassade dem Wind ausgesetzt);
+                    n_sup=0 if b_exhaust_air_ventilation_system else 1 #Vereinfachung: nur Unterscheidung zwischen Abluft und WRG-System, Wert normiert (da nur zwichen kompletter Dysbalance und Balance zwischen Zu- und Abluftvolumenstrom unterschieden werden soll) #die Summe über die Zuluftwechsel der mechanischen Lüftung n_mech_sup nach den Gleichungen (92) oder (93) und der aus benachbarten Zonen überströmenden Luft n_z_sup nach Gleichung (105);
+                    n_eta=1 #Vereinfachugn: Wert normiert (da nur zwichen kompletter Dysbalance und Balance zwischen Zu- und Abluftvolumenstrom unterschieden werden soll) #die Summe über die Abluftwechsel der mechanischenn Lüftung n_mech_eta nach Gleichung (94) und der aus benachbarten Zonen abgesaugten Luft n_z_eta nach Gleichung (107).
+                    f_e=1/(1+f/e*((n_eta-n_sup)/(n50*f_ATD))**2) #Gleichung 67 (schließt unbalancierte Zu-/Abluft mit ein) :ein Faktor zur Bewertung der durch die mechanische Lüftungsanlage vermehrten oder verminderten Infiltration nach den Gleichungen (66) bis (67);
+                    ##
+                    t_v_mech=24 #Annahme: 24 h/d, weil im  Modell eine konstant betriebene Anlage angenommen wird #die tägliche Betriebsdauer der Lüftungsanlage (siehe DIN V 18599-10);
+                    n_inf=n50*e*f_ATD*(1+(f_e-1)*t_v_mech/24)  #Gleichung (62): Mit mechanischer Lüftung vermindert sich der mittlere tägliche Infiltrationsluftwechsel entsprechend Gleichung (62):
+                    ##
+                c_p_aXrho_a=.34   #ist zu 0,34 Wh/(m3·K) zu setzen.
+                H_V_inf=n_inf*V*c_p_aXrho_a #der Wärmetransferkoeffizient für Infiltration nach 6.3.1 (ohne mechanische Lüftung);
+                dQ_V_inf__source=H_V_inf*delta_theta_source #Gleichung C.13
+                ##
+                #%%dQ_V_win
+                H_V_win=0.1*V*c_p_aXrho_a # der Wärmetransferkoeffizient n für Fensterluftwechsel nach 6.3.2 (mit einem angenommenen Fensterluftwechsel von n_win = 0,1 h–1);
+                dQ_V_win__source=H_V_win*delta_theta_source #Gleichung C.15
+                ##
+            dQ_V__source=dQ_V_inf__source+dQ_V_win__source    #die Summe der Lüftungswärmequellen, wenn θi,c,max,d &lt; θe,max, nach den Gleichungen (C.13) Q und (C.15);
+            ##
+            #%%dQ_I_source
+            # calculation according to standard:
+            # A_B=A_NGF=tr[&#34;thermalZone.AFloor&#34;] #die Nettogrundfläche der Gebäudezone
+            # t_c_op_d=24  #Annahme: 24 h/d in Betrieb #die tägliche Betriebsdauer der Kühlanlage.
+            # dQ_I_p=q_I_P*A_B/t_c_op_d
+            # dQ_I_L=mu_L*Q_I_L_elektr/t_c_op_d
+            # dQ_I_fac=q_I_fac*A_B/t_c_op_d
+            # dQ_I_goods=c*dm*max(0, theta_in-theta_out)/t_c_op_d
+            # dQ_I_source=dQ_I_p+dQ_I_L+dQ_I_fac+dQ_I_goods+dQ_I_h #die Summe der internen Wärmequellen nach Gleichung (C.23);
+            dQ_I_source=self.load_internalGain_data(tr).resample(&#34;1d&#34;).mean().max().item()  #Vereinfachung: Summe der internen Gewinne aus internal gains file#die Summe der internen Wärmequellen nach Gleichung (C.23);
+            ##
+        dQ_source_max=dQ_S+dQ_T__source+dQ_V__source+dQ_I_source   #die Summe der Wärmequellen am Auslegungstag innerhalb der betrachteten Gebäudezone (Leistungswert) nach Gleichung (C.3);
+        ##
+
+        #%%dQ_sink_max: Wärmesenken
+        delta_theta_sink=max(0,theta_i-theta_e_max)   
+            #%%dQ_T
+        if True:
+            dQ_T_e__sink=H_T_D*delta_theta_sink   #Transmissionswärme nach außen, Gleichung (C.5)    
+            dQ_T_s__sink=max(0,theta_i-(tr[&#34;TGro.k&#34;]-273.15))*tr[&#34;thermalZone.AFloor&#34;]*tr[&#34;UFloor&#34;] #Vereinfachung: Wärmefluss über Boden wird über statisch im Modell konfigurierte Bodentemperatur und Kühlsolltemperatur berechnet#laut Norm: dQ_T_s=H_T_s*delta_theta_sink  #Transmissionswärme über das Erdreich, Gleichung (C.7)
+            dQ_T_j=0      #Annahme: Es gibt keine angrenzenden Bereiche, daher dQ_T_j=0 #Andere Transmissionswärmeströme, Gleichung (C.10): dQ_T_j=H_T_j*max(0,theta_i-theta_j)
+            dQ_T__sink=dQ_T_e__sink+dQ_T_s__sink+dQ_T_j  #die Summe der Transmissionswärmesenken, wenn θi,c,max,d &gt; θe,max, nach den Gleichungen (C.5), (C.7) und (C.10);
+            ##
+            #%%dQ_V
+            dQ_V_inf__sink=H_V_win*delta_theta_sink   #Wärmestrom durch Infiltration, Gleichung (C.12)
+            dQ_V_win__sink=H_V_inf*delta_theta_sink   #Wärmestrom durch Fensterluftwechsel, Gleichung (C.14)
+            dQ_V__sink=dQ_V_inf__sink+dQ_V_win__sink   #die Summe der Lüftungswärmesenken, wenn θi,c,max,d &gt; θe,max, nach den Gleichungen (C.12) und (C.14);
+            ##
+        dQ_I_sink=0  #Annahme: keine internen Wärmesenken  #Q I,sink die Summe der internen Wärmesenken nach Gleichung (C.24).
+        dQ_sink_max=dQ_T__sink+dQ_V__sink+dQ_I_sink  #Gleichung (C.4)
+        ##
+
+        #%%tau
+        if True:
+            #%%H
+            #Temperatur-Korrekturfaktor für die Berechnung der Zeitkonstante
+            Fx_in2out=1 # 1 für direkte Transmission nach außen (Außenbauteile) und Transmission über F = Erdreich nach DIN EN ISO 13370;
+            Fx_in2in=0.5  # für alle anderen Bauteile.
+                #%%sumH_T_s
+            if True:
+                if True:
+                    #%%H_T_WB
+                    delta_U_WB=0.1 #Annahme: keine genauere Information über Gebäude bekannt; der Wärmebrückenzuschlag; Ohne Nachweis ist allgemein ΔUWB = 0,10 W/(m2·K) zu setzen, bei Außenbauteilen mit innenliegender Dämmschicht und einbindender Massivdecke ist ΔUWB = 0,15 W/(m2·K) zu setzen...
+                    sum_A_j=sum(AExt_list)+ \
+                            sum(AWin_list)+ \
+                            tr[&#34;thermalZone.ARoof&#34;]+tr[&#34;thermalZone.AFloor&#34;]       #die Fläche eines [jeden] Bauteils das die Gebäudezone zur Außenluft, zu unbeheizten oder ungekühlten Zonen oder zum Erdreich hin begrenzt. Als Maße von Fenstern und Türen werden die lichten inneren Rohbauöffnungen angesetzt;
+
+                    H_T_WB=sum_A_j*delta_U_WB #der Transmissionswärmetransferkoeffizient für zweidimensionale Wärmebrücken;
+                    ##
+                H_T_iu=0 #Annahme: keine Wärmetransmission zwischen beheizten und unbeheizten Zonen; der Transmissionswärmetransferkoeffizient zwischen beheizten und unbeheizten bzw. gekühlter und ungekühlter Gebäudezonen nach Gleichung (50) oder nach DIN EN ISO 13789 (entsprechend H_D);
+                H_T_iz=tr[&#34;UInt&#34;]*tr[&#34;thermalZone.AInt&#34;]  #Vereinfachung: Innenwand wird als einfache Fläche zwischen nur zwei Gebäudezonen betrachtet; der Wärmetransferkoeffizient zwischen der betrachteten Gebäudezone und der benachbarten Gebäudezone nach Gleichung (53) oder nach DIN EN ISO 13789 (entsprechend H_D);
+                H_T_s_simplified=tr[&#34;thermalZone.AFloor&#34;]*tr[&#34;UFloor&#34;]  #Vereinfachung: Berechnung lediglich aus Bodenfläche und U-Wert für Boden, analog zu H_T_D in 6.2.1; der Wärmetransferkoeffizient über das Erdreich (HT,s entspricht G nach DIN EN ISO 13370);
+                sumH_T_j=H_T_D*Fx_in2out+H_T_WB*Fx_in2out+  H_T_iu*Fx_in2in+  H_T_iz*Fx_in2in+  H_T_s_simplified*Fx_in2out #die Summe der Transmissionswärmetransferkoeffizienten j über alle nach 6.2 in die Bilanz einzubeziehenden Bauteile der wärmeübertragenden Umfassungsfläche der Gebäudezone
+                ##
+                #%%sumH_V_k
+                sumH_V_k=H_V_inf+H_V_win #die Summe über alle Lüftungswärmetransferkoeffizienten der mit Außentemperatur eingehenden Luftströme:
+                ##
+                #%%H_V_mech_theta
+                n_mech_sup=0 if b_exhaust_air_ventilation_system or not(b_ventilation_system) else tr[&#34;airChangeRate&#34;] #Annahme: Wenn ein Zu- und Abluftsystem, dann nehme komplette Luftwechselrate als Zuluftwechselrate an #der Luftwechsel der Zuluft während der Betriebszeit der Anlage nach den Gleichungen (92) bis (93);
+                n_mech=n_mech_sup*t_v_mech/24 #der über den Tag gemittelte Luftwechsel durch die mechanische Lüftungsanlage nach Gleichung (90);
+                H_V_mech=n_mech*V*c_p_aXrho_a #der Lüftungswärmetransferkoeffizient der mechanischen Lüftung (siehe 6.3.3);
+                H_V_mech_theta=H_V_mech  #Vereinfachung aus Norm wegen Annahme, dass RLT ohne Kühlfunktion ist: Für RLT-Anlagen ohne Kühlfunktion und Wohnungslüftungsanlagen ist in Gleichung (135) der unkorrigierte H θ H Lüftungswärmetransferkoeffizient des Anlagenluftstroms einzusetzen. Es gilt: H_V_mech_theta=H_V_mech; der temperaturgewichtete Wärmetransferkoeffizient der mechanischen Lüftung, nach den Gleichungen (136) bis (138).
+                ##
+            H=sumH_T_j+sumH_V_k+H_V_mech_theta  #der Wärmetransferkoeffizient der Gebäudezone, berechnet aus dem Wärmetransferkoeffizienten für Transmission und Lüftung nach 5.5.2;
+            ##
+        tau=C_wirk/H #die Zeitkonstante der Gebäudezone nach 6.7.2, jedoch ohne mechanische Lüftung;
+        ##
+
+        dQ_c_max=0.8*(dQ_source_max-dQ_sink_max)*(1+0.3*np.exp(-tau/120))-C_wirk/60*(delta_theta-2) + C_wirk/40*(12/t_c_op_d - 1)  #Die überschlägige Berechnung der erforderlichen maximalen Kühlleistung erfolgt nach Gleichung (C.1)
+            
+        tr[&#34;coolingPower&#34;] = dQ_c_max.item()
+
+        return tr</code></pre>
+</details>
+<div class="desc"><p>A class to calculate the nominal cooling power required for a building based on
+various parameters including building characteristics and environmental conditions.</p>
+<p>This class is designed to implement the calculation of nominal cooling power as per
+the guidelines established in DIN 18599-2.
+It takes into account both the internal and external temperature settings,
+as well as heat loss due to ventilation and building materials.</p>
+<p>The following assumptions and simplifications have been made:
+Simplification from standard: Assuming effective wall heat capacity according to building class: light-&gt;50 Wh/k, medium-&gt; 90 Wh/K, heavy-&gt;130 Wh/k
+-&gt; Own calculation to find out building class (light, medium or heavy), using exemplary wall profiles' heat capacity to compare it with the actual heat capacity of the external walls configured in the model
+Assumption: Residential building
+Simplification/Assumption: Highest daily average of weather data = the average outdoor temperature on the design day according to DIN V 18599-10
+Simplification: maximum hourly average of horizontal global radiation from the weather file = the maximum hourly solar radiation on the design day (see DIN V 18599-10);
+Simplification: own calculation based on DIN 18599-10 Table 9: factor to convert global horizontal radiation to radiation on vertical surfaces facing south, east, north, west in Germany in the month of July
+Simplification: g-value of the window * reduction factor due to possible shading for calculating the overall energy transmission coefficient including sun protection
+Simplification: Orientation of the roof (cardinal directions) is irrelevant
+Simplification: own calculation, using the mean of the maximum hourly radiation for the roof in the case of roof_angle &gt; 60°
+Simplification: Heat flow through the floor is calculated based on a statically configured floor temperature and cooling setpoint temperature in the model (according to: dQ_T_s=H_T_sdelta_theta_source #Equation C.8)
+Assumptions: Compliance with the requirements for building tightness according to DIN 4108-7 (i.e., the tightness test is conducted according to the criteria of this standard after completion);
+Assumption: mechanical ventilation system if n &gt; 0.1 (n_inf)
+Assumption: the entire zone envelope area is heat-transmitting
+Simplification: only distinction between exhaust air and heat recovery system
+Assumption: Operating time of the ventilation system 24 h/d, because a constantly operated system is assumed in the model
+Assumption: 24 h/d in operation (the daily operating duration of the cooling system).
+Simplification: Sum of internal gains from the internal gains file
+Simplification: Heat flow through the floor is calculated based on a statically configured floor temperature and cooling setpoint temperature in the model (according to the standard: dQ_T_s=H_T_sdelta_theta_sink)
+Assumption: There are no adjacent areas, hence dQ_T_j=0
+Assumption: no internal heat sinks
+Assumption: no more detailed information about the building is known; the thermal bridge surcharge; without proof, ΔUWB = 0.10 W/(m²·K) is generally to be set
+Assumption: no heat transmission between heated and unheated zones
+Simplification: Interior wall is considered as a simple surface between only two building zones
+Simplification: Calculation is based solely on floor area and U-value for the floor, analogous to H_T_D in 6.2.1
+Assumption: If there is a supply and exhaust air system, then assume the complete air exchange rate as the supply air exchange rate
+Simplification from the standard due to the assumption that the ventilation system has no cooling function: For ventilation systems without cooling function and apartment ventilation systems, the uncorrected H θ H ventilation heat transfer coefficient of the system air flow is to be used in Equation (135). It applies: H_V_mech_theta=H_V_mech; the temperature-weighted heat transfer coefficient of mechanical ventilation, according to Equations (136) to (138).</p>
+<p>Init function of the Converter Function abstract base class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="src.converter_functions.converter_function.ConverterFunction" href="/src.converter_functions.converter_function.ConverterFunction.ext">src.converter_functions.converter_function.ConverterFunction</a></li>
+<li><a title="abc.ABC" href="/abc.ABC.ext">abc.ABC</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="BuilDa.src.converter_functions.custom_converter_functions.Nominal_cooling_power_calculator_dev.Nominal_cooling_power_calculator.convert"><code class="name flex">
+<span>def <span class="ident">convert</span></span>(<span>self, variable_dict)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert(self, variable_dict):
+    tr = variable_dict
+
+    weather_data=self.load_weather_data(tr)
+    AExt_list=[tr[&#34;thermalZone.AExt[1]&#34;],tr[&#34;thermalZone.AExt[2]&#34;],tr[&#34;thermalZone.AExt[3]&#34;],tr[&#34;thermalZone.AExt[4]&#34;]]
+    AWin_list=[tr[&#34;thermalZone.AWin[1]&#34;],tr[&#34;thermalZone.AWin[2]&#34;],tr[&#34;thermalZone.AWin[3]&#34;],tr[&#34;thermalZone.AWin[4]&#34;]]
+    V=tr[&#34;thermalZone.VAir&#34;]  # das Nettoraumvolumen;
+
+
+    t_c_op_d=24 #die tägliche Betriebsdauer der Kühlanlage
+    delta_theta=2 #die zugelassene Schwankung der Innentemperatur (üblicherweise 2 K)
+
+    #%%C_wirk
+    if True:
+        b_inner_wall_insulation= 0.1 &lt; sum(tr[&#34;extWall_R_distribution&#34;][:len(tr[&#34;extWall_R_distribution&#34;])//4]) / sum(tr[&#34;extWall_R_distribution&#34;]) #own calculation: decides, if there&#39;s an inner insulation on the external walls by comparing the fraction of the most inner 1/4 of the external walls R-Elements to a threshold value
+        b_high_room=tr[&#34;zone_height&#34;]&gt;4.5
+        if True:
+            #%%own calculation of heatCapacity_limits between lightweight, medium and heavy
+                #source of material constants in this section: https://www.ubakus.de/u-wert-rechner
+                heatCapacity_limit1=600*0.1*1600   #rho_limit*thickness*c_douglas=600 kg/m³*0.1 m *1600 J/(kg*K) -&gt; the density differs slightly from douglas fir (530 kg/m³) to met the conditions of the standard
+                heatCapacity_limit2=1600*0.18*1000 #rho_limit*thickness*c_adobe=1600 kg/m³*0.18 m *1600 J/(kg*K) -&gt; the density differs slightly from adobe (1500 kg/m³) to met the conditions of the standard
+        A_NGF=tr[&#34;thermalZone.AFloor&#34;]
+        C_wirk=(50 if (tr[&#34;heatCapacity_wall&#34;]&lt;heatCapacity_limit1 or b_high_room or b_inner_wall_insulation) else 90 if tr[&#34;heatCapacity_wall&#34;]&lt;heatCapacity_limit2 else 130)*A_NGF  #Vereinfachung aus Norm: 50: leicht, 90: mittelschwer, 130: schwer in Wh/K  #die wirksame Wärmekapazität der Gebäudezone nach 6.7.1;
+    ##
+
+    #%%dQ_source_max: Wärmequellen
+        #%%theta_e_max                                                        
+        theta_i_c_max=26 #Annahme: Wohngebäude #die Maximaltemperatur (maximal zugelassene Innentemperatur am Auslegungstag) nach DIN V 18599-10;
+        theta_i_c_soll=25 #Annahme: Wohngebäude #die Raumsolltemperatur für den Kühlfall nach DIN V 18599-10.
+        theta_i=theta_i_c_max_d=(theta_i_c_max+theta_i_c_soll-2)/2        #die Berechnungswert der Innentemperatur für die Auslegung θi,c,max,d nach Gleichung (C.2);
+        theta_e_max=self.df_findcol(weather_data,&#34;dry bulb temperature&#34;).resample(&#34;1d&#34;).mean().max().item() #oder: load_weather_file- function in base class #?Vereinfachung/Annahme: Höchstes Tagesmittel der Wetterdaten #die mittlere Außentemperatur am Auslegungstag nach DIN V 18599-10
+        ##
+    delta_theta_source=max(0,theta_e_max-theta_i)   
+    if True:
+        #%%dQ_S
+        if True:
+            #%%dQ_S_tr   #hier werden Bauteile für alle Himmelsrichtungen angegeben
+            I_S_max_global_horizontal=self.df_findcol(weather_data,&#34;global horizontal radiation&#34;).resample(&#34;1h&#34;).mean().max().item() #Vereinfachung?: maximales Stundenmittel der Horizontalglobalstrahlung aus dem weather file#die maximale stündliche solare Einstrahlung am Auslegungstag (siehe DIN V 18599-10);
+            factor_I_S_max=np.array([605/927,739/927,164/927,739/927])  #Vereinfachung: own calculation from DIN 18599-10 Table 9: factor to convert global horizontal radiation to radiation on vertical surface on south, east, north, west in Germany in the month of Juli
+            I_S_max_windows=I_S_max_global_horizontal*factor_I_S_max
+            A=np.array(AWin_list) #die Fläche des transparenten Bauteils;
+            F_F=tr[&#34;fATransToAWindow&#34;] #der Abminderungsfaktor für den Rahmenanteil, welcher dem Verhältnis der durchsichtigen Fläche zur Gesamtfläche F der verglasten Einheit entspricht. Sofern keine genaueren Werte bekannt sind, ist F = 0,7 zu setzen;
+            F_V=1 #Wohngebäuden: 1 (keine Verschmutzung)#der Abminderungsfaktor infolge von Verschmutzung nach DIN V 18599-10;
+            factor_shading=1 #own factor for shading by shading device, etc. -&gt; use as soon as shading (parameter factor_shading) is implemented in BuilDa
+            g_tot=tr[&#34;thermalZone.gWin&#34;]*factor_shading #Vereinfachung: g-Wert des Fensters * Abminderungsfaktor durch evtl. vorhandene Verschattung #der Gesamtenergiedurchlassgrad einschließlich Sonnenschutz (nach 6.4.1). -&gt; unter 6.4.1: der Gesamtenergiedurchlassgrad einschließlich Sonnenschutzvorrichtung nach Tabelle 8, nach DIN EN 13363-1, DIN EN 13363-2 oder nach objektbezogenem Nachweis des Herstellers (zugesicherte Herstellerangaben) für kalorische und lichttechnische Kennwerte unter gleichen Randbedingungen;
+            dQ_S_tr=sum(A*F_F*F_V*g_tot*I_S_max_windows).item() #Solare Wärmeeinträge über transparente Bauteile
+            ##
+            #%%dQ_S_opa  #hier werden Bauteile für alle Himmelsrichtungen angegeben
+            Rse=tr[&#34;Rse_extWall&#34;]             #der äußere Wärmeübergangswiderstand;
+            U=np.array([tr[&#34;UExt&#34;],tr[&#34;UExt&#34;],tr[&#34;UExt&#34;],tr[&#34;UExt&#34;],tr[&#34;URoof&#34;]])            #der Wärmedurchgangskoeffizient des Bauteils;
+            A = np.array([*AExt_list, tr[&#34;thermalZone.ARoof&#34;]])        
+            alpha=np.array([tr[&#34;eqAirTemp.aExt&#34;],tr[&#34;eqAirTemp.aExt&#34;],tr[&#34;eqAirTemp.aExt&#34;],tr[&#34;eqAirTemp.aExt&#34;],tr[&#34;eqAirTempVDI.aExt&#34;]])         #der Absorptionskoeffizient des Bauteils für Solarstrahlung;
+            F_f_roof=1 if tr[&#34;fARoofToAFloor&#34;]&gt;2**.5 else 0.5 #own calculation: on a right triangle (roof inclination 45°) the sum of legs (roof) = sqrt(2)*hypotenuse (floor), when inclination is higher, then the sum is greater
+            F_f=[0.5,0.5,0.5,0.5,F_f_roof]               #Vereinfachung: Ausrichtung des Daches egal #der Formfaktor F zwischen dem Bauteil und dem Himmel: Ff = 1 für waagerechte Bauteile bis h 45° Neigung; f = 0,5 für senkrechte Bauteile ab 45° Neigung;
+            h_r=np.array([tr[&#34;eqAirTemp.hRad&#34;],tr[&#34;eqAirTemp.hRad&#34;],tr[&#34;eqAirTemp.hRad&#34;],tr[&#34;eqAirTemp.hRad&#34;],tr[&#34;eqAirTempVDI.hRad&#34;]])          #der äußere Abstrahlungskoeffizient;
+            delta_theta_er=10   #Vereinfacht: 10 K  #die mittlere Differenz zwischen der Temperatur der Umgebungsluft und der scheinbaren Temperatur des Himmels; vereinfachend kann Δθer = 10 K angenommen werden
+            I_S_max_walls=I_S_max_global_horizontal*factor_I_S_max
+            roof_angle=(np.pi-2*np.arccos(1-tr[&#34;fARoofToAFloor&#34;]**-2))/2 /np.pi*180   #own calculation: roof inclination angle deduced from law of consines using the conversion factor for roof to floor area
+            I_S_max_roof=I_S_max_walls.mean() if roof_angle&gt;60 else I_S_max_global_horizontal  #Vereinfachung: own calculation, using the mean the maximum hourly radiation for roof in the case roof_anlge&gt;60
+            I_S_max_wallsRoof=np.array([*I_S_max_walls,I_S_max_roof])
+            dQ_S_opak=sum(Rse*U*A*(alpha*I_S_max_wallsRoof-F_f*h_r*delta_theta_er) ).item()
+            ##
+        dQ_S=dQ_S_tr+dQ_S_opak    #die Summe der Wärmequellen aufgrund solarer Einstrahlung nach den Gleichungen (C.18) bis (C.21);
+        ##
+        #%%dQ_T
+        if True:
+            #%%dQ_T_e
+            if True:
+                H_T_D=sum(AExt_list)*tr[&#34;UExt&#34;]+ \
+                    tr[&#34;thermalZone.ARoof&#34;]*tr[&#34;URoof&#34;]+ \
+                    sum(AWin_list)*tr[&#34;UWin&#34;]  #der Transmissionswärmetransferkoeffizient zwischen der beheizten oder gekühlten Gebäudezone und außen;
+
+            dQ_T_e__source=H_T_D*delta_theta_source  #Gleichung C.6
+            ##
+            #%%dQ_T_s
+            #H_T_s=  #Vereinfachung: nicht benötigt#der Wärmetransferkoeffizient über das Erdreich nach 6.2.4;  -&gt;  der Wärmetransferkoeffizient über das Erdreich (HT,s entspricht G nach DIN EN ISO 13370);
+            dQ_T_s__source=max(0,(tr[&#34;TGro.k&#34;]-273.15)-theta_i)*tr[&#34;thermalZone.AFloor&#34;]*tr[&#34;UFloor&#34;] #Vereinfachung: Wärmefluss über Boden wird über statisch im Modell konfigurierte Bodentemperatur und Kühlsolltemperatur berechnet#laut NOrm: dQ_T_s=H_T_s*delta_theta_source  #Gleichung C.8
+            ##  
+        dQ_T__source=dQ_T_e__source+dQ_T_s__source  #Ausgewählt: C.6 und C.8#die Summe der Transmissionswärmequellen, wenn θi,c,max,d &lt; θ e,max, nach den Gleichungen (C.6), (C.8) oder (C.9), (C.11);
+        ##
+        #%%dQ_V
+        if True:
+            #%%dQ_V_inf
+            if True:
+                #%%n_inf
+                if True:
+                    #%%n50
+                    #ohne erfolgte bzw. bei geplanter, aber noch ausstehender Dichtheitsprüfung:Standardwerte, vorgegeben nach Tabelle 7 bzw. nach Gleichung (61) in Verbindung mit Tabelle 7 berechneter Wert;
+                    #Annahmen in Tabelle: Kategorie I: Einhaltung der Anforderung an die Gebäudedichtheit nach DIN 4108-7 (d. h., die Dichtheitsprüfung wird entsprechend den Kriterien dieser Norm nach Fertigstellung durchgeführt); 
+                    b_ventilation_system=tr[&#34;airChangeRate&#34;]&gt;.1 #Annahme: mechanisches Lüftungssystem, wenn n&gt;0.1 (n_inf)
+                    A_E=sum(AExt_list)+ \
+                        tr[&#34;thermalZone.ARoof&#34;]+ \
+                        sum(AWin_list) + \
+                        tr[&#34;thermalZone.AFloor&#34;]   #Annahme: gesamte Zonenhüllfläche ist Wärmeübertragend #die Hüllfläche nach DIN EN ISO 9972. A Vereinfacht kann die nach DIN V 18599-1 ermittelte Wärmeübertragende Umfassungsfläche angesetzt werden;
+                    n50=(1 if b_ventilation_system else 2) if V&lt;=1500 else (2*A_E/V if b_ventilation_system else 3*A_E/V)  # der Luftwechsel bei 50 Pa Druckdifferenz; ohne erfolgte bzw. bei geplanter, aber noch ausstehender Dichtheitsprüfung:Standardwerte, vorgegeben nach Tabelle 7 bzw. nach Gleichung (61) in Verbindung mit  Tabelle 7 berechneter Wert;
+                    ##
+                e=.07  #der Volumenstromkoeffizient, als Standardwert gilt: = 0,07 (entspricht Abschirmungskoeffizient nach DIN EN ISO 13789 bei gemäßigter Abschirmung, mehr als eine Fassade dem Wind ausgesetzt);
+                b_exhaust_air_ventilation_system=b_air_transfer_device=  b_ventilation_system and tr[&#34;heatRecoveryRate&#34;]==0 #if ventilation system is used and heat recovery rate 0, then exhaust air system with air transfer devices is used
+                f_ATD=min(16,(n50-1.5)/n50) if b_air_transfer_device else 1 #ein Faktor zur Berücksichtigung von Außenluftdurchlässen (ATD, en: air transfer device) nach Gleichung (63) bzw. (64).
+                #%%f_e
+                f=15      #Koeffizient zur Windexposition, als Standardwerte gelten: f=15 (entspricht Abschirmungskoeffizienten nach DIN EN ISO 13789 bei gemäßigter Abschirmung, mehr als eine Fassade dem Wind ausgesetzt);
+                n_sup=0 if b_exhaust_air_ventilation_system else 1 #Vereinfachung: nur Unterscheidung zwischen Abluft und WRG-System, Wert normiert (da nur zwichen kompletter Dysbalance und Balance zwischen Zu- und Abluftvolumenstrom unterschieden werden soll) #die Summe über die Zuluftwechsel der mechanischen Lüftung n_mech_sup nach den Gleichungen (92) oder (93) und der aus benachbarten Zonen überströmenden Luft n_z_sup nach Gleichung (105);
+                n_eta=1 #Vereinfachugn: Wert normiert (da nur zwichen kompletter Dysbalance und Balance zwischen Zu- und Abluftvolumenstrom unterschieden werden soll) #die Summe über die Abluftwechsel der mechanischenn Lüftung n_mech_eta nach Gleichung (94) und der aus benachbarten Zonen abgesaugten Luft n_z_eta nach Gleichung (107).
+                f_e=1/(1+f/e*((n_eta-n_sup)/(n50*f_ATD))**2) #Gleichung 67 (schließt unbalancierte Zu-/Abluft mit ein) :ein Faktor zur Bewertung der durch die mechanische Lüftungsanlage vermehrten oder verminderten Infiltration nach den Gleichungen (66) bis (67);
+                ##
+                t_v_mech=24 #Annahme: 24 h/d, weil im  Modell eine konstant betriebene Anlage angenommen wird #die tägliche Betriebsdauer der Lüftungsanlage (siehe DIN V 18599-10);
+                n_inf=n50*e*f_ATD*(1+(f_e-1)*t_v_mech/24)  #Gleichung (62): Mit mechanischer Lüftung vermindert sich der mittlere tägliche Infiltrationsluftwechsel entsprechend Gleichung (62):
+                ##
+            c_p_aXrho_a=.34   #ist zu 0,34 Wh/(m3·K) zu setzen.
+            H_V_inf=n_inf*V*c_p_aXrho_a #der Wärmetransferkoeffizient für Infiltration nach 6.3.1 (ohne mechanische Lüftung);
+            dQ_V_inf__source=H_V_inf*delta_theta_source #Gleichung C.13
+            ##
+            #%%dQ_V_win
+            H_V_win=0.1*V*c_p_aXrho_a # der Wärmetransferkoeffizient n für Fensterluftwechsel nach 6.3.2 (mit einem angenommenen Fensterluftwechsel von n_win = 0,1 h–1);
+            dQ_V_win__source=H_V_win*delta_theta_source #Gleichung C.15
+            ##
+        dQ_V__source=dQ_V_inf__source+dQ_V_win__source    #die Summe der Lüftungswärmequellen, wenn θi,c,max,d &lt; θe,max, nach den Gleichungen (C.13) Q und (C.15);
+        ##
+        #%%dQ_I_source
+        # calculation according to standard:
+        # A_B=A_NGF=tr[&#34;thermalZone.AFloor&#34;] #die Nettogrundfläche der Gebäudezone
+        # t_c_op_d=24  #Annahme: 24 h/d in Betrieb #die tägliche Betriebsdauer der Kühlanlage.
+        # dQ_I_p=q_I_P*A_B/t_c_op_d
+        # dQ_I_L=mu_L*Q_I_L_elektr/t_c_op_d
+        # dQ_I_fac=q_I_fac*A_B/t_c_op_d
+        # dQ_I_goods=c*dm*max(0, theta_in-theta_out)/t_c_op_d
+        # dQ_I_source=dQ_I_p+dQ_I_L+dQ_I_fac+dQ_I_goods+dQ_I_h #die Summe der internen Wärmequellen nach Gleichung (C.23);
+        dQ_I_source=self.load_internalGain_data(tr).resample(&#34;1d&#34;).mean().max().item()  #Vereinfachung: Summe der internen Gewinne aus internal gains file#die Summe der internen Wärmequellen nach Gleichung (C.23);
+        ##
+    dQ_source_max=dQ_S+dQ_T__source+dQ_V__source+dQ_I_source   #die Summe der Wärmequellen am Auslegungstag innerhalb der betrachteten Gebäudezone (Leistungswert) nach Gleichung (C.3);
+    ##
+
+    #%%dQ_sink_max: Wärmesenken
+    delta_theta_sink=max(0,theta_i-theta_e_max)   
+        #%%dQ_T
+    if True:
+        dQ_T_e__sink=H_T_D*delta_theta_sink   #Transmissionswärme nach außen, Gleichung (C.5)    
+        dQ_T_s__sink=max(0,theta_i-(tr[&#34;TGro.k&#34;]-273.15))*tr[&#34;thermalZone.AFloor&#34;]*tr[&#34;UFloor&#34;] #Vereinfachung: Wärmefluss über Boden wird über statisch im Modell konfigurierte Bodentemperatur und Kühlsolltemperatur berechnet#laut Norm: dQ_T_s=H_T_s*delta_theta_sink  #Transmissionswärme über das Erdreich, Gleichung (C.7)
+        dQ_T_j=0      #Annahme: Es gibt keine angrenzenden Bereiche, daher dQ_T_j=0 #Andere Transmissionswärmeströme, Gleichung (C.10): dQ_T_j=H_T_j*max(0,theta_i-theta_j)
+        dQ_T__sink=dQ_T_e__sink+dQ_T_s__sink+dQ_T_j  #die Summe der Transmissionswärmesenken, wenn θi,c,max,d &gt; θe,max, nach den Gleichungen (C.5), (C.7) und (C.10);
+        ##
+        #%%dQ_V
+        dQ_V_inf__sink=H_V_win*delta_theta_sink   #Wärmestrom durch Infiltration, Gleichung (C.12)
+        dQ_V_win__sink=H_V_inf*delta_theta_sink   #Wärmestrom durch Fensterluftwechsel, Gleichung (C.14)
+        dQ_V__sink=dQ_V_inf__sink+dQ_V_win__sink   #die Summe der Lüftungswärmesenken, wenn θi,c,max,d &gt; θe,max, nach den Gleichungen (C.12) und (C.14);
+        ##
+    dQ_I_sink=0  #Annahme: keine internen Wärmesenken  #Q I,sink die Summe der internen Wärmesenken nach Gleichung (C.24).
+    dQ_sink_max=dQ_T__sink+dQ_V__sink+dQ_I_sink  #Gleichung (C.4)
+    ##
+
+    #%%tau
+    if True:
+        #%%H
+        #Temperatur-Korrekturfaktor für die Berechnung der Zeitkonstante
+        Fx_in2out=1 # 1 für direkte Transmission nach außen (Außenbauteile) und Transmission über F = Erdreich nach DIN EN ISO 13370;
+        Fx_in2in=0.5  # für alle anderen Bauteile.
+            #%%sumH_T_s
+        if True:
+            if True:
+                #%%H_T_WB
+                delta_U_WB=0.1 #Annahme: keine genauere Information über Gebäude bekannt; der Wärmebrückenzuschlag; Ohne Nachweis ist allgemein ΔUWB = 0,10 W/(m2·K) zu setzen, bei Außenbauteilen mit innenliegender Dämmschicht und einbindender Massivdecke ist ΔUWB = 0,15 W/(m2·K) zu setzen...
+                sum_A_j=sum(AExt_list)+ \
+                        sum(AWin_list)+ \
+                        tr[&#34;thermalZone.ARoof&#34;]+tr[&#34;thermalZone.AFloor&#34;]       #die Fläche eines [jeden] Bauteils das die Gebäudezone zur Außenluft, zu unbeheizten oder ungekühlten Zonen oder zum Erdreich hin begrenzt. Als Maße von Fenstern und Türen werden die lichten inneren Rohbauöffnungen angesetzt;
+
+                H_T_WB=sum_A_j*delta_U_WB #der Transmissionswärmetransferkoeffizient für zweidimensionale Wärmebrücken;
+                ##
+            H_T_iu=0 #Annahme: keine Wärmetransmission zwischen beheizten und unbeheizten Zonen; der Transmissionswärmetransferkoeffizient zwischen beheizten und unbeheizten bzw. gekühlter und ungekühlter Gebäudezonen nach Gleichung (50) oder nach DIN EN ISO 13789 (entsprechend H_D);
+            H_T_iz=tr[&#34;UInt&#34;]*tr[&#34;thermalZone.AInt&#34;]  #Vereinfachung: Innenwand wird als einfache Fläche zwischen nur zwei Gebäudezonen betrachtet; der Wärmetransferkoeffizient zwischen der betrachteten Gebäudezone und der benachbarten Gebäudezone nach Gleichung (53) oder nach DIN EN ISO 13789 (entsprechend H_D);
+            H_T_s_simplified=tr[&#34;thermalZone.AFloor&#34;]*tr[&#34;UFloor&#34;]  #Vereinfachung: Berechnung lediglich aus Bodenfläche und U-Wert für Boden, analog zu H_T_D in 6.2.1; der Wärmetransferkoeffizient über das Erdreich (HT,s entspricht G nach DIN EN ISO 13370);
+            sumH_T_j=H_T_D*Fx_in2out+H_T_WB*Fx_in2out+  H_T_iu*Fx_in2in+  H_T_iz*Fx_in2in+  H_T_s_simplified*Fx_in2out #die Summe der Transmissionswärmetransferkoeffizienten j über alle nach 6.2 in die Bilanz einzubeziehenden Bauteile der wärmeübertragenden Umfassungsfläche der Gebäudezone
+            ##
+            #%%sumH_V_k
+            sumH_V_k=H_V_inf+H_V_win #die Summe über alle Lüftungswärmetransferkoeffizienten der mit Außentemperatur eingehenden Luftströme:
+            ##
+            #%%H_V_mech_theta
+            n_mech_sup=0 if b_exhaust_air_ventilation_system or not(b_ventilation_system) else tr[&#34;airChangeRate&#34;] #Annahme: Wenn ein Zu- und Abluftsystem, dann nehme komplette Luftwechselrate als Zuluftwechselrate an #der Luftwechsel der Zuluft während der Betriebszeit der Anlage nach den Gleichungen (92) bis (93);
+            n_mech=n_mech_sup*t_v_mech/24 #der über den Tag gemittelte Luftwechsel durch die mechanische Lüftungsanlage nach Gleichung (90);
+            H_V_mech=n_mech*V*c_p_aXrho_a #der Lüftungswärmetransferkoeffizient der mechanischen Lüftung (siehe 6.3.3);
+            H_V_mech_theta=H_V_mech  #Vereinfachung aus Norm wegen Annahme, dass RLT ohne Kühlfunktion ist: Für RLT-Anlagen ohne Kühlfunktion und Wohnungslüftungsanlagen ist in Gleichung (135) der unkorrigierte H θ H Lüftungswärmetransferkoeffizient des Anlagenluftstroms einzusetzen. Es gilt: H_V_mech_theta=H_V_mech; der temperaturgewichtete Wärmetransferkoeffizient der mechanischen Lüftung, nach den Gleichungen (136) bis (138).
+            ##
+        H=sumH_T_j+sumH_V_k+H_V_mech_theta  #der Wärmetransferkoeffizient der Gebäudezone, berechnet aus dem Wärmetransferkoeffizienten für Transmission und Lüftung nach 5.5.2;
+        ##
+    tau=C_wirk/H #die Zeitkonstante der Gebäudezone nach 6.7.2, jedoch ohne mechanische Lüftung;
+    ##
+
+    dQ_c_max=0.8*(dQ_source_max-dQ_sink_max)*(1+0.3*np.exp(-tau/120))-C_wirk/60*(delta_theta-2) + C_wirk/40*(12/t_c_op_d - 1)  #Die überschlägige Berechnung der erforderlichen maximalen Kühlleistung erfolgt nach Gleichung (C.1)
+        
+    tr[&#34;coolingPower&#34;] = dQ_c_max.item()
+
+    return tr</code></pre>
+</details>
+<div class="desc"><p>The function to convert a dict of fmu parameter / variations into a new set of variations.</p>
+<p>This function must be implemented in every class that extends this ABC.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="BuilDa.src.converter_functions.custom_converter_functions" href="index.html">BuilDa.src.converter_functions.custom_converter_functions</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="BuilDa.src.converter_functions.custom_converter_functions.Nominal_cooling_power_calculator_dev.Nominal_cooling_power_calculator" href="#BuilDa.src.converter_functions.custom_converter_functions.Nominal_cooling_power_calculator_dev.Nominal_cooling_power_calculator">Nominal_cooling_power_calculator</a></code></h4>
+<ul class="">
+<li><code><a title="BuilDa.src.converter_functions.custom_converter_functions.Nominal_cooling_power_calculator_dev.Nominal_cooling_power_calculator.convert" href="#BuilDa.src.converter_functions.custom_converter_functions.Nominal_cooling_power_calculator_dev.Nominal_cooling_power_calculator.convert">convert</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

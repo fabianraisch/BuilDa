@@ -1,5 +1,6 @@
 # Setup
 
+
 ## Load Repository
 To setup BuilDa clone the repo and go into the directory
 
@@ -32,14 +33,26 @@ python3 ./main.py
 Optionally set parameters for FMU-File, configuration file and output directory to use (order of arguments doesn't matter)  
 
 ```bash
-python3 ./main.py <my_model>.fmu <my_config>.json <my_output_folder>
+python3 ./main.py --fmu <my_model>.fmu --config <my_config>.json --output <my_output_folder> --schedule <my_schedule>.json
 ```
 
-If no command line parameters are set, parameters from main.py's user_config dictionary are used.
+use
+
+```bash
+python3 ./main.py --help
+```
+for more info.
+
 
 # Configuration of simulations
 The configuration of the simulations as well as the buildings to be simulated is done in a json-file located in resources/configurations.  
-## Variation of parameters
+
+Open [tutorial_use_cases.md](tutorial_use_cases.md) to see a tutorial on the model configuration in BuilDa.
+
+See [General configuration parameters](#general-configuration-parameters) to see how to configure the simulation in BuilDa.
+
+
+# Variation of parameters
 In the variations section of the config file, the parameters of the model itself can be set. There can be set more than one value per parameter by listing the values in brackets. With at least one parameter with multiple values, a simulation series is defined, indicating that there will be executed more than one simulation. There are generally two different methods to handle multiple parameters with more than one value set:
 
 **zip variation:** The values are used for the parameters consecutivelly for each simulation of the simulation series. The longest value set determines the number of simulations. To create the final parameter value sets the last values of shorter value sets from other parameters are used. This method can be used if e.g. 10 different simulations should be executed, without combining each value with each other.
@@ -59,15 +72,17 @@ Resulting parameter sets:
 
 Example: 
 
-`zone_length: [5, 10], zone_width=[4, 8], floor_height: [2.5]`
+```
+zone_length: [5, 10], zone_width=[4, 8], floor_height: [2.5]
+```
 
 Resulting parameter sets:
-
-	zone_length: 5, zone_width:4, floor_height: 2.5
-	zone_length: 5, zone_width:8, floor_height: 2.5
-	zone_length: 10, zone_width:4, floor_height: 2.5
-	zone_length: 10, zone_width:8, floor_height: 2.5
-
+```
+zone_length: 5, zone_width:4, floor_height: 2.5
+zone_length: 5, zone_width:8, floor_height: 2.5
+zone_length: 10, zone_width:4, floor_height: 2.5
+zone_length: 10, zone_width:8, floor_height: 2.5
+```
 
 ## Model parameters (section variations)
 
@@ -84,20 +99,34 @@ A list of the parameters is shown in the following table.
 ![image](./images/model_parameter_overview.png "Model parameter overview")
 
 
-## General simulation parameters
-The general simulation parameters include
-- Variation type (**zip** or **cartesion_product**)
-- Simulation start time  
-- Simulation stop time
-- External controllers to be used  
-- Output columns  
-- Time steps for:  
-        - Simulation output  
-        - External control  
 
-## Weather and human behaviour profiles
+
+
+
+## General configuration parameters
+Besides the model related parameters (mainly building specific parameters), additionally general simulation parameters can be set. 
+
+Parameters related to the simulation time or step sizes can be set as an integer (time in seconds) or a string representing containing number and unit (e.g. 1y: 1 year, 1min: 1 minute, etc., note: only time units with constant length are supported, thus month isn't supported)
+
+
+| Parameter Name                     | Description                                                                                          | Example Parameters                      |
+|------------------------------------|------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| variation_type                     | Type of variation of the simulation parameters (see [README.md](README.md)). Available options are 'zip' and 'cartesian_product'. For additional information see [README.md](README.md)         | cartesian_product, zip                       |
+| converter_functions                | Functions that handle various conversions and calculations for the model (see [README.md](README.md)). Only advanced users should modify this.                          | Link_resolver, Miscellaneous_handler, Model_compatibility_layer, Zone_dimensions_calculator, RC_Distribution_Configurator, Component_properties_calculator, Nominal_heating_power_calculator, Nominal_cooling_power_calculator |
+| controller_name                    | List of controllers available to control e.g. heating, cooling syste, window opening or other parts of the model.                                             | TwoPointController_heating, PIController_cooling              |
+| controller_step_size               | Time step size for the controller in seconds.                                                      | 90, "1.5min"                                      |
+| start_time                         | The start time for the simulation, can be set as an integer or a string.                           | 0, "0s"                                       |
+| stop_time                          | The end time for the simulation, in seconds.                                                       | 31536000, "1y"                                |
+| writer_step_size                   | Time step size for writing output data, in seconds.                                               | 900, "15min"                                     |
+| time_columns_included              | List of time columns to be exported. Options include various time representations.                  | "second", "second_of_day", "day_of_year", "year", "day_of_week", "hour_of_year"     |
+| columns_included                   | List of FMU parameters to be exported, representing various thermal and weather conditions.        | "thermalZone.TAir", "totalHeatingPower.y", "weaBus.TDryBul", "weaBus.HDirNor", "weaBus.HDifHor", "weaBus.HGloHor" |
+
+
+
+
+## Weather and human behavior profiles
 ### Weather
-Outside weather, window-opening behaviour and human activity profiles are specified in the config.
+Outside weather, window-opening behavior and human activity profiles are specified in the config.
 
 Using 
 ```
@@ -107,17 +136,15 @@ weather data for specific locations from Jan. 1st (startyear) to Dec. 31st (endy
 
 ### Behaviour profiles
 
-Window opening profiles and activity profiles with possible user changes over time can be generated using the script `./resources/profile_generator.py`.
+Multiple representative human behavior profiles are supplied in `./resources/internalGainProfiles` and `./resources/hygienicalWindowOpeningProfiles`.
 
-For each occupant, all relevant parameters (see below) are randomly chosen using a gaussian distribution around reference values specified at the top of the script. Calling `generate_profiles()` automatically creates n_occupants profiles for gaussian distributed amounts of days each and concatenates them to one profile, which is stored in `resources/hygienicalWindowOpeningProfiles` and `resources/internalGainProfiles/[filename]`.
-
-Instead, calling `generate_winOpeningProfile_spec_time(time)` or `generate_intGainProfile(time)` `(time from to: [[YYYY, MM, DD], [YYYY, MM, DD]])` generates a profile over the given time period using either the reference parameters from the top of the script or ones provided as arguments. It returns the profiles as `np.array` which then have to be manually saved.
+Alternatively, window opening profiles and activity profiles with possible user changes over time can be generated using the script `./resources/profile_generator.py`.
 
 List of parameters used for the profiles:
 
 | Name              | Description               | Unit      |
 |-------------------|---------------------------|-----------|
-| `n_persons`       | the amount of persons the household exists of |    |
+| `n_persons`       | the amount of persons the household consists of |    |
 | `sleeptime`         | `[from, to]` wallclock time, the (or all) user sleeps | h |
 | `rmr = 1.62*bodymass`| resting metabolic rate. The amount of heat a resting human radiates | W |
 | `met_profile`     | activity profile over one day in multitudes of rmr with shape `(hour of day, [holiday, workday, saturday, sunday])` |         |
@@ -125,7 +152,41 @@ List of parameters used for the profiles:
 | `open_after_min`  | The amount of minutes 1 person rests in the room after which they'd want fresh air | min |
 | `consciousness`   | weight parameter to alter the air quality at which the window is opened. 1 meaning the windows are opened after 1 person spends `open_after_min` resting, 0 meaning no windows are opened and 2 meaning the window is already openend after `open_after_min`/2  |     |
 
-The profiles can be used by changing the config entries `internalGain.fileName` and `hygienicalWindowOpening.fileName` to the generated files before simulating.
+The profiles can be used by changing the config entries `internalGain.fileName` and `hygienicalWindowOpening.fileName` to the generated files before simulation.
+
+## Scheduling parameter updates
+
+During a simulation, parameters can be changed to emulate new occupants moving in or a retrofit being executed on the house. To use a schedule, pass one to the builda program by using the 
+```bash
+python3 main.py --schedule <path_to_schedule>.json
+```
+The schedule is specified through a special config that contains timestamps for the different scheduled changes and what is changed:
+
+```
+{
+    "100d": {"UExt": 0.25, "UInt": 0.3, "Occupancy": "Empty"},
+    "150d": {"Occupancy": "Couple_over_65", "roomTempLowerSetpoint": 22, "roomTempUpperSetpoint": 24, "UExt": 0.1, "UInt": 0.1},
+    "200d": {"UWin": 1.0, "Heater": "new"},
+    "250d": {"UExt": 0.11}
+}
+```
+Timestamps can be provided as String numbers followed by a unit (s, min, d, w, y) or as an integer in seconds.
+
+As the default behavior, the maximum heating power is **not** recalculated for every update, it has to be triggered manually by specifying "Heater": "new".
+A full list of occupancy profiles (heat dissipation and window opening by occupants, see above for more detail) can be found below:
+
+| short name | description | windowOpening available |
+|------------|-------------| ----------------------- |
+|"Empty"     | no occupants live in the house. Thus, there is no thermal dissipation | yes |
+|"base_example" | exemplary profile for one working person | yes |
+|"ASHRAE_BASE_EXAMPLE" | - | no |
+|"Couple_both_at_work" | two mature persons with regular working hours | yes |
+|"Single_with_work"    | a single mature person with regular working hours | yes |
+|"Family_both_at_work_2_children" | two mature persons working regularly with two children | yes |
+|"Couple_over_65"      | two eldery retired persons | yes |
+|"Student_Flatsharing" | three young students sharing an appartment | yes |
+
+To schedule custom occupancy profiles, `internalGains.fileName` and `hygienicalWindowOpening.fileName` can be updated in the schedule (instead of using the "Occupancy" keyword)
 
 # Simulation output
 There are plenty of simulation output parameters (configurable as output parameters in the config JSON), with the most important being:
@@ -187,17 +248,19 @@ The purpose of the control function is to modify the controller output variable 
 - If model internal heating controller is activated in the config JSON, the external heating controllers are not loaded. Criterion for external heating controller: output is `ctrSignalHeating` (heating controller interface of fmu)
 - If more than one controller generates output for the same model interface, the output of the last controller configured in the controller ist in the configuration JSON is applied.
 
+## Source Code Documentation
+
+To gain a deeper insight into BuilDa, please refer to the source code documentation provided [here](https://htmlpreview.github.io/?https://github.com/fabianraisch/BuilDa/blob/main/doc/index.html). This API reference offers a thorough overview of the framework, including its features and functionalities.
 
 
-### License
+
+## License
 
 This project is licensed under the GNU GENERAL PUBLIC LICENSE
                        Version 3 - see the [LICENSE](./LICENSE) file for details.
 
-Due to licensing, the original FMU was replaced with a similar one from OpenModelica.
 
-
-### Citation
+## Citation
 This code is based on the publication **BUILDA: A THERMAL BUILDING DATA GENERATION FRAMEWORK FOR
 TRANSFER LEARNING**.
 
@@ -205,10 +268,14 @@ For citation please use:
 
 ```
 @inproceedings{
-    BuilDa2025,
-    title={BUILDA: A THERMAL BUILDING DATA GENERATION FRAMEWORK FOR TRANSFER LEARNING},
-    author={Thomas Krug and Fabian Raisch and Dominik Aimer and Markus Wirnsberger and Ferdinand Sigg and Benjamin Schäfer and Benjamin Tischler},
-    booktitle={2025 Annual Modeling and Simulation Conference (ANNSIM)},
-    year= {2025}
+  BUILDA,
+  title={Builda: A thermal building data generation framework for transfer learning},
+  author={Krug, Thomas and Raisch, Fabian and Aimer, Dominik and Wirnsberger, Markus and Sigg, Ferdinand and Sch{\"a}fer, Benjamin and Tischler, Benjamin},
+  booktitle={2025 Annual Modeling and Simulation Conference (ANNSIM)},
+  pages={1--13},
+  year={2025},
+  organization={IEEE}
 }
 ```
+
+[go to top](#setup)

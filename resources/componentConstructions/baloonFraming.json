@@ -1,0 +1,20 @@
+{
+    "baloonFraming": {
+        "UExt": 0.7320644216691068,
+        "heatCapacity_wall": 37177.31,
+        "R_si": 0.13,
+        "R_se": 0.13,
+        "extWall_C_distribution": [
+            26880.0,
+            2393.62,
+            7903.69
+        ],
+        "extWall_R_distribution": [
+            0.14250000000000002,
+            0.24449709950914772,
+            0.44272096492840507,
+            0.34072386541925737
+        ],
+        "info": "https://www.ubakus.de/u-wert-rechner/?c=2&M0=133859i6&M1=36i24&M2=137011i2&M3=86I6&M4=36I9&x4=-0.05&y4=0.2&w4=6&R4=60&M5=132403I3&v5=81674f&tex5=kork&M6=132657i3&M7=90i24&M8=36i24&y8=0&w8=4.8&R8=30&hz8=1&M9=119929i44&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=0&bt=0&unorm=enev14alt&cq=2947513&name=AW%20Einsteins%20Sommerhaus%2C%20Holzrahmen%2012%20cm%2C%203%20cm%20Torfd%C3%A4mmung%2C%201929&fz=14#"
+    }
+}

@@ -197,7 +197,10 @@ class Config:
         
     def get_max_permitted_time_step(self):
         '''
-        max_permitted_time_step (int): This parameter defines the maximum allowable 
+        Function calculates this max_permitted_time_step, considered are files with changes in data (at least two different values in data), that are supposed to affect the dynamics in the model
+        
+        Returns:
+        max_permitted_time_step (int): Defines the maximum allowable 
         time step, expressed in seconds, that is consistent with the resolution 
         of the external input files. It ensures that the time intervals between 
         solver steps do not exceed this threshold, thereby ensuring, that all 
@@ -205,8 +208,6 @@ class Config:
         In contrast to writer_step_size, it doesn't affect the the ability for events
         to be seen by the user in the results.
 
-        Function calculates this max_permitted_time_step, considered are files with changes in data (at least two different values in data), that are supposed to affect the dynamics in the model
-        
         '''
 
         df_hygienicalWindowOpening=load_hygienicalWindowOpening_data(self.config["variations"])

@@ -1,0 +1,20 @@
+{
+    "solidBrick": {
+        "UExt": 1.6129032258064517,
+        "heatCapacity_wall": 376000.0,
+        "R_si": 0.13,
+        "R_se": 0.04,
+        "extWall_C_distribution": [
+            28000.0,
+            336000.0,
+            12000.0
+        ],
+        "extWall_R_distribution": [
+            0.014500000000000002,
+            0.2215,
+            0.211,
+            0.004
+        ],
+        "info": "https://www.ubakus.de/u-wert-rechner/?c=2&M0=132061I2&M1=132225I24&M2=47047i8&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=0&bt=0&unorm=geg20alt&fz=14#"
+    }
+}

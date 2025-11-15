@@ -1,0 +1,20 @@
+{
+    "pumiceConcreteWall": {
+        "UExt": 0.6150061500615006,
+        "heatCapacity_wall": 201500.0,
+        "R_si": 0.13,
+        "R_se": 0.04,
+        "extWall_C_distribution": [
+            14000.0,
+            181500.0,
+            6000.0
+        ],
+        "extWall_R_distribution": [
+            0.007,
+            0.7245,
+            0.721,
+            0.0035
+        ],
+        "info": "https://www.ubakus.de/u-wert-rechner/index.php?c=2&M0=132061I1&M1=132153I33&l1=0.23&r1=550&name1=Geschosshohe%20Porenbetonplatten&v1=f2f2f2&tex1=gf&M2=77i5&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=0&bt=0&unorm=enev14alt&cq=2947871&name=AW%20Porenbeton%20Fassadenelemente%20GSB%2035%2C%2033%20cm%2C%20ab%201952&fz=14"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "drywall": {
+        "UInt": 0.5159958720330238,
+        "heatCapacity_internalWall": 17565.355,
+        "R_si": 0.13,
+        "R_se": 0.13,
+        "intWall_C_distribution": [
+            8160.0,
+            1245.355,
+            8160.0
+        ],
+        "intWall_R_distribution": [
+            0.025,
+            0.5808025789239663,
+            0.6058025789239663
+        ],
+        "info": "https://www.ubakus.de/u-wert-rechner/index.php?c=2&M0=23879i12.5&M1=130I10&M2=50100I10&y2=0&w2=5&R2=55&M3=23879i12.5&T_i=20&RH_i=50&Te=12&RH_e=80&outside=4&bt=0&unorm=geg20alt&name=GK-Trockenbauwand&fz=14#"
+    }
+}

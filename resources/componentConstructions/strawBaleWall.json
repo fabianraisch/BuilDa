@@ -1,0 +1,20 @@
+{
+    "strawBaleWall": {
+        "UExt": 0.12565971349585323,
+        "heatCapacity_wall": 104352.04000000001,
+        "R_si": 0.13,
+        "R_se": 0.13,
+        "extWall_C_distribution": [
+            16280.0,
+            74632.04000000001,
+            13440.0
+        ],
+        "extWall_R_distribution": [
+            0.0195,
+            3.3670576237826326,
+            3.8020576237826327,
+            0.45449999999999996
+        ],
+        "info": "https://www.ubakus.de/u-wert-rechner/index.php?c=2&M0=196i12.5&M1=44827I4&M2=58543i12&M3=269I36&M4=36I36&y4=0&w4=4.5&R4=47&M5=19I4&m5=5%2F5&name5=Holzfaserunterdeckplatte&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=1&bt=0&unorm=enev14alt&name=Strohballenwand&fz=14#"
+    }
+}

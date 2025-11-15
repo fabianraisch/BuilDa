@@ -27,6 +27,7 @@ class Exporter():
         self.config_path=config_path
         self.config_name=os.path.split(config_path)[-1]
         self.output_path = output_path
+        self.b_short_output_folder_name=True
 
         self.ts_csv_prefix = "_"
 
@@ -49,8 +50,10 @@ class Exporter():
         name_suffix = name_suffix.replace(" ", "_")
         name_suffix = name_suffix.replace("-", "")
         name_suffix = name_suffix.replace(":", "")
-        
-        return f"{name_prefix}_{name_suffix}"
+        if self.b_short_output_folder_name:
+            return f"{name_suffix}"
+        else:
+            return f"{name_prefix}_{name_suffix}"
     
 
     def export_csv(
@@ -85,7 +88,7 @@ class Exporter():
 
 		# Deduce denomination for results of variation by using list of varied parameters
         # by creating a string that clearly identifies a simulation in the simulation series
-        identstr=""
+        identstr="_"
         #iterate only through variated parameters
         for param in np.sort(np.unique(variated_param.index.values)):
             val=vars_start.loc[param].value
@@ -99,13 +102,11 @@ class Exporter():
             param="_".join([w[:3] for w in param.split("_")])
             #extend identstr by adapted name of parameter in pascal case and value
             identstr+="#"+self.__to_pascal_case(param)+"_"+str(val)
-        #remove leading "_" from identstr
-        identstr = identstr.lstrip("_")
 
 		# Create a new directory to save the csv file in.
         dirname_prefix = identstr
-        if not identstr:
-            dirname_prefix += "#single"
+        if identstr=="_":
+            dirname_prefix += "single"
         save_dir = self.__make_csv_save_dir(dirname_prefix)
         file_name=os.path.join(save_dir,os.path.basename(save_dir)+".csv")
 

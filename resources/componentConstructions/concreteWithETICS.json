@@ -1,0 +1,20 @@
+{
+    "concreteWithETICS": {
+        "UExt": 0.20462451401677922,
+        "heatCapacity_wall": 463400.0,
+        "R_si": 0.13,
+        "R_se": 0.04,
+        "extWall_C_distribution": [
+            12000.0,
+            429600.0,
+            21800.0
+        ],
+        "extWall_R_distribution": [
+            0.004,
+            2.3295,
+            2.354,
+            0.028500000000000004
+        ],
+        "info": "https://www.ubakus.de/u-wert-rechner/?c=2&M0=47047i8&M1=12I20&M2=216I16&M3=74I2&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=0&bt=0&unorm=geg20alt&fz=14#"
+    }
+}

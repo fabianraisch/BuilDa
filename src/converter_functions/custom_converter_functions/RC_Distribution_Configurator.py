@@ -41,14 +41,14 @@ class RC_Distribution_Configurator(ConverterFunction):
 
             #wall constructrion according to: 
             # https://www.ubakus.de/u-wert-rechner/index.php?c=2&M0=199i15&M1=132261I24&v1=b7b7b7&tex1=0&M2=133477I2&M3=136921i115&v3=cc5c4a&tex3=vz2&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=0&bt=0&Rsi=U&unorm=enev14alt&cq=2947497&name=AW%20Bims-Schwemmstein%2024%20cm%2C%20Schalenfuge%2FVZ-Vormauer%201200%20kg%2Fm%C2%B3%2C%20ab%201952&fz=14
-            "perforatedBrick":{ 
+            "pumiceAndBrick":{ 
                 "extWall":{"C":[167100, 28000, 138000 ],"R":[0.3535, 0.3605, 0.117, 0.11  ]},
             },
 
             #wall constructrion according to: 
             # https://www.ubakus.de/u-wert-rechner/index.php?c=2&M0=133859i6&M1=36i24&M2=137011i2&M3=86I6&M4=36I9&x4=-0.05&y4=0.2&w4=6&R4=60&M5=132403I3&v5=81674f&tex5=kork&M6=132657i3&M7=90i24&M8=36i24&y8=0&w8=4.8&R8=30&hz8=1&M9=119929i44&T_i=20&RH_i=50&Te=-5&RH_e=80&outside=0&bt=0&unorm=enev14alt&cq=2947513&name=AW%20Einsteins%20Sommerhaus%2C%20Holzrahmen%2012%20cm%2C%203%20cm%20Torfd%C3%A4mmung%2C%201929&fz=14
             "baloonFraming":{ 
-                "extWall":{"C":[26880, 2446, 7850],"R":[0.1425, 0.268922018348624, 0.465422018348624, 0.339 ]},
+                "extWall":{"C":[26880,2446,7850],"R":[0.1425,0.245191011235955,0.441691011235955,0.339]},
             },
             #Draft for additional distribution profile:
             # // Placement of the innermost capacity in the center of the innermost layer, the rest on the inner side of the resistance. (set-up: R1/2-C1-R1/2-C2-R2-C3-R3)
