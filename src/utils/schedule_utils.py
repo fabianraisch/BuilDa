@@ -120,7 +120,7 @@ def get_winOpProfile_from_shortname(shortname):
 	returns:
 		- full filepath if the windowOpening Profile exists
 	'''
-	base_path = "resources/hygienicalWindowOpening/"
+	base_path = "resources/hygienicalWindowOpeningProfiles/"
 	match shortname:
 		case "Empty":
 			return base_path + "no_opening.txt"
